@@ -1,0 +1,33 @@
+{
+  "name": "carbonguard",
+  "version": "1.0.0",
+  "description": "AI-flagged, double-counting-proof carbon credits on Ethereum",
+  "private": true,
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "test:ai": "python -m pytest ai/tests -q",
+    "test:all": "npm run test:ai && npm test && npm run check",
+    "coverage": "hardhat coverage",
+    "check": "node scripts/check_release.js",
+    "score": "python ai/generate_data.py && python ai/train_and_score.py",
+    "satellite": "python ai/satellite/fetch_boundaries.py && python ai/satellite/measure.py",
+    "map": "python ai/satellite/make_map.py",
+    "build:real": "python ai/build_real_dataset.py",
+    "validate:real": "python ai/validate_real_world.py",
+    "export:web": "python ai/web_model.py",
+    "export:inputs": "node scripts/oracle_push_scores.js --inputs-only",
+    "grade": "python ai/grade_california.py",
+    "gas": "hardhat run scripts/gas_report.js",
+    "chain": "hardhat node",
+    "demo:local": "hardhat run scripts/deploy.js --network localhost && hardhat run scripts/oracle_push_scores.js --network localhost && hardhat run scripts/seed_demo.js --network localhost",
+    "demo:monitor": "hardhat run scripts/monitor_satellite.js --network localhost",
+    "web": "npx --yes http-server web -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.0.2",
+    "hardhat": "^2.22.17"
+  },
+  "license": "MIT"
+}

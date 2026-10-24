@@ -1,0 +1,15 @@
+{
+ "projects_in_vrod": 11856,
+ "projects_scored": 6107,
+ "share_with_published_estimate": 0.713,
+ "share_mapped_to_known_type": 0.678,
+ "neutral_fill_ins": {
+  "satellite_gap": "not published by registries -> 0 (no penalty)",
+  "verifier_changes": "only current verifier published -> 0 (no penalty)",
+  "over_issuance_ratio": "1.0 (no penalty) when no ex-ante estimate is published"
+ },
+ "satellite_measured": 3,
+ "held_out_from_training": 69,
+ "citation": "Quartson, Haya, Bernard, Abayo, Rong, So, Elias (2026). Voluntary Registry Offsets Database v2026-08, Berkeley Carbon Trading Project, UC Berkeley. CC BY 4.0.",
+ "source_url": "https://gspp.berkeley.edu/berkeley-carbon-trading-project/offsets-database"
+}

@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CarbonGuard · Live ledger</title>
+<meta name="description" content="AI-scored carbon credits that can't be double counted, on Ethereum: the live ledger.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z' fill='%23121a16'/%3E%3Cpath d='M11 16.5l3.5 3.5 7-7.5' stroke='%23f4f5f1' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="story.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="var(--ink)"/><path d="M11 16.5l3.5 3.5 7-7.5" stroke="var(--paper)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      CarbonGuard
+    </a>
+    <nav class="nav" aria-label="Pages">
+      <a href="story.html">The problem</a>
+      <a href="index.html" aria-current="page">Live ledger</a>
+      <a href="sandbox.html">Pre-check</a>
+      <a href="satellite.html">Satellite evidence</a>
+    </nav>
+    <span class="spacer"></span>
+    <span class="chain hide-sm" id="netPill"><span class="dot"></span><span id="netName">…</span> · <span id="contractLink"></span></span>
+    <button id="connectBtn">Connect wallet</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="title-row">
+    <div>
+      <h1>What CarbonGuard is protecting right now</h1>
+      <p class="sub">Every batch carries an AI risk score on chain. Above 70, the contract freezes it until independent verifiers review it.</p>
+    </div>
+    <span class="spacer"></span>
+    <span class="stamp-time" id="fresh" aria-live="polite">Reading the chain…</span>
+  </div>
+
+  <div class="figures" aria-label="Ledger totals">
+    <div class="fig lead"><div class="v"><span id="kBlk">–</span><small>tCO₂e</small></div><div class="l">frozen as high-risk</div><div class="s" id="kBlkSub">&nbsp;</div></div>
+    <div class="fig"><div class="v"><span id="kAct">–</span><small>tCO₂e</small></div><div class="l">tradable</div><div class="s" id="kActSub">&nbsp;</div></div>
+    <div class="fig"><div class="v"><span id="kRet">–</span><small>tCO₂e</small></div><div class="l">retired and burned</div><div class="s" id="kRetSub">&nbsp;</div></div>
+    <div class="fig"><div class="v"><span id="kTok">–</span><small>tCO₂e</small></div><div class="l">tokenised</div><div class="s" id="kTokSub">&nbsp;</div></div>
+  </div>
+  <div class="demo-note">
+    <span><b>Demo ledger.</b> Synthetic batches calibrated to published research, plus Alto Mayo with real registry data and demo serials.</span>
+    <a href="#trust">Results on 6,107 real projects ↓</a>
+  </div>
+  <p class="impact" id="impact" style="margin-top:10px"></p>
+
+  <div class="entry" id="entry" role="status" aria-live="polite"><span class="when" id="entryWhen"></span><p id="entryText"></p></div>
+
+  <div class="split" style="margin-top:28px">
+    <section id="marketSection" aria-labelledby="mkH">
+      <div class="ledger-head tight">
+        <div class="row"><h2 id="mkH">Marketplace</h2></div>
+        <p>An example trading venue built on CarbonGuard. Frozen credits can't be listed or bought, and a listing is suspended the moment its batch is frozen.</p>
+      </div>
+      <div class="table-wrap" style="margin-top:16px">
+        <table class="cards">
+          <thead><tr><th>AI risk</th><th>Credits</th><th class="num">For sale</th><th>Status</th><th><span class="sr-only">Action</span></th></tr></thead>
+          <tbody id="listings"><tr class="empty-row"><td colspan="5">Reading listings from the chain…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="atkH">
+      <div class="ledger-head tight">
+        <div class="row"><h2 id="atkH">Try to cheat the market</h2></div>
+        <p>Each attempt runs against the live contract. No wallet needed.</p>
+      </div>
+      <div class="attacks" style="margin-top:16px">
+        <div class="attack">
+          <div class="head"><div><h3>Double tokenisation</h3><p>Bridge registry serials that overlap credits already on chain: the failure that made Verra ban tokenising retired credits in 2022.</p></div><button id="atk1">Re-bridge existing serials</button></div>
+          <div class="gate" id="atk1r" aria-live="polite"></div>
+        </div>
+        <div class="attack">
+          <div class="head"><div><h3>Selling junk credits</h3><p>Move credits from a batch the AI froze. They stay frozen until independent verifiers review them.</p></div><button id="atk2">Sell frozen credits</button></div>
+          <div class="gate" id="atk2r" aria-live="polite"></div>
+        </div>
+        <div class="attack">
+          <div class="head"><div><h3>Double claiming</h3><p>Use a credit for a compliance claim (NDC, CORSIA) when the host country made no Paris Agreement Article&nbsp;6 corresponding adjustment.</p></div><button id="atk3">Make a compliance claim</button></div>
+          <div class="gate" id="atk3r" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section aria-labelledby="bH">
+    <div class="ledger-head">
+      <div class="row"><h2 id="bH">Credit batches</h2><span class="muted" id="batchCount"></span></div>
+      <p>One token id per project vintage, one token per tonne. Open a batch for its full reasons, serials and hashes.</p>
+    </div>
+    <div class="toolbar">
+      <div class="tabs" id="tabs" role="group" aria-label="Filter by status">
+        <button class="on" data-f="all">All</button>
+        <button data-f="Active">Tradable</button>
+        <button data-f="Flagged">Frozen</button>
+        <button data-f="Rejected">Rejected</button>
+      </div>
+      <input type="search" id="q" placeholder="Search project, type, country" aria-label="Search batches">
+    </div>
+    <div class="table-wrap">
+      <table class="cards">
+        <thead><tr><th>AI risk</th><th>Status</th><th>Project</th><th class="num">Outstanding</th><th class="hide-md">Top reasons (written on chain)</th><th><span class="sr-only">Action</span></th></tr></thead>
+        <tbody id="rows"><tr class="empty-row"><td colspan="6">Reading batches from the chain…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="trust" aria-labelledby="tH">
+    <div class="ledger-head">
+      <div class="row"><h2 id="tH">Can you trust the AI?</h2></div>
+      <p>Scores are statistical risk indicators from public data, not allegations. Here is how the frozen model does on real projects, including where it fails.</p>
+    </div>
+    <div class="trust" style="margin-top:20px">
+      <div id="rwCard">
+        <div class="bigfigs" id="rwMetrics"></div>
+        <p class="tonnes" id="rwTonnes"></p>
+        <h3 class="block-title">Measured with real satellite data</h3>
+        <div class="table-wrap"><table class="sat-rows"><tbody id="rwWatch"></tbody></table></div>
+        <div class="scale-pair" id="rwScale" style="margin-top:24px"></div>
+        <p style="margin-top:16px"><a class="btn" href="satellite.html">See the satellite evidence, year by year →</a></p>
+        <p class="cite" id="rwCite"></p>
+      </div>
+      <div>
+        <div class="fails">
+          <h3>Where it fails</h3>
+          <div class="auc">AUC 0.56</div>
+          <p><b>No better than chance</b> on 65 California forest offsets graded against Badgley et al. (2021). Their over-crediting came from how baseline carbon stocks were set, which leaves no trace in registry data. Like Kariba before satellite data, it needs outside evidence: forest-inventory data. <a href="https://doi.org/10.1111/gcb.15943" target="_blank" rel="noopener">Study</a></p>
+        </div>
+        <div id="fairCard">
+          <h3 class="block-title">No hidden regional bias</h3>
+          <p class="muted" style="font-size:14px;margin-bottom:12px">Country is never a model input. Each region's High rate is compared with what its mix of project types alone predicts.</p>
+          <div class="fair" id="fair"></div>
+        </div>
+      </div>
+    </div>
+    <div class="trust" style="margin-top:36px">
+      <div id="modelCard">
+        <h3 class="block-title" style="margin-top:0">The model</h3>
+        <p class="muted" style="font-size:14px;margin-bottom:14px">Weak-supervised gradient boosting plus an isolation-forest anomaly detector, trained on 420 synthetic and 6,038 real projects. The 69 real projects used to judge it were held out.</p>
+        <div class="bigfigs" id="metrics"></div>
+        <h3 class="block-title">What drives a score</h3>
+        <div class="imp" id="imp"></div>
+      </div>
+      <div>
+        <h3 class="block-title" style="margin-top:0">Provenance on every score</h3>
+        <p class="muted" style="font-size:14px">Every score on chain carries these hashes, so anyone can check which model judged which credit. The AI can only freeze; unfreezing takes 2 of 3 independent human verifiers.</p>
+        <div class="hashes" id="hashes"></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="rH">
+    <div class="ledger-head">
+      <div class="row"><h2 id="rH">Retired and certified</h2></div>
+      <p>Retiring burns the tokens, so a retired tonne can never be sold or claimed again. Each retirement has a public certificate anyone can verify.</p>
+    </div>
+    <div class="table-wrap" style="margin-top:16px">
+      <table class="cards">
+        <thead><tr><th>Beneficiary</th><th class="hide-md">Project</th><th class="num">Retired</th><th><span class="sr-only">Certificate</span></th></tr></thead>
+        <tbody id="feed"><tr class="empty-row"><td colspan="4">Reading retirements…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>CarbonGuard · built for the IEEE ClimateChain Global Hackathon. Demo batches are synthetic and calibrated to published research.</span>
+    <span>Real-world results: Berkeley Voluntary Registry Offsets Database v2026-08 (CC BY 4.0); Hansen et al. Global Forest Change v1.12 (CC BY 4.0); project boundaries from Karnik et al. 2024 (CC BY 4.0).</span>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Batch details"></aside>
+
+<div class="modal" id="retireModal" role="dialog" aria-modal="true" aria-labelledby="rmH">
+  <h3 id="rmH">Retire credits</h3>
+  <div class="field"><span class="label">Batch</span><div id="rmBatch"></div></div>
+  <div class="field"><label for="rmAmt">Amount (tCO₂e)</label><input type="number" id="rmAmt" min="1" value="1000"></div>
+  <div class="field"><label for="rmBen">Beneficiary</label><input type="text" id="rmBen" placeholder="Company or person the offset is for"></div>
+  <div class="field"><label for="rmPur">Purpose</label><input type="text" id="rmPur" placeholder="For example: FY2025 Scope 1 offset"></div>
+  <label class="check"><input type="checkbox" id="rmComp"> <span>Compliance claim (NDC / CORSIA). This needs an Article 6 corresponding adjustment.</span></label>
+  <div class="msg" id="rmMsg"></div>
+  <div class="actions"><button data-close>Cancel</button><button class="primary" id="rmGo">Retire</button></div>
+</div>
+
+<div class="modal" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="rvH">
+  <h3 id="rvH">Verifier review</h3>
+  <div class="field"><span class="label">Batch</span><div id="rvBatch"></div></div>
+  <div class="field"><label for="rvNote">Audit note (stored on chain)</label><textarea id="rvNote" rows="3">Desk review against satellite record</textarea></div>
+  <div class="msg" id="rvMsg"></div>
+  <div class="actions"><button data-close>Cancel</button><button class="danger" id="rvReject">Reject permanently</button><button class="primary" id="rvApprove">Approve</button></div>
+</div>
+
+<div class="modal" id="buyModal" role="dialog" aria-modal="true" aria-labelledby="byH">
+  <h3 id="byH">Buy credits</h3>
+  <div class="field"><span class="label">Listing</span><div id="byListing"></div></div>
+  <div class="field"><label for="byAmt">Amount (tCO₂e)</label><input type="number" id="byAmt" min="1" value="100"></div>
+  <div class="field"><span class="label">Total</span><div id="byTotal" class="mono"></div></div>
+  <div class="msg" id="byMsg"></div>
+  <div class="actions"><button data-close>Cancel</button><button class="primary" id="byGo">Buy</button></div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js"></script>
+<script src="deployment.js"></script>
+<script src="model.js"></script>
+<script src="impact.js"></script>
+<script src="costs.js"></script>
+<script src="real_world.js"></script>
+<script src="common.js"></script>
+<script src="motion.js"></script>
+<script>
+const { cfg, esc, fmt, fmtCompact, short, tier } = CG;
+const $ = (id) => document.getElementById(id);
+let batches = [], retirements = [], listings = [], filter = "all", isVerifier = false, current = null;
+// Previous chain state, so a refresh can show exactly what changed (and leave the rest alone).
+let prevBatches = null, prevLive = null, rowsSig = "", listSig = "", feedSig = "", firstKpis = true, lastFocus = null, lastBlk = null, lastGrew = "";
+// Demo batches that carry a real project's data (with illustrative serials): the satellite-measured projects.
+const REAL_IDS = new Set(((window.CG_REAL_WORLD || {}).satellite || []).map((s) => s.project_id));
+const REAL_NAMES = Object.fromEntries(((window.CG_REAL_WORLD || {}).satellite || []).map((s) => [s.project_id, s.name]));
+const realTag = (b) => (REAL_IDS.has(b.projectId) ? `<span class="tag" title="Real registry project and real AI scores; the serial range is illustrative">Real project data · demo serials</span>` : "");
+
+function toast(t) { const el = $("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 3500); }
+const outstanding = (b) => b.issued - b.retired;
+const time = (d = new Date()) => d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+// "1 of 2 approvals" while a flagged batch is waiting on the verifier panel.
+const votesText = (b) => {
+  const v = b.votes;
+  if (!v || b.status !== "Flagged") return "";
+  const parts = [`${v.approvals} of ${v.required} approvals`];
+  if (v.rejections) parts.push(`${v.rejections} of ${v.required} rejections`);
+  return parts.join(" · ");
+};
+const STAMP = { Active: ["Tradable", "st-low"], Flagged: ["Frozen", "st-high"], Rejected: ["Rejected", "st-rejected"], Pending: ["Pending", ""] };
+const stamp = (status) => { const [t, c] = STAMP[status] || [status, ""]; return `<span class="stamp ${c}">${t}</span>`; };
+
+// ---------- render
+function setFigure(id, n) {
+  if (firstKpis) CGM.countTo($(id), 0, n, (v) => fmtCompact(v));
+  else $(id).textContent = fmtCompact(n);
+}
+function renderKpis() {
+  const sum = (arr, f) => arr.reduce((a, b) => a + f(b), 0n);
+  const tok = sum(batches, (b) => b.issued);
+  const ret = sum(batches, (b) => b.retired);
+  const blockedB = batches.filter((b) => b.status === "Flagged" || b.status === "Rejected");
+  const blk = sum(blockedB, outstanding);
+  const act = sum(batches.filter((b) => b.status === "Active"), outstanding);
+  const pct = (x) => (tok ? ((Number(x) / Number(tok)) * 100).toFixed(1) : "0");
+  setFigure("kBlk", Number(blk));
+  // When a refresh freezes more tonnes, say how many: the compact figure alone may not move.
+  const grew = lastBlk !== null && blk > lastBlk ? blk - lastBlk : 0n;
+  $("kBlkSub").innerHTML = `${pct(blk)}% of supply kept away from buyers · ${blockedB.length} batches` +
+    (grew ? `<br><b class="grew">+${fmt(grew)} t frozen at ${time()}</b>` : lastGrew);
+  if (grew) { lastGrew = `<br><b class="grew">+${fmt(grew)} t frozen at ${time()}</b>`; CGM.land($("kBlk")); }
+  lastBlk = blk;
+  setFigure("kAct", Number(act));
+  $("kActSub").textContent = `${batches.filter((b) => b.status === "Active").length} batches passed the AI gate`;
+  setFigure("kRet", Number(ret));
+  $("kRetSub").textContent = `${retirements.length} retirements · can never be resold`;
+  setFigure("kTok", Number(tok));
+  $("kTokSub").textContent = `${batches.length} batches from ${new Set(batches.map((b) => b.registry)).size} registries`;
+  firstKpis = false;
+  renderImpact(blk);
+}
+
+// Blocked tonnes in everyday terms, plus what one retirement costs on chain.
+function renderImpact(blocked) {
+  const im = window.CG_IMPACT, costs = window.CG_COSTS;
+  const parts = [];
+  if (im && blocked > 0n) {
+    const t = Number(blocked);
+    parts.push(`Sold as real, the frozen credits would cover the yearly emissions of ` +
+      `<b>≈${fmtCompact(t / im.carTonnesPerYear)} cars</b> (<a href="${im.carSource}" target="_blank" rel="noopener">EPA</a>) ` +
+      `and cost buyers <b>≈$${fmtCompact(t * im.priceUsdPerTonne)}</b> <span title="${esc(im.priceNote)}">(at an assumed $${im.priceUsdPerTonne.toFixed(2)}/t)</span>.`);
+  }
+  const base = costs && costs.perNetwork["Base (L2)"];
+  if (base) parts.push(`A retirement costs <b>≈$${base.retireUsd.toFixed(3)}</b> on Base <span class="muted" title="Gas measured on the real contract; ETH price and gas price are assumptions (docs/costs.md)">(estimate)</span>.`);
+  $("impact").innerHTML = parts.join(" ");
+}
+
+function renderRealWorld() {
+  const rw = window.CG_REAL_WORLD;
+  if (!rw) { $("rwCard").style.display = "none"; return; }
+  const metric = (v, l) => `<div><b>${v}</b><span>${l}</span></div>`;
+  const total = Object.values(rw.tier_counts).reduce((a, b) => a + b, 0);
+  const cmp = rw.redd_vs_west_2023;
+  $("rwMetrics").innerHTML =
+    metric(fmt(total), "real registry projects scored") +
+    metric(`${fmt(rw.tier_counts.High)}`, `rated High and would be frozen (${((rw.tier_counts.High / total) * 100).toFixed(1)}%)`) +
+    metric(`${Math.round(cmp.share_of_redd_tonnes_rated_medium_or_high * 100)}%`, `of REDD+ tonnes rated Medium or High. A 2023 study of a different sample found ~${Math.round(cmp.west_2023_share_not_real * 100)}% not real.`);
+  const tt = rw.tonnes_by_tier;
+  if (tt) {
+    const add = (k) => tt.Medium[k] + tt.High[k];
+    const big = (t) => (t >= 1e9 ? `${(t / 1e9).toFixed(2)} billion` : `${Math.round(t / 1e6)} million`);
+    $("rwTonnes").innerHTML = `<b>${big(add("issued_t"))} t</b> were issued by the ${fmt(add("projects"))} real projects rated Medium or High. <b>${big(add("not_yet_retired_t"))} t</b> of them are not yet retired, so they can still be sold. Aggregate only; no project is named.`;
+  } else $("rwTonnes").remove();
+  const scoreSpan = (score, t) => `<span class="t-${t}"><span class="tier-word">${score}</span> <span class="muted">${t}</span></span>`;
+  const watch = Object.fromEntries(rw.watchlist.filter((w) => w.found_in_vrod).map((w) => [w.project_id, w]));
+  const sats = [...(rw.satellite || [])].sort((a, b) => Number(b.measurable) - Number(a.measurable) || b.gap - a.gap);
+  $("rwWatch").innerHTML = sats.map((s) => {
+    const w = watch[s.project_id];
+    const finding = w ? `<span class="stamp-sub" style="white-space:normal">${esc(w.finding)}. <a href="${esc(w.source_url)}" target="_blank" rel="noopener">${esc(w.source)}</a></span>` : "";
+    if (!s.measurable) return `<tr><td class="proj"><b>${esc(s.name)}</b><span>${esc(s.project_id)}</span><span class="stamp-sub" style="white-space:normal">Not measurable: ${esc(s.not_measurable_reason)}.</span></td><td class="num muted">–</td><td class="num">${scoreSpan(s.score_registry_only, CG.tier(s.score_registry_only))}</td></tr>`;
+    return `<tr><td class="proj"><b>${esc(s.name)}</b><span>${esc(s.project_id)} · ${Math.round(s.gap * 100)}% of credits not backed by avoided forest loss</span>${finding}</td>
+      <td class="num">${scoreSpan(s.score_registry_only, CG.tier(s.score_registry_only))}</td>
+      <td class="num"><span class="arrow">→</span> ${scoreSpan(s.score_with_satellite, s.tier_with_satellite)}</td></tr>`;
+  }).join("") + `<tr><td class="muted" style="font-size:13px">Score: registry data only → with satellite data</td><td></td><td></td></tr>`;
+  const k = (rw.satellite || []).find((s) => s.project_id === "VCS902");
+  if (k) {
+    const implied = k.claimed_tco2 / k.tco2_per_ha_assumed;
+    const side = 150, small = Math.max(2, side * Math.sqrt(k.avoided_ha / implied));
+    $("rwScale").innerHTML = `
+      <figure><span class="sq credited" style="width:${side}px;height:${side}px"></span><figcaption class="credited-c"><b>${fmt(Math.round(implied))} ha</b><span>forest Kariba's credits imply was saved</span></figcaption></figure>
+      <figure><span class="sq observed" style="width:${small.toFixed(1)}px;height:${small.toFixed(1)}px"></span><figcaption class="observed-c"><b>${fmt(Math.round(k.avoided_ha))} ha</b><span>what satellites show was saved</span></figcaption></figure>
+      <p class="muted" style="font-size:13px;flex-basis:100%">Drawn to scale by area, at a high-end ${Math.round(k.tco2_per_ha_assumed)} t CO₂ per hectare that favours the project.</p>`;
+  }
+  $("rwCite").textContent = `${rw.disclaimer} Data: ${rw.dataset.citation}`;
+}
+
+function renderFairness() {
+  const f = window.CG_MODEL && window.CG_MODEL.fairness;
+  if (!f) { $("fairCard").style.display = "none"; return; }
+  const rows = Object.entries(f.regions).filter(([r, v]) => v.projects >= f.min_projects_per_region && r !== "Other");
+  const pct = (x) => `${(x * 100).toFixed(0)}%`;
+  $("fair").innerHTML = rows.map(([r, v]) => `
+    <span>${esc(r)}</span>
+    <div class="bars"><div class="b obs" style="width:${v.observed_high_rate * 200}%"></div><div class="b exp" style="width:${v.expected_from_type_mix * 200}%"></div></div>
+    <span class="v">${pct(v.observed_high_rate)} vs ${pct(v.expected_from_type_mix)}</span>`).join("") +
+    `<div class="legend" style="grid-column:1/-1;margin-top:4px"><span><i style="background:var(--ink)"></i>Rated High</span><span><i style="background:var(--ink-3);opacity:.45"></i>Expected from project types</span><span>Largest unexplained gap: <b style="color:var(--ink)">${(f.max_abs_residual * 100).toFixed(1)} points</b></span></div>`;
+}
+
+function scoreCell(score) {
+  return `<span class="score t-${tier(score)}"><b>${score}</b><span class="rail hide-sm" style="--v:${score / 100}"><i></i></span></span>`;
+}
+function reasonsList(b) {
+  const t = tier(b.score);
+  if (!b.reasons.length) return `<ul class="reasons t-${t}"><li class="none">No significant red flags</li></ul>`;
+  return `<ul class="reasons t-${t}">${b.reasons.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>`;
+}
+function mainReason(b) {
+  if (!b.reasons.length) return `<span class="muted">No significant red flags</span>`;
+  const more = b.reasons.length - 2;
+  return b.reasons.slice(0, 2).map(esc).join("<br>") + (more > 0 ? ` <span class="more">+${more} more</span>` : "");
+}
+
+function renderRows(changed = new Map()) {
+  const q = $("q").value.trim().toLowerCase();
+  const list = batches
+    .filter((b) => filter === "all" || b.status === filter)
+    .filter((b) => !q || `${b.projectId} ${b.projectType} ${b.country} ${b.registry}`.toLowerCase().includes(q))
+    .sort((a, b) => b.score - a.score || a.id - b.id);
+  // Re-render only when something on screen would change, so a refresh never resets the table.
+  const sig = JSON.stringify([filter, q, list.map((b) => [b.id, b.score, b.status, String(outstanding(b)), votesText(b), b.humanReviewed, b.reasons.length])]);
+  if (sig === rowsSig && !changed.size) return;
+  rowsSig = sig;
+  $("batchCount").textContent = `${list.length} of ${batches.length}, highest risk first`;
+  $("rows").innerHTML = list.length
+    ? list.map((b) => `<tr data-id="${b.id}" tabindex="0" aria-label="Batch ${b.id}, ${esc(b.projectType)}, risk ${b.score}">
+        <td class="c-score">${scoreCell(b.score)}</td>
+        <td class="c-st st">${stamp(b.status)}${b.humanReviewed && b.status !== "Flagged" ? `<span class="stamp-sub">human reviewed</span>` : ""}${votesText(b) ? `<span class="stamp-sub">${votesText(b)}</span>` : ""}</td>
+        <td class="c-proj proj"><b>${esc(b.projectType)}</b><span>#${b.id} · ${esc(b.projectId)} · ${esc(b.country)} · ${b.vintage}</span>${b.ca || REAL_IDS.has(b.projectId) ? "<br>" : ""}${b.ca ? `<span class="tag" title="Article 6 corresponding adjustment">Art. 6 adjusted</span>` : ""}${realTag(b)}</td>
+        <td class="c-num num">${fmt(outstanding(b))} t</td>
+        <td class="c-hide why hide-md">${mainReason(b)}</td>
+        <td class="c-act num">${actionBtn(b)}</td>
+      </tr>`).join("")
+    : `<tr class="empty-row"><td colspan="6">No batches match this filter.</td></tr>`;
+  for (const [id, was] of changed) {
+    const tr = $("rows").querySelector(`tr[data-id="${id}"]`);
+    const b = batches.find((x) => x.id === id);
+    if (!tr || !b) continue;
+    flashRow(tr, was, b);
+  }
+}
+// One batch changed on chain: count its score, re-land its stamp, wash the row.
+function flashRow(tr, was, b) {
+  tr.classList.remove("changed"); void tr.offsetWidth; tr.classList.add("changed");
+  if (was.score !== b.score) {
+    CGM.countTo(tr.querySelector(".score b"), was.score, b.score);
+    CGM.rail(tr.querySelector(".rail"), was.score, b.score);
+  }
+  if (was.status !== b.status) CGM.land(tr.querySelector(".stamp"));
+}
+function actionBtn(b) {
+  if (b.status === "Active" && outstanding(b) > 0n) return `<button class="sm" data-act="retire" data-id="${b.id}">Retire</button>`;
+  if (b.status === "Flagged") return `<button class="sm" data-act="review" data-id="${b.id}">Review</button>`;
+  return "";
+}
+
+function renderListings(changedB = new Map(), changedL = new Set()) {
+  if (!CG.market) { $("marketSection").style.display = "none"; return; }
+  const byId = Object.fromEntries(batches.map((b) => [b.id, b]));
+  const shown = listings.filter((l) => l.open).sort((a, b) => a.id - b.id);
+  const sig = JSON.stringify(shown.map((l) => [l.id, l.live, String(l.remaining), (byId[l.tokenId] || {}).score]));
+  if (sig === listSig && !changedL.size) return;
+  listSig = sig;
+  $("listings").innerHTML = shown.length
+    ? shown.map((l) => {
+        const b = byId[l.tokenId] || { projectType: "?", projectId: "?", country: "", score: 0, status: "?" };
+        const status = l.live
+          ? `<span class="stamp st-low">Live</span>`
+          : `<span class="stamp st-high">Suspended</span><span class="stamp-sub">credits frozen</span>`;
+        return `<tr data-id="${l.tokenId}" tabindex="0" class="${l.live ? "" : "suspended"}" aria-label="Listing ${l.id}, ${esc(b.projectType)}">
+          <td class="c-score">${scoreCell(b.score)}</td>
+          <td class="c-proj proj"><b>${esc(b.projectType)}</b><span>${esc(b.projectId)} · ${esc(b.country)} · batch #${l.tokenId}</span>${REAL_IDS.has(b.projectId) ? "<br>" + realTag(b) : ""}</td>
+          <td class="c-num num">${fmt(l.remaining)} t<span class="stamp-sub">${ethers.formatEther(l.price)} ETH/t</span></td>
+          <td class="c-st st">${status}</td>
+          <td class="c-act num">${l.live ? `<button class="sm" data-act="buy" data-listing="${l.id}">Buy</button>` : ""}</td>
+        </tr>`;
+      }).join("")
+    : `<tr class="empty-row"><td colspan="5">No open listings.</td></tr>`;
+  for (const l of shown) {
+    const was = changedB.get(l.tokenId);
+    if (!was && !changedL.has(l.id)) continue;
+    const tr = $("listings").querySelector(`tr[data-id="${l.tokenId}"]`);
+    const b = byId[l.tokenId];
+    if (tr && b) flashRow(tr, was || { score: b.score, status: b.status }, b);
+    if (tr && changedL.has(l.id)) CGM.land(tr.querySelector(".stamp"));
+  }
+}
+
+// The ledger entry: one sentence naming what just changed on chain.
+function noteChanges(changedB, changedL) {
+  if (!changedB.size && !changedL.size) return;
+  const parts = [];
+  for (const [id, was] of changedB) {
+    const b = batches.find((x) => x.id === id);
+    if (!b) continue;
+    const why = b.reasons.some((r) => /^Satellite/.test(r)) ? " after a yearly satellite monitoring update" : "";
+    const now = b.status === "Flagged" ? "frozen" : b.status === "Active" ? "tradable" : b.status.toLowerCase();
+    const name = (REAL_NAMES[b.projectId] || b.projectType) + ` (${b.projectId})`;
+    parts.push(`<b>Batch #${b.id} ${esc(name)}</b> re-scored <b>${was.score} → ${b.score}</b>${why}${was.status !== b.status ? `: <b>${now}</b>` : ""}.`);
+  }
+  for (const id of changedL) {
+    const l = listings.find((x) => x.id === id);
+    if (l) parts.push(l.live ? `Listing #${l.id} is live again.` : `Listing #${l.id} (${fmt(l.remaining)} t) <b>suspended</b>.`);
+  }
+  if (!parts.length) return;
+  $("entryWhen").textContent = `Changed at ${time()}`;
+  $("entryText").innerHTML = parts.join(" ");
+  $("entry").classList.add("show");
+  CGM.close($("entry"));
+}
+
+function renderFeed() {
+  const byId = Object.fromEntries(batches.map((b) => [b.id, b]));
+  const list = [...retirements].reverse().slice(0, 6);
+  const sig = JSON.stringify(list.map((r) => r.id));
+  if (sig === feedSig) return;
+  feedSig = sig;
+  $("feed").innerHTML = list.length
+    ? list.map((r) => {
+        const b = byId[r.tokenId] || {};
+        return `<tr>
+          <td class="c-proj proj"><b>${esc(r.beneficiary)}</b><span>${esc(r.purpose)} · ${new Date(r.timestamp * 1000).toLocaleDateString()}${r.compliance ? " · compliance claim" : ""}</span></td>
+          <td class="c-hide hide-md proj"><b style="font-weight:500">${esc(b.projectType || "")}</b><span>${esc(b.projectId || "")} · batch #${r.tokenId}</span></td>
+          <td class="c-num num">${fmt(r.amount)} t</td>
+          <td class="c-act num"><a class="btn sm cert-link" href="certificate.html?id=${r.id}" target="_blank" rel="noopener">Certificate</a></td>
+        </tr>`;
+      }).join("")
+    : `<tr class="empty-row"><td colspan="4">No retirements yet.</td></tr>`;
+}
+
+function renderModel() {
+  const m = window.CG_MODEL;
+  if (!m) { $("modelCard").style.display = "none"; return; }
+  const mt = m.metrics;
+  const metric = (v, l) => `<div><b>${v}</b><span>${l}</span></div>`;
+  $("metrics").innerHTML =
+    metric(mt.auc_vs_hidden_truth_blended ?? "–", `ROC-AUC on the synthetic test set (rules alone: ${mt.auc_vs_hidden_truth_rules_only ?? "–"})`) +
+    metric(mt.high_tier_precision != null ? (mt.high_tier_precision * 100).toFixed(1) + "%" : "–", "of High ratings are real problems (synthetic set)") +
+    metric(mt.recall_high_or_medium != null ? (mt.recall_high_or_medium * 100).toFixed(1) + "%" : "–", "of problem projects caught as Medium or High (synthetic set)");
+  const labels = {
+    over_issuance_ratio: "Issued vs. own estimate", vintage_age: "Vintage age", type_low_additionality: "Low-additionality type",
+    satellite_gap_pct: "Satellite forest gap", issuance_spike: "Issuance spike", retirement_rate: "Retirement rate",
+    buffer_shortfall: "Thin permanence buffer", verifier_changes: "Auditor churn", type_overcrediting_history: "Over-crediting history",
+  };
+  const imp = Object.entries(m.global_importance).filter(([, v]) => v > 0.001);
+  const max = Math.max(...imp.map(([, v]) => v));
+  $("imp").innerHTML = imp.map(([k, v]) => `<span>${labels[k] || k}</span><div><div class="b" style="width:${(v / max) * 100}%"></div></div><span class="v">${(v * 100).toFixed(1)}%</span>`).join("");
+  $("hashes").innerHTML = `
+    <div class="hashrow"><span>Model version</span><span class="mono">${esc(m.model_version)}</span></div>
+    <div class="hashrow"><span>Model SHA-256</span><span class="mono" title="${m.model_hash}">${short(m.model_hash, 10, 8)}</span></div>
+    <div class="hashrow"><span>Training-data SHA-256</span><span class="mono" title="${m.data_hash}">${short(m.data_hash, 10, 8)}</span></div>
+    <div class="hashrow"><span>Contract</span><span class="mono">${short(cfg.address, 10, 8)}</span></div>`;
+}
+
+function openDrawer(b) {
+  current = b;
+  lastFocus = document.activeElement;
+  const rs = retirements.filter((r) => r.tokenId === b.id);
+  const ex = CG.explorer("address", cfg.address);
+  const modelMatches = window.CG_MODEL && window.CG_MODEL.model_hash === b.modelHash;
+  const t = tier(b.score);
+  $("drawer").innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:start;gap:12px">
+      <div><div class="meta">Batch #${b.id} · ${esc(b.registry)}</div><h2>${esc(b.projectType)}</h2><div class="meta">${esc(b.projectId)} · ${esc(b.country)} · vintage ${b.vintage}</div></div>
+      <button class="sm" data-close>Close</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap">${stamp(b.status)}${votesText(b) ? `<span class="muted" style="font-size:14px">${votesText(b)}</span>` : ""}${b.ca ? `<span class="tag" style="margin:0">Article 6 corresponding adjustment</span>` : ""}</div>
+    <div class="t-${t}" style="margin-top:22px">
+      <div class="score"><b>${b.score}</b><span class="rail" style="--v:${b.score / 100}"><i></i></span></div>
+      <p style="margin-top:8px"><span class="tier-word">${t} risk</span> <span class="muted">· a statistical risk indicator, not an allegation</span></p>
+      <h3 style="font-size:16px;margin-top:20px">Reasons written on chain</h3>
+      ${reasonsList(b)}
+    </div>
+    <section aria-labelledby="hiH">
+      <h3 id="hiH" style="font-size:16px;margin-top:28px">Score history on chain</h3>
+      <p class="muted" style="font-size:13px;margin-top:4px">Every score the oracle wrote for this batch, read from the contract's events. The AI can only tighten: once frozen, only verifiers can release a batch.</p>
+      <ol class="hist" id="hist"><li class="muted">Reading events…</li></ol>
+      <div class="recheck">
+        <button class="sm" id="recheckBtn" disabled>Re-check in this browser</button>
+        <p class="muted">Runs the frozen model in this page on the batch's published inputs. Nothing is sent anywhere.</p>
+      </div>
+      <div id="recheckOut" aria-live="polite"></div>
+    </section>
+    <dl class="kv">
+      <dt>Registry serials</dt><dd class="mono">${b.serialFrom} → ${b.serialTo}</dd>
+      <dt>Issued</dt><dd>${fmt(b.issued)} tCO₂e</dd>
+      <dt>Retired</dt><dd>${fmt(b.retired)} tCO₂e</dd>
+      ${b.votes ? `<dt>Verifier panel</dt><dd>${b.votes.required} matching vote${b.votes.required > 1 ? "s" : ""} needed${b.status === "Flagged" ? ` · ${votesText(b)}` : ""}</dd>` : ""}
+      <dt>Scored at</dt><dd>${b.scoredAt ? new Date(b.scoredAt * 1000).toLocaleString() : "–"}</dd>
+      <dt>Model hash</dt><dd class="mono">${b.modelHash}${modelMatches ? `<br><span class="match">✓ matches the model card</span>` : ""}</dd>
+      <dt>Data hash</dt><dd class="mono">${b.dataHash}</dd>
+      <dt>Contract</dt><dd class="mono">${ex ? `<a href="${ex}" target="_blank" rel="noopener">${cfg.address}</a>` : cfg.address}</dd>
+    </dl>
+    <div style="display:flex;gap:8px">${actionBtn(b)}</div>
+    <h3 style="font-size:16px;margin:26px 0 6px">Retirements from this batch</h3>
+    ${rs.length ? `<table><tbody>${rs.map((r) => `<tr><td class="proj"><b>${esc(r.beneficiary)}</b><span>${esc(r.purpose)}</span></td><td class="num">${fmt(r.amount)} t</td><td class="num"><a href="certificate.html?id=${r.id}" target="_blank" rel="noopener">Certificate</a></td></tr>`).join("")}</tbody></table>` : `<p class="muted">None yet.</p>`}`;
+  $("drawer").classList.add("show");
+  $("scrim").classList.add("show");
+  $("drawer").querySelector("[data-close]").focus();
+  showHistory(b);
+}
+
+// ---------- score history (events) and the in-browser re-check
+const STATUS_WORD = { Active: ["tradable", "tradable"], Flagged: ["frozen", "frozen"], Rejected: ["rejected", "frozen"], Pending: ["pending", ""] };
+async function loadHistory(b) {
+  const f = CG.read.filters;
+  const [scored, votes, decisions] = await Promise.all([
+    CG.logs(f.RiskScored(b.id)), CG.logs(f.VerifierVote(b.id)), CG.logs(f.VerifierDecision(b.id))]);
+  const all = [...scored.map((e) => ({ kind: "score", e })), ...votes.map((e) => ({ kind: "vote", e })), ...decisions.map((e) => ({ kind: "decision", e }))]
+    .sort((x, y) => x.e.blockNumber - y.e.blockNumber || x.e.index - y.e.index);
+  const times = await CG.blockTimes(all.map((x) => x.e));
+  return all.map((x) => ({ ...x, time: times[x.e.blockNumber] }));
+}
+function histRow(h, i) {
+  const a = h.e.args;
+  const when = h.time ? `<span class="h-when">${new Date(h.time * 1000).toLocaleString([], { dateStyle: "medium", timeStyle: "medium" })} · block ${h.e.blockNumber}</span>` : "";
+  if (h.kind === "score") {
+    const s = Number(a.score), [word, cls] = STATUS_WORD[CG.STATUS[Number(a.status)]] || ["", ""];
+    return `<li class="t-${tier(s)}" data-i="${i}"><span class="h-score"><b>${s}</b></span>
+      <span>Scored by model <span class="mono">${short(a.modelHash, 6, 4)}</span> · <span class="h-st ${cls}">${word}</span>${when}<span class="h-inputs"></span></span>
+      <span class="h-check"></span></li>`;
+  }
+  const what = h.kind === "vote"
+    ? `Verifier <span class="mono">${short(a.verifier)}</span> voted to ${a.approve ? "approve" : "reject"}${a.note ? `: “${esc(a.note)}”` : ""}`
+    : `Panel decision: <span class="h-st ${a.approved ? "tradable" : "frozen"}">${a.approved ? "approved, tradable again" : "rejected for good"}</span>`;
+  return `<li><span class="h-human">Human</span><span>${what}${when}</span><span></span></li>`;
+}
+async function showHistory(b) {
+  let hist;
+  try { hist = await loadHistory(b); }
+  catch (e) { console.error(e); if (current === b) $("hist").innerHTML = `<li class="muted">Couldn't read events from ${esc(cfg.name)}.</li>`; return; }
+  if (current !== b || !$("drawer").classList.contains("show")) return;
+  $("hist").innerHTML = hist.length ? hist.map(histRow).join("") : `<li class="muted">No scores yet.</li>`;
+  const btn = $("recheckBtn");
+  btn.disabled = !hist.some((h) => h.kind === "score");
+  btn.onclick = () => recheck(b, hist, btn);
+}
+
+const scripts = {};
+const loadScript = (src) => (scripts[src] ||= new Promise((ok, fail) => {
+  const s = document.createElement("script");
+  s.src = src; s.onload = ok; s.onerror = () => { delete scripts[src]; fail(new Error(`Couldn't load ${src}`)); };
+  document.head.append(s);
+}));
+const INPUT_LABELS = {
+  project_type: "Project type", first_vintage: "First vintage", last_vintage: "Last vintage",
+  est_annual_reductions: "Own estimate (t/yr)", total_issued: "Issued (t)", total_retired: "Retired (t)",
+  max_to_median_issuance: "Peak year ÷ median year", buffer_pool_pct: "Permanence buffer (%)",
+  satellite_cover_delta_pct: "Satellite forest gap (%)", verifier_changes: "Auditor changes",
+};
+function inputValue(k, v) {
+  if (v === null || v === undefined) return k === "satellite_cover_delta_pct" ? "not measured" : "–";
+  if (k === "satellite_cover_delta_pct") return `${(-v).toFixed(1)}`;
+  if (/vintage/.test(k)) return String(v);
+  return typeof v === "number" ? (Number.isInteger(v) ? fmt(v) : String(+v.toFixed(3))) : esc(v);
+}
+async function recheck(b, hist, btn) {
+  btn.disabled = true; btn.textContent = "Loading the model…";
+  const out = $("recheckOut");
+  try { await Promise.all(["sandbox_model.js", "scorer.js", "batch_inputs.js"].map(loadScript)); }
+  catch (e) { out.innerHTML = `<p class="muted">${esc(e.message)}</p>`; btn.disabled = false; btn.textContent = "Re-check in this browser"; return; }
+  if (current !== b) return;
+  btn.disabled = false; btn.textContent = "Re-check again";
+  const M = window.CG_SANDBOX, S = window.CGScorer;
+  const entry = ((window.CG_BATCH_INPUTS || {}).batches || {})[b.projectId];
+  if (!entry) { out.innerHTML = `<p class="muted" style="margin-top:12px">No published inputs for ${esc(b.projectId)}, so this batch can't be re-checked here.</p>`; return; }
+  const runs = entry.versions.map((v) => {
+    const r = S.scoreRaw(M, v.raw);
+    return { ...v, risk: r.risk, reasons: r.reasons.length ? r.reasons.join(" | ") : "No significant red flags" };
+  });
+  const checks = [];
+  hist.forEach((h, i) => {
+    if (h.kind !== "score") return;
+    const a = h.e.args, s = Number(a.score), li = $("hist").querySelector(`li[data-i="${i}"]`);
+    const sameModel = a.modelHash === M.model_hash;
+    const hit = sameModel && runs.find((r) => r.risk === s && r.reasons === a.reasons);
+    const shown = hit || runs[runs.length - 1];
+    checks.push({ s, hit, sameModel, final: shown.risk });
+    li.querySelector(".h-check").innerHTML = hit
+      ? `<span class="ok">✓ <b>0</b></span>reproduced`
+      : `<span class="diff">≈ <b>0</b></span>final model`;
+    li.querySelector(".h-inputs").innerHTML = hit && entry.versions.length > 1 ? `<span class="h-when">Inputs: ${esc(hit.label.toLowerCase())}</span>` : "";
+    CGM.countTo(li.querySelector(".h-check b"), 0, shown.risk);
+  });
+  const hash = `<span class="mono">${short(M.model_hash, 6, 4)}</span>`;
+  let verdict;
+  if (checks.every((c) => c.hit)) {
+    verdict = `<div class="verified"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M7 12.5l3.2 3.2L17 9" stroke="var(--low-soft)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><b>${checks.length === 2 ? "Both scores reproduce" : checks.length > 2 ? `All ${checks.length} scores reproduce` : "The score reproduces"} exactly in your browser:</b> same number, same reasons, from model ${hash}, the hash written with every score. A test checks this browser copy against the Python model on all 6,107 real projects.</div></div>`;
+  } else if (checks.some((c) => !c.sameModel)) {
+    verdict = `<div class="note-box">A score here was written by a different model than ${hash}, so this page can't reproduce it.</div>`;
+  } else {
+    const c = checks.find((x) => !x.hit);
+    const tierNote = tier(c.final) !== tier(c.s) ? `, which would be ${tier(c.final)} rather than ${tier(c.s)}` : "";
+    verdict = entry.source === "synthetic"
+      ? `<div class="note-box"><b>On chain ${c.s}; the final model gives ${c.final}${tierNote}.</b> Synthetic demo batches were scored out-of-fold: 5-fold cross-validation scored each one with a model that never saw it, the honest way to test. The final model, trained on all the data, lands ${Math.abs(c.final - c.s)} point${Math.abs(c.final - c.s) === 1 ? "" : "s"} ${c.final > c.s ? "higher" : "lower"}. The reasons match exactly.</div>`
+      : `<div class="note-box">The score on chain does not reproduce from the published inputs (closest: ${c.final}).</div>`;
+  }
+  const cols = entry.versions;
+  const table = `<details class="rc-inputs"><summary>Inputs used${entry.source === "synthetic" ? " (synthetic project)" : ""}</summary>
+    <div class="table-wrap"><table><thead><tr><th></th>${cols.map((v) => `<th class="num">${esc(v.label)}</th>`).join("")}</tr></thead><tbody>
+    ${Object.keys(INPUT_LABELS).map((k) => `<tr><td>${INPUT_LABELS[k]}</td>${cols.map((v) => `<td class="num">${inputValue(k, v.raw[k])}</td>`).join("")}</tr>`).join("")}
+    </tbody></table></div>
+    <p class="muted" style="font-size:13px;margin-top:8px">${entry.source === "real" ? "Published registry figures (Berkeley VROD v2026-08) and our yearly satellite measurement." : "From CarbonGuard's synthetic training data."} The chain stores the score, reasons and hashes, not these inputs.</p></details>`;
+  out.innerHTML = verdict + table;
+  CGM.close(out.firstElementChild);
+}
+
+function closeAll() {
+  ["drawer", "scrim", "retireModal", "reviewModal", "buyModal"].forEach((id) => $(id).classList.remove("show"));
+  if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+  lastFocus = null;
+}
+
+// ---------- data
+async function refresh() {
+  try {
+    [batches, retirements, listings] = await Promise.all([CG.loadBatches(), CG.loadRetirements(), CG.loadListings()]);
+    const changedB = new Map(), changedL = new Set();
+    if (prevBatches) for (const b of batches) {
+      const p = prevBatches.get(b.id);
+      if (p && (p.score !== b.score || p.status !== b.status)) changedB.set(b.id, p);
+    }
+    if (prevLive) for (const l of listings) if (prevLive.has(l.id) && prevLive.get(l.id) !== l.live) changedL.add(l.id);
+    prevBatches = new Map(batches.map((b) => [b.id, { score: b.score, status: b.status }]));
+    prevLive = new Map(listings.map((l) => [l.id, l.live]));
+    renderKpis(); renderRows(changedB); renderListings(changedB, changedL); renderFeed();
+    noteChanges(changedB, changedL);
+    $("fresh").textContent = `Read from chain at ${time()} · refreshes every 12 s`;
+  } catch (e) {
+    console.error(e);
+    $("fresh").textContent = `Couldn't reach the contract on ${cfg.name} at ${time()}. Retrying every 12 s.`;
+    if (!batches.length) $("rows").innerHTML = `<tr class="empty-row"><td colspan="6">Could not reach the contract at ${esc(cfg.address)} on ${esc(cfg.name)}. Is the chain running?</td></tr>`;
+  }
+}
+
+// ---------- attack simulator (static calls against the live contract, no wallet needed)
+async function simulate(btn, out, fn) {
+  const el = $(out);
+  btn.disabled = true;
+  try {
+    const desc = await fn();
+    el.className = "gate show allowed";
+    el.innerHTML = desc
+      ? `<div class="verdict"><span class="stamp">Nothing to try</span></div><h4>${esc(desc)}</h4>`
+      : `<div class="verdict"><span class="stamp">Allowed</span></div><h4>The contract allowed this action.</h4>`;
+  } catch (e) {
+    const h = CG.humanError(e);
+    if (h.name === "Error") {
+      el.className = "gate show allowed";
+      el.innerHTML = `<div class="verdict"><span class="stamp">Couldn't run</span></div><h4>${esc(h.text)}</h4>`;
+    } else {
+      el.className = "gate show";
+      el.innerHTML = `<div class="verdict"><span class="stamp">Blocked by the contract</span></div><h4>${esc(h.text)}</h4><code>revert ${esc(h.name)}</code>`;
+      CGM.close(el);
+    }
+  } finally { btn.disabled = false; }
+}
+const from = { from: cfg.admin };
+$("atk1").onclick = (ev) => simulate(ev.currentTarget, "atk1r", async () => {
+  const b = batches[0];
+  if (!b) throw new Error("No batches yet");
+  const shift = (b.serialTo - b.serialFrom) / 2n;
+  await CG.read.registerBatch.staticCall({ registry: b.registry, projectId: b.projectId, projectType: b.projectType, country: b.country, vintage: b.vintage, serialFrom: b.serialFrom + shift, serialTo: b.serialTo + shift, correspondingAdjustment: b.ca }, cfg.admin, from);
+});
+$("atk2").onclick = (ev) => simulate(ev.currentTarget, "atk2r", async () => {
+  const b = batches.find((x) => x.status === "Flagged") || batches.find((x) => x.status === "Rejected");
+  if (!b) return "No frozen batches right now. Every batch passed the AI gate.";
+  await CG.read.safeTransferFrom.staticCall(cfg.admin, "0x000000000000000000000000000000000000dEaD", b.id, 100, "0x", from);
+});
+$("atk3").onclick = (ev) => simulate(ev.currentTarget, "atk3r", async () => {
+  const b = batches.find((x) => x.status === "Active" && !x.ca && outstanding(x) > 0n);
+  if (!b) return "No tradable batch without a corresponding adjustment.";
+  await CG.read.retire.staticCall(b.id, 10, "Demo Airline", "CORSIA claim", true, from);
+});
+
+// ---------- wallet actions
+async function send(msgId, fn) {
+  const m = $(msgId);
+  m.className = "msg show info"; m.textContent = "Confirm in your wallet…";
+  try {
+    const tx = await fn();
+    m.textContent = "Waiting for the block…";
+    const rc = await tx.wait();
+    await refresh();
+    return rc;
+  } catch (e) {
+    const h = CG.humanError(e);
+    m.className = "msg show err"; m.textContent = h.text;
+    return null;
+  }
+}
+
+$("rmGo").onclick = async () => {
+  const c = CG.write();
+  if (!c) { $("rmMsg").className = "msg show err"; $("rmMsg").textContent = "Connect a wallet first."; return; }
+  const rc = await send("rmMsg", () => c.retire(current.id, BigInt($("rmAmt").value || 0), $("rmBen").value, $("rmPur").value, $("rmComp").checked));
+  if (rc) {
+    const ev = rc.logs.map((l) => { try { return CG.iface.parseLog(l); } catch { return null; } }).find((e) => e && e.name === "Retired");
+    const id = ev ? ev.args.retirementId : null;
+    $("rmMsg").className = "msg show ok";
+    $("rmMsg").innerHTML = `Retired and burned. ${id != null ? `<a href="certificate.html?id=${id}" target="_blank" rel="noopener">Open the public certificate →</a>` : ""}`;
+  }
+};
+async function review(approve) {
+  const c = CG.write();
+  if (!c) { $("rvMsg").className = "msg show err"; $("rvMsg").textContent = "Connect a wallet first."; return; }
+  const rc = await send("rvMsg", () => c.verifierDecision(current.id, approve, $("rvNote").value));
+  if (rc) {
+    const b = batches.find((x) => x.id === current.id);
+    const decided = b && b.status !== "Flagged";
+    $("rvMsg").className = "msg show ok";
+    $("rvMsg").textContent = decided
+      ? approve ? "Approved. The batch is now tradable." : "Rejected. The batch is permanently frozen."
+      : `Vote recorded (${votesText(b)}). Another verifier must agree before anything changes.`;
+  }
+}
+$("rvApprove").onclick = () => review(true);
+// Rejection is final, so it takes a second, deliberate click.
+$("rvReject").onclick = () => {
+  const btn = $("rvReject");
+  if (!btn.classList.contains("armed")) { btn.classList.add("armed"); btn.textContent = "Click again to reject for good"; return; }
+  btn.classList.remove("armed"); btn.textContent = "Reject permanently";
+  review(false);
+};
+
+let buying = null;
+function openBuy(l) {
+  buying = l;
+  closeAll();
+  lastFocus = document.activeElement;
+  $("scrim").classList.add("show");
+  const b = batches.find((x) => x.id === l.tokenId) || {};
+  $("byListing").innerHTML = `#${l.id} · ${esc(b.projectType)} · ${esc(b.projectId)} · risk ${b.score} · ${fmt(l.remaining)} t at ${ethers.formatEther(l.price)} ETH/t`;
+  $("byAmt").value = String(l.remaining < 100n ? l.remaining : 100n);
+  $("byMsg").className = "msg";
+  updateBuyTotal();
+  $("buyModal").classList.add("show");
+  $("byAmt").focus();
+}
+function updateBuyTotal() {
+  const amt = BigInt(Math.max(0, Math.floor(Number($("byAmt").value) || 0)));
+  $("byTotal").textContent = `${ethers.formatEther(amt * buying.price)} ETH`;
+  return amt;
+}
+$("byAmt").oninput = updateBuyTotal;
+$("byGo").onclick = async () => {
+  const m = CG.writeMarket();
+  if (!m) { $("byMsg").className = "msg show err"; $("byMsg").textContent = "Connect a wallet first."; return; }
+  const amt = updateBuyTotal();
+  const rc = await send("byMsg", () => m.buy(buying.id, amt, { value: amt * buying.price }));
+  if (rc) { $("byMsg").className = "msg show ok"; $("byMsg").textContent = `Bought ${fmt(amt)} t. The credits are in your wallet; retire them to claim the offset.`; }
+};
+
+function openModal(kind, b) {
+  current = b;
+  closeAll();
+  lastFocus = document.activeElement;
+  $("scrim").classList.add("show");
+  const label = `#${b.id} · ${esc(b.projectType)} · ${esc(b.projectId)} · risk ${b.score}`;
+  if (kind === "retire") {
+    $("rmBatch").innerHTML = label; $("rmMsg").className = "msg";
+    $("rmAmt").value = String(outstanding(b) < 1000n ? outstanding(b) : 1000n);
+    $("rmComp").checked = false;
+    $("retireModal").classList.add("show");
+    $("rmAmt").focus();
+  } else {
+    const panel = b.votes ? `<div class="muted" style="margin-top:6px;font-size:14px">Needs ${b.votes.required} matching verifier vote${b.votes.required > 1 ? "s" : ""}. So far: ${b.votes.approvals} approve, ${b.votes.rejections} reject.</div>` : "";
+    $("rvBatch").innerHTML = `${label}<div class="t-${tier(b.score)}">${reasonsList(b)}</div>${panel}`; $("rvMsg").className = "msg";
+    $("rvReject").classList.remove("armed"); $("rvReject").textContent = "Reject permanently";
+    $("reviewModal").classList.add("show");
+    $("rvNote").focus();
+  }
+}
+
+$("connectBtn").onclick = async () => {
+  try {
+    const s = await CG.connect();
+    const addr = await s.getAddress();
+    $("connectBtn").textContent = short(addr);
+    isVerifier = await CG.read.hasRole(await CG.read.VERIFIER_ROLE(), addr);
+    toast(isVerifier ? "Connected as a verifier" : "Connected");
+  } catch (e) { toast(CG.humanError(e).text); }
+};
+
+// ---------- events
+document.addEventListener("click", (e) => {
+  const t = e.target.closest("[data-act],[data-close],tbody tr[data-id]");
+  if (!t) return;
+  if (t.hasAttribute("data-close")) return closeAll();
+  if (t.dataset.act === "buy") { e.stopPropagation(); return openBuy(listings.find((l) => l.id === Number(t.dataset.listing))); }
+  if (t.dataset.act) { e.stopPropagation(); return openModal(t.dataset.act, batches.find((b) => b.id === Number(t.dataset.id))); }
+  if (t.dataset.id) openDrawer(batches.find((b) => b.id === Number(t.dataset.id)));
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") return closeAll();
+  const tr = e.target.closest && e.target.closest("tbody tr[data-id]");
+  if (tr && e.target === tr && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openDrawer(batches.find((b) => b.id === Number(tr.dataset.id))); }
+});
+$("scrim").onclick = closeAll;
+$("tabs").onclick = (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  filter = b.dataset.f;
+  [...$("tabs").children].forEach((x) => { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", String(x === b)); });
+  renderRows();
+};
+$("q").oninput = () => renderRows();
+
+// ---------- boot
+$("netName").textContent = cfg.name;
+const ex = CG.explorer("address", cfg.address);
+$("contractLink").innerHTML = ex ? `<a class="mono" href="${ex}" target="_blank" rel="noopener">${short(cfg.address)}</a>` : `<span class="mono">${short(cfg.address)}</span>`;
+renderModel();
+renderRealWorld();
+renderFairness();
+refresh();
+setInterval(refresh, 12000);
+</script>
+</body>
+</html>

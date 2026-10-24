@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CarbonGuard · Satellite evidence</title>
+<meta name="description" content="Real satellite forest-loss data for REDD+ projects, against the credits they were issued.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z' fill='%23121a16'/%3E%3Cpath d='M11 16.5l3.5 3.5 7-7.5' stroke='%23f4f5f1' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="story.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="var(--ink)"/><path d="M11 16.5l3.5 3.5 7-7.5" stroke="var(--paper)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      CarbonGuard
+    </a>
+    <nav class="nav" aria-label="Pages">
+      <a href="story.html">The problem</a>
+      <a href="index.html">Live ledger</a>
+      <a href="sandbox.html">Pre-check</a>
+      <a href="satellite.html" aria-current="page">Satellite evidence</a>
+    </nav>
+    <span class="spacer"></span>
+    <span class="chain hide-sm"><span class="dot" style="background:var(--ink-3)"></span>Yearly satellite record, 2001–2024</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="sat-head">
+    <div>
+      <h1>What satellites saw vs. what was credited</h1>
+      <p class="sub">REDD+ credits pay for forest loss a project <i>prevented</i>. Here is real tree-cover loss, year by year, inside three projects and a 2–20 km ring around them.</p>
+    </div>
+  </div>
+
+  <div class="tabs sat-tabs" id="tabs" role="tablist" aria-label="Project"></div>
+
+  <div class="sat">
+    <div class="sat-mapcard">
+      <div class="sat-maphead">
+        <div><b id="pName"></b> <span class="muted" id="pId"></span></div>
+        <div class="sat-year" id="yearBig" aria-live="off"></div>
+      </div>
+      <div class="sat-map" id="mapBox">
+        <canvas id="map" role="img" aria-label="Map of cumulative tree-cover loss"></canvas>
+        <svg id="overlay" preserveAspectRatio="none" aria-hidden="true"></svg>
+      </div>
+      <div class="sat-controls">
+        <button class="primary" id="play" aria-label="Play the time-lapse">Play</button>
+        <div class="sat-range">
+          <div class="sat-track" id="track"></div>
+          <input type="range" id="year" min="2001" max="2024" step="1" value="2024" aria-label="Year">
+        </div>
+      </div>
+      <div class="sat-legend">
+        <span><i style="background:var(--sat-loss)"></i>Tree-cover loss, shaded by the share of each cell lost</span>
+        <span><i class="ln" style="border-color:var(--ink)"></i>Project boundary</span>
+        <span><i class="dash" style="border-color:var(--ink-3)"></i>2–20 km comparison ring (faded beyond it)</span>
+        <span><i style="background:var(--sat-credit-band)"></i>Crediting years</span>
+      </div>
+    </div>
+
+    <div class="sat-side">
+      <div class="gap-fig" id="sGap"></div>
+      <p class="gap-l">of the credits are not backed by forest loss the satellite record shows was avoided</p>
+      <div class="scale-pair" id="scalePair"></div>
+      <p class="sb-note" id="sMax"></p>
+      <div class="sat-stats">
+        <div class="sat-stat"><span>Credits issued <span id="sPeriod"></span></span><b id="sClaimed"></b></div>
+        <div class="sat-stat"><span>Tree-cover loss inside the project, 2001–<span id="sYear"></span></span><b id="sLost"></b></div>
+      </div>
+      <div class="chart-block">
+        <h2 class="h3">Yearly loss, % of land</h2>
+        <p id="chartNote"></p>
+        <svg class="sat-chart" id="chart" viewBox="0 0 340 170" role="img" aria-label="Yearly tree-cover loss rate, project vs ring"></svg>
+        <div class="sat-legend" style="margin-top:6px"><span><i class="ln" style="border-color:var(--ink)"></i>Project</span><span><i class="dash" style="border-color:var(--ink-3)"></i>Ring</span></div>
+      </div>
+      <a class="btn sat-cta" href="sandbox.html" id="toSandbox">Score this project with its satellite gap →</a>
+    </div>
+  </div>
+
+  <section aria-labelledby="mH">
+    <div class="ledger-head">
+      <div class="row"><h2 id="mH">How this is measured</h2></div>
+    </div>
+    <div class="sat-notes">
+      <div><h3>Method</h3><div id="method" class="muted" style="font-size:14px;color:var(--ink-2)"></div></div>
+      <div>
+        <h3>Limits</h3>
+        <p>A screening estimate, not an audit. A distance ring is a simpler control than the synthetic-control matching in published studies, the satellite product can miss slow degradation of dry woodland, and boundaries are as published. There is no imagery basemap: land and water come from the satellite data mask, and each map cell covers many 30 m pixels.</p>
+        <p style="margin-top:10px"><b>Not measurable:</b> <span id="notMeasurable"></span></p>
+      </div>
+      <div><h3>Sources</h3><p id="sources"></p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot"><div class="wrap"><span>Scores and measurements are statistical risk indicators from public data, not allegations of wrongdoing. Satellite checks are yearly monitoring.</span></div></footer>
+
+<script src="satellite_map.js"></script>
+<script>
+const SAT = window.CG_SAT;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const nf = (v) => Math.round(v).toLocaleString("en-US");
+const SHORT = { VCS902: "Kariba (Zimbabwe)", VCS944: "Alto Mayo (Peru)", VCS1748: "Southern Cardamom (Cambodia)" };
+const FADE = 0.6;
+let P = null, base = null, frames = null, cum = null, cumYear = -1, timer = null;
+
+function palette() {
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches && document.documentElement.dataset.theme !== "light"
+    || document.documentElement.dataset.theme === "dark";
+  return dark
+    ? { bg: [14, 19, 17], land: [30, 38, 34], water: [24, 38, 52], project: [24, 52, 36], ring: [36, 45, 40], loss: [242, 132, 114] }
+    : { bg: [244, 245, 241], land: [234, 237, 230], water: [203, 218, 230], project: [218, 236, 225], ring: [228, 232, 224], loss: [176, 42, 26] };
+}
+
+function pixels(uri) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement("canvas");
+      c.width = img.width; c.height = img.height;
+      const g = c.getContext("2d");
+      g.drawImage(img, 0, 0);
+      resolve(g.getImageData(0, 0, img.width, img.height).data);
+    };
+    img.src = uri;
+  });
+}
+
+async function select(i) {
+  stop();
+  P = SAT.projects[i];
+  [...$("tabs").children].forEach((b, j) => { b.classList.toggle("on", j === i); b.setAttribute("aria-selected", String(j === i)); });
+  const [b, l] = await Promise.all([pixels(P.base_png), pixels(P.loss_png)]);
+  base = b; frames = l; cum = new Float32Array(P.width * P.height); cumYear = -1;
+  const [kx, ky] = P.km_per_cell;
+  const canvas = $("map");
+  canvas.width = P.width; canvas.height = P.height;
+  $("mapBox").style.aspectRatio = `${P.width * kx} / ${P.height * ky}`;
+  drawOverlay();
+  drawStatic();
+  setYear(Number($("year").value));
+}
+
+// Cumulative share of each cell's land lost up to `year`.
+function accumulate(year) {
+  const n = P.width * P.height, upto = year - P.years[0];
+  if (upto < cumYear) { cum.fill(0); cumYear = -1; }
+  for (let y = cumYear + 1; y <= upto; y++) {
+    const off = y * n * 4;
+    for (let i = 0; i < n; i++) {
+      const v = frames[off + i * 4] / 255;
+      cum[i] += v * v; // frames are square-root encoded
+    }
+  }
+  cumYear = upto;
+}
+
+function render() {
+  const c = palette(), n = P.width * P.height;
+  const g = $("map").getContext("2d");
+  const img = g.createImageData(P.width, P.height);
+  const d = img.data;
+  for (let i = 0; i < n; i++) {
+    const land = base[i * 4] / 255, proj = base[i * 4 + 1] / 255, ring = base[i * 4 + 2] / 255;
+    let col = land < 0.5 ? c.water : proj > 0.5 ? c.project : ring > 0.5 ? c.ring : c.land;
+    const a = Math.min(1, Math.sqrt(cum[i]));
+    const fade = proj < 0.5 && ring < 0.5 ? FADE : 0;
+    for (let k = 0; k < 3; k++) {
+      const v = col[k] * (1 - a) + c.loss[k] * a;
+      d[i * 4 + k] = v * (1 - fade) + c.bg[k] * fade;
+    }
+    d[i * 4 + 3] = 255;
+  }
+  g.putImageData(img, 0, 0);
+}
+
+function setYear(year) {
+  accumulate(year);
+  render();
+  const s = P.stats, [start, end] = s.crediting_period;
+  const credited = year >= start && year <= end;
+  $("year").value = year;
+  $("year").setAttribute("aria-valuetext", `${year}${credited ? ", a credited year" : ""}`);
+  $("yearBig").innerHTML = `${year}<small>${credited ? "credited year" : year < start ? "before crediting" : "after crediting"}</small>`;
+  $("yearBig").classList.toggle("in", credited);
+  $("sYear").textContent = year;
+  const lost = Object.entries(s.project_loss_ha_by_year).reduce((t, [y, v]) => t + (Number(y) <= year ? v : 0), 0);
+  $("sLost").textContent = `${nf(lost)} ha`;
+  const marker = $("chart").querySelector(".now");
+  if (marker) marker.setAttribute("x1", xOf(year)), marker.setAttribute("x2", xOf(year));
+}
+
+function ringsPath(rings) {
+  return rings.map((r) => "M" + r.map((p) => p.join(",")).join("L") + "Z").join("");
+}
+
+function drawOverlay() {
+  const svg = $("overlay");
+  svg.setAttribute("viewBox", `0 0 ${P.width} ${P.height}`);
+  svg.innerHTML = `<path d="${ringsPath(P.ring_outline)}" class="ol ring"/><path d="${ringsPath(P.project_outline)}" class="ol proj"/>`;
+}
+
+const CH = { x0: 34, x1: 332, y0: 140, y1: 12 };
+let yMax = 1;
+const xOf = (y) => CH.x0 + ((y - 2001) / 23) * (CH.x1 - CH.x0);
+const yOf = (v) => CH.y0 - (v / yMax) * (CH.y0 - CH.y1);
+
+function drawStatic() {
+  const s = P.stats, [start, end] = s.crediting_period;
+  $("pName").textContent = s.name;
+  $("pId").textContent = `· ${P.project_id}`;
+  $("sPeriod").textContent = `(${start}–${end} vintages)`;
+  $("sClaimed").textContent = `${(s.claimed_tco2 / 1e6).toFixed(1)}M t CO₂`;
+  $("sGap").textContent = `${Math.round(s.gap * 100)}%`;
+  $("sMax").textContent = `Drawn to scale by area, at a high-end ${Math.round(s.tco2_per_ha_assumed)} t CO₂ per hectare and the more favourable of two methods. Even if the project had stopped all the forest loss expected without it, the record could back at most ${(s.max_supported_share * 100).toFixed(1)}% of its credits.`;
+  $("toSandbox").href = `sandbox.html?preset=${P.project_id}-sat`;
+
+  // Credited vs observed, to scale: area = hectares.
+  const side = 200, small = Math.max(2, side * Math.sqrt(Math.max(s.avoided_ha, 0) / s.implied_avoided_ha));
+  $("scalePair").innerHTML = `
+    <figure><span class="sq credited" style="width:${side}px;height:${side}px"></span><figcaption class="credited-c"><b>${nf(s.implied_avoided_ha)} ha</b><span>forest the credits imply was saved</span></figcaption></figure>
+    <figure><span class="sq observed" style="width:${small.toFixed(1)}px;height:${small.toFixed(1)}px"></span><figcaption class="observed-c"><b>${nf(s.avoided_ha)} ha</b><span>saved, per satellite</span></figcaption></figure>`;
+
+  const pct = (a, b) => `${(100 * a / b).toFixed(1)}%`;
+  $("track").style.background = `linear-gradient(90deg, transparent ${pct(start - 2001, 23)}, var(--sat-credit-band) ${pct(start - 2001, 23)}, var(--sat-credit-band) ${pct(end - 2001, 23)}, transparent ${pct(end - 2001, 23)})`;
+  $("track").innerHTML = `<span style="left:${(100 * ((start + end) / 2 - 2001)) / 23}%">credited ${start}–${end}</span>`;
+
+  // chart: yearly loss rate (% of land) project vs ring, crediting years shaded
+  const rate = (by, land) => P.years.map((y) => (100 * (by[y] || 0)) / land);
+  const pr = rate(s.project_loss_ha_by_year, s.project_land_ha), rr = rate(s.ring_loss_ha_by_year, s.ring_land_ha);
+  const avg = (vals, a, b) => { const v = P.years.map((y, i) => [y, vals[i]]).filter(([y]) => y >= a && y <= b); return v.reduce((t, [, x]) => t + x, 0) / v.length; };
+  const [p0, p1] = s.pre_period;
+  const f = (v) => `${v.toFixed(2)}%`;
+  $("chartNote").textContent = `Average loss a year, before crediting (${p0}–${p1}) → during (${start}–${end}): project ${f(avg(pr, p0, p1))} → ${f(avg(pr, start, end))}, ring ${f(avg(rr, p0, p1))} → ${f(avg(rr, start, end))}.`;
+  const top = Math.max(...pr, ...rr) * 1.1 || 1;
+  const step = [0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2, 0.25, 0.5, 1].find((s) => s * 4 >= top) || 1;
+  yMax = step * 4;
+  const line = (vals) => vals.map((v, i) => `${i ? "L" : "M"}${xOf(P.years[i]).toFixed(1)},${yOf(v).toFixed(1)}`).join("");
+  const dec = step < 0.1 ? 2 : 1;
+  const ticks = [0, 1, 2, 3, 4].map((k) => `<line x1="${CH.x0}" x2="${CH.x1}" y1="${yOf(k * step)}" y2="${yOf(k * step)}" class="${k ? "grid" : "axis"}"/><text x="${CH.x0 - 5}" y="${yOf(k * step) + 4}" text-anchor="end">${(k * step).toFixed(dec)}</text>`).join("");
+  $("chart").innerHTML = `
+    <rect x="${xOf(start)}" y="${CH.y1}" width="${xOf(end) - xOf(start)}" height="${CH.y0 - CH.y1}" class="band"/>
+    ${ticks}
+    <text x="${CH.x0}" y="${CH.y0 + 18}">2001</text><text x="${CH.x1}" y="${CH.y0 + 18}" text-anchor="end">2024</text>
+    <text x="${(xOf(start) + xOf(end)) / 2}" y="${CH.y0 + 18}" text-anchor="middle" class="band-label">credited</text>
+    <path d="${line(rr)}" class="l ring"/><path d="${line(pr)}" class="l proj"/>
+    <line class="now" x1="${xOf(2024)}" x2="${xOf(2024)}" y1="${CH.y1}" y2="${CH.y0}"/>`;
+}
+
+function stop() {
+  clearInterval(timer); timer = null;
+  $("play").textContent = "Play";
+  $("play").setAttribute("aria-label", "Play the time-lapse");
+}
+
+function play() {
+  if (timer) return stop();
+  let y = Number($("year").value);
+  if (y >= 2024) y = 2000;
+  $("play").textContent = "Pause";
+  $("play").setAttribute("aria-label", "Pause the time-lapse");
+  timer = setInterval(() => {
+    y += 1;
+    setYear(y);
+    if (y >= 2024) stop();
+  }, 450);
+}
+
+function init() {
+  $("tabs").innerHTML = SAT.projects.map((p, i) => `<button role="tab" aria-selected="false" data-i="${i}">${esc(SHORT[p.project_id] || p.stats.name)}</button>`).join("");
+  $("tabs").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) select(Number(b.dataset.i)); });
+  $("year").addEventListener("input", (e) => { stop(); setYear(Number(e.target.value)); });
+  $("play").addEventListener("click", play);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === " " && !e.target.closest("button, input, a")) { e.preventDefault(); play(); }
+  });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => P && render());
+  // The generated method text is one paragraph of numbered steps; show them as a list, without script names.
+  const method = SAT.method.replace(/\s+/g, " ").replace(/\s*\([a-z_]+\.py\)/g, "");
+  const steps = method.split(/\s(?=\d\.\s)/);
+  $("method").innerHTML = steps.length > 1
+    ? `${esc(steps[0])}<ol style="margin-top:8px">${steps.slice(1).map((s) => `<li>${esc(s.replace(/^\d\.\s/, ""))}</li>`).join("")}</ol>`
+    : esc(method);
+  $("notMeasurable").innerHTML = SAT.not_measurable.map((m) => `${esc(m.name)} (${esc(m.project_id)}): ${esc(m.reason)}.`).join(" ") || "none";
+  $("sources").innerHTML = Object.values(SAT.sources).map(esc).join("<br><br>");
+  const want = new URLSearchParams(location.search).get("project");
+  const i = Math.max(0, SAT.projects.findIndex((p) => p.project_id === want));
+  select(i);
+}
+
+init();
+</script>
+</body>
+</html>

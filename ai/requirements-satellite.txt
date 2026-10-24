@@ -1,0 +1,8 @@
+# Optional: only for measuring real satellite data (npm run satellite).
+# Training, scoring and all tests run without these.
+-r requirements.txt
+rasterio==1.5.2
+geopandas==1.2.0
+pyogrio==0.13.0
+shapely==2.2.0
+pyproj==3.8.0

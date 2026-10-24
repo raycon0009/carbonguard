@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CarbonGuard · Credited vs. observed</title>
+<meta name="description" content="Carbon credits claimed vs forest actually saved, and how CarbonGuard scores every tonne and counts it once.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z' fill='%23121a16'/%3E%3Cpath d='M11 16.5l3.5 3.5 7-7.5' stroke='%23f4f5f1' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="story.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="var(--ink)"/><path d="M11 16.5l3.5 3.5 7-7.5" stroke="var(--paper)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      CarbonGuard
+    </a>
+    <nav class="nav" aria-label="Pages">
+      <a href="story.html" aria-current="page">The problem</a>
+      <a href="index.html">Live ledger</a>
+      <a href="sandbox.html">Pre-check</a>
+      <a href="satellite.html">Satellite evidence</a>
+    </nav>
+    <span class="spacer"></span>
+    <a class="btn primary hide-sm" href="index.html">Open the live ledger</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="story-grid story-hero">
+    <div class="story-copy">
+      <h1>Credited for saving <span class="credited" id="hImplied">124,011</span> hectares of forest. Satellites saw <span class="observed" id="hObserved">1,231</span>.</h1>
+      <p class="lead" id="hLead">Kariba REDD+ in Zimbabwe issued 34 million tonnes of carbon credits for deforestation it said it prevented. Satellites recorded the same low rate of forest loss inside and outside it, before and during the project.</p>
+      <p class="promise">Every tonne scored by AI. Every tonne counted once.</p>
+      <div class="cta"><a class="btn primary" href="index.html">Open the live ledger</a><a class="btn" href="satellite.html">Watch the satellite record</a></div>
+      <p class="muted" style="font-size:13px;margin-top:14px">Satellite figures are screening estimates from yearly monitoring data. Scores are statistical risk indicators, not allegations.</p>
+    </div>
+    <figure class="evidence" style="margin:0">
+      <div class="canvas-wrap" id="mapBox">
+        <canvas id="map" role="img" aria-label="Kariba REDD+: real tree-cover loss 2001–2024, with the forest its credits imply was saved drawn to scale"></canvas>
+        <svg class="ov" id="overlay" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="yr" id="yr">2024</div>
+      </div>
+      <figcaption>
+        <span><i style="border:2px dashed var(--high)"></i>Forest the credits imply was saved, to scale</span>
+        <span><i style="background:var(--low)"></i>Saved, per satellite (the dot)</span>
+        <span><i style="background:var(--sat-loss)"></i>Tree-cover loss 2001–2024</span>
+        <button type="button" class="text sm" id="replay">Replay</button>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="gap-line" id="gapLine"></div>
+
+  <section aria-labelledby="pH">
+    <div class="ledger-head">
+      <div class="row"><h2 id="pH">Kariba is not an outlier</h2></div>
+      <p>Carbon markets only work if one credit is one real tonne, counted once. Published research says neither holds reliably.</p>
+    </div>
+    <div class="problem" style="margin-top:18px">
+      <p class="lead" style="font-size:var(--fs-lead);color:var(--ink-2)">Verification is slow, manual and opaque. Buyers can't tell good credits from bad ones, and the same tonne can be tokenised, sold or claimed twice.</p>
+      <ul>
+        <li><b>~94%</b><span>of credits from sampled rainforest projects did not reflect real reductions (West et al., <i>Science</i>, 2023)</span></li>
+        <li><b>~9×</b><span>over-crediting estimated for cookstove projects (Gill-Wiehl et al., <i>Nature Sustainability</i>, 2024)</span></li>
+        <li><b>&lt;16%</b><span>of credits assessed represent real emission reductions (Probst et al., <i>Nature Communications</i>, 2024)</span></li>
+        <li><b>2022</b><span>crypto bridges tokenised millions of old registry credits; Verra banned tokenising retired credits over double counting</span></li>
+      </ul>
+    </div>
+    <div class="gap-line" id="scaleLine" style="margin-top:32px"></div>
+    <p class="muted" id="scaleNote" style="font-size:13px;margin-top:10px"></p>
+  </section>
+
+  <section aria-labelledby="hwH">
+    <div class="ledger-head">
+      <div class="row"><h2 id="hwH">Three checks, on real data</h2></div>
+      <p>CarbonGuard scores every credit batch with an explainable AI model, writes the score on chain, and lets the contract freeze what fails.</p>
+    </div>
+    <div class="proofs" style="margin-top:18px">
+      <div class="proof">
+        <h3>The AI score</h3>
+        <div class="fig-row t-Medium"><span>6</span><span class="to">→</span><span style="color:var(--c)">64</span></div>
+        <p>On registry data alone the model scored Kariba 6: a miss we report. With satellite evidence, the same frozen model scores it 64, a public warning.</p>
+        <a class="btn" href="sandbox.html?preset=VCS902">Try it in the pre-check →</a>
+      </div>
+      <div class="proof">
+        <h3>The satellite evidence</h3>
+        <div class="fig-row"><span style="color:var(--high)">99%</span></div>
+        <p>of Kariba's credits aren't backed by forest the satellite record shows was saved. Measured yearly from Hansen Global Forest Change at 30 m.</p>
+        <a class="btn" href="satellite.html">See it year by year →</a>
+      </div>
+      <div class="proof">
+        <h3>The contract guards</h3>
+        <div class="fig-row t-High"><span>66</span><span class="to">→</span><span style="color:var(--c)">86</span></div>
+        <p>When yearly monitoring re-scores Alto Mayo above 70, the contract freezes it and its listing is suspended. Double tokenisation, double selling and double claiming all revert.</p>
+        <a class="btn" href="index.html">Open the live ledger →</a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="hoH">
+    <div class="ledger-head">
+      <div class="row"><h2 id="hoH">Where it fails, in the open</h2></div>
+      <p>On 65 California forest offsets the model is no better than chance (AUC 0.56): their over-crediting leaves no trace in registry data. Scores are statistical risk indicators, not allegations. <a href="index.html#trust">See every result</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap sources">
+    <span>Kariba: credits from the Berkeley Voluntary Registry Offsets Database v2026-08 (Quartson et al., CC BY 4.0); tree-cover loss from Hansen et al. (2013), Global Forest Change v1.12 (CC BY 4.0); boundary from Karnik et al. (2024), Zenodo 11459391 (CC BY 4.0); hectares at a high-end 275 t CO₂/ha (IPCC defaults via Rozendaal et al. 2022), the more favourable of two counterfactuals.</span>
+    <span>Verra's review of Kariba: <a href="https://verra.org/verra-acts-on-kariba-project-cancels-excess-credits-advances-independent-review/" target="_blank" rel="noopener">verra.org</a>. Research: West et al. (2023) <i>Science</i>; Gill-Wiehl et al. (2024) <i>Nature Sustainability</i>; Probst et al. (2024) <i>Nature Communications</i>; Badgley et al. (2021) <i>Global Change Biology</i>.</span>
+  </div>
+</footer>
+
+<script src="real_world.js"></script>
+<script src="satellite_map.js"></script>
+<script src="motion.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+const nf = (v) => Math.round(v).toLocaleString("en-US");
+const P = (window.CG_SAT.projects || []).find((p) => p.project_id === "VCS902");
+const W = ((window.CG_REAL_WORLD || {}).watchlist || []).find((w) => w.project_id === "VCS902");
+const FADE = 0.6;
+let base = null, frames = null, cum = null, timer = null;
+
+function palette() {
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches && document.documentElement.dataset.theme !== "light"
+    || document.documentElement.dataset.theme === "dark";
+  return dark
+    ? { bg: [14, 19, 17], land: [30, 38, 34], water: [24, 38, 52], project: [24, 52, 36], ring: [36, 45, 40], loss: [242, 132, 114] }
+    : { bg: [244, 245, 241], land: [234, 237, 230], water: [203, 218, 230], project: [218, 236, 225], ring: [228, 232, 224], loss: [176, 42, 26] };
+}
+function pixels(uri) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement("canvas");
+      c.width = img.width; c.height = img.height;
+      const g = c.getContext("2d");
+      g.drawImage(img, 0, 0);
+      resolve(g.getImageData(0, 0, img.width, img.height).data);
+    };
+    img.src = uri;
+  });
+}
+// Cumulative share of each cell's land lost, drawn the same way as satellite.html (never "any loss in the cell").
+function draw(year) {
+  const n = P.width * P.height, upto = year - P.years[0];
+  cum.fill(0);
+  for (let y = 0; y <= upto; y++) {
+    const off = y * n * 4;
+    for (let i = 0; i < n; i++) { const v = frames[off + i * 4] / 255; cum[i] += v * v; }
+  }
+  const c = palette(), g = $("map").getContext("2d"), img = g.createImageData(P.width, P.height), d = img.data;
+  for (let i = 0; i < n; i++) {
+    const land = base[i * 4] / 255, proj = base[i * 4 + 1] / 255, ring = base[i * 4 + 2] / 255;
+    const col = land < 0.5 ? c.water : proj > 0.5 ? c.project : ring > 0.5 ? c.ring : c.land;
+    const a = Math.min(1, Math.sqrt(cum[i])), fade = proj < 0.5 && ring < 0.5 ? FADE : 0;
+    for (let k = 0; k < 3; k++) d[i * 4 + k] = (col[k] * (1 - a) + c.loss[k] * a) * (1 - fade) + c.bg[k] * fade;
+    d[i * 4 + 3] = 255;
+  }
+  g.putImageData(img, 0, 0);
+  const [s0, s1] = P.stats.crediting_period;
+  $("yr").textContent = year;
+  $("yr").classList.toggle("in", year >= s0 && year <= s1);
+}
+// Play the record once, 2001 to 2024; reduced motion shows the final year.
+function play() {
+  clearInterval(timer);
+  if (CGM.reduced()) return draw(2024);
+  let y = 2001;
+  draw(y);
+  timer = setInterval(() => { y += 1; draw(y); if (y >= 2024) clearInterval(timer); }, 160);
+}
+const rings = (rs) => rs.map((r) => "M" + r.map((p) => p.join(",")).join("L") + "Z").join("");
+const tonnes = (t) => (t >= 1e9 ? `${(t / 1e9).toFixed(2)} billion` : `${Math.round(t / 1e6)} million`);
+
+// The same frozen model across every real registry project: aggregate tonnes only, no project named.
+function renderScale() {
+  const rw = window.CG_REAL_WORLD, t = rw && rw.tonnes_by_tier;
+  if (!t) { $("scaleLine").remove(); $("scaleNote").remove(); return; }
+  const risky = ["Medium", "High"], add = (k) => risky.reduce((a, x) => a + t[x][k], 0);
+  const all = Object.values(t).reduce((a, x) => a + x.projects, 0);
+  $("scaleLine").innerHTML = `
+    <div><b>${nf(all)}</b><span>real registry projects scored by CarbonGuard's frozen model</span></div>
+    <div class="md"><b>${tonnes(add("issued_t"))} t</b><span>issued by the ${nf(add("projects"))} rated Medium or High risk</span></div>
+    <div class="md"><b>${tonnes(add("not_yet_retired_t"))} t</b><span>of those not yet retired, so still for sale today</span></div>`;
+  $("scaleNote").textContent = `Aggregate figures from the Berkeley Voluntary Registry Offsets Database v2026-08. ${rw.disclaimer}`;
+}
+renderScale();
+
+async function init() {
+  const s = P.stats, [kx, ky] = P.km_per_cell;
+  $("hImplied").textContent = nf(s.implied_avoided_ha);
+  $("hObserved").textContent = nf(s.avoided_ha);
+  const finding = W ? ` Verra's own review later found ${W.finding.replace(/^Verra's own carbon-accounting review found /, "").replace(/;.*$/, "")}.` : "";
+  $("hLead").textContent = `Kariba REDD+ in Zimbabwe was credited with ${(s.claimed_tco2 / 1e6).toFixed(0)} million tonnes of CO₂, buffer included, for deforestation it said it prevented. Satellites recorded about the same low rate of forest loss inside and outside it, before and during the project.${finding}`;
+  $("gapLine").innerHTML = `
+    <div><b>${(s.claimed_tco2 / 1e6).toFixed(1)}M t</b><span>of CO₂ credited, ${s.crediting_period[0]}–${s.crediting_period[1]} vintages</span></div>
+    <div class="hi"><b>${nf(s.implied_avoided_ha)} ha</b><span>of forest those credits imply was saved</span></div>
+    <div class="ok"><b>${nf(s.avoided_ha)} ha</b><span>estimated saved from 24 years of satellite records (the more favourable of two methods): ${Math.round(s.gap * 100)}% of the credits not backed by observed avoided loss</span></div>`;
+
+  const canvas = $("map");
+  canvas.width = P.width; canvas.height = P.height;
+  $("mapBox").style.aspectRatio = `${P.width * kx} / ${P.height * ky}`;
+  // Both squares at true scale on the map: side = sqrt(hectares) in km, converted to map cells.
+  const sq = (ha) => { const km = Math.sqrt(ha / 100); return [km / kx, km / ky]; };
+  const [iw, ih] = sq(s.implied_avoided_ha), [ow, oh] = sq(Math.max(s.avoided_ha, 0));
+  const x0 = P.width * 0.04, y0 = P.height * 0.95;
+  const svg = $("overlay");
+  svg.setAttribute("viewBox", `0 0 ${P.width} ${P.height}`);
+  svg.innerHTML = `<path d="${rings(P.project_outline)}" class="ol"/>
+    <rect x="${x0}" y="${y0 - ih}" width="${iw}" height="${ih}" class="credited"/>
+    <rect x="${x0 + iw + P.width * 0.02}" y="${y0 - oh}" width="${ow}" height="${oh}" class="observed"/>`;
+
+  [base, frames] = await Promise.all([pixels(P.base_png), pixels(P.loss_png)]);
+  cum = new Float32Array(P.width * P.height);
+  play();
+  $("replay").onclick = play;
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => draw(Number($("yr").textContent)));
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Retirement Certificate</title>
+<meta name="description" content="Publicly verifiable carbon credit retirement certificate, rendered live from the blockchain.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z' fill='%23121a16'/%3E%3Cpath d='M11 16.5l3.5 3.5 7-7.5' stroke='%23f4f5f1' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="story.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="var(--ink)"/><path d="M11 16.5l3.5 3.5 7-7.5" stroke="var(--paper)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      CarbonGuard
+    </a>
+    <nav class="nav" aria-label="Pages">
+      <a href="story.html">The problem</a>
+      <a href="index.html">Live ledger</a>
+      <a href="sandbox.html">Pre-check</a>
+      <a href="satellite.html">Satellite evidence</a>
+    </nav>
+    <span class="spacer"></span>
+    <button class="noprint" onclick="window.print()">Print / PDF</button>
+  </div>
+</header>
+<main id="root"><div class="cert"><p class="muted">Reading the certificate from the blockchain…</p></div></main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js"></script>
+<script src="deployment.js"></script>
+<script src="model.js"></script>
+<script src="impact.js"></script>
+<script src="real_world.js"></script>
+<script src="common.js"></script>
+<script src="motion.js"></script>
+<script>
+const { cfg, esc, fmt, fmtCompact, short, tier } = CG;
+const REAL_NAMES = Object.fromEntries(((window.CG_REAL_WORLD || {}).satellite || []).map((s) => [s.project_id, s.name]));
+const ZERO = "0x0000000000000000000000000000000000000000";
+
+// Re-read every claim on this certificate from the chain, one check at a time.
+async function reverify(id, btn) {
+  const list = document.getElementById("checks");
+  btn.disabled = true; btn.textContent = "Reading the chain…";
+  list.innerHTML = "";
+  const add = (ok, html) => {
+    const li = document.createElement("li");
+    li.className = ok ? "ok" : "bad";
+    li.innerHTML = `<span class="mark" aria-hidden="true">${ok ? "✓" : "✗"}</span><span>${html}</span>`;
+    list.append(li);
+    CGM.land(li.querySelector(".mark"));
+  };
+  const pause = () => new Promise((r) => setTimeout(r, CGM.reduced() ? 0 : 160));
+  try {
+    const r = await CG.read.getRetirement(id);
+    const b = await CG.read.getBatch(r.tokenId);
+    const block = await CG.readProvider.getBlockNumber();
+    add(true, `Retirement #${id} is recorded in contract <span class="mono">${short(cfg.address)}</span> on ${esc(cfg.name)}.`); await pause();
+    const ev = (await CG.logs(CG.read.filters.Retired(id)))[0];
+    const rc = ev && (await CG.readProvider.getTransactionReceipt(ev.transactionHash));
+    const burns = rc ? rc.logs.map((l) => { try { return CG.iface.parseLog(l); } catch { return null; } })
+      .filter((e) => e && e.name === "TransferSingle" && e.args.to === ZERO && e.args.id === r.tokenId) : [];
+    const burned = burns.reduce((a, e) => a + e.args.value, 0n);
+    const txLink = ev && CG.explorer("tx", ev.transactionHash);
+    const tx = ev ? (txLink ? `<a class="mono" href="${txLink}" target="_blank" rel="noopener">${short(ev.transactionHash, 8, 6)}</a>` : `<span class="mono">${short(ev.transactionHash, 8, 6)}</span>`) : "";
+    add(burned === r.amount, burned === r.amount
+      ? `${fmt(r.amount)} t burned to the zero address in transaction ${tx} (block ${ev.blockNumber}).`
+      : `Couldn't find the burn of ${fmt(r.amount)} t for this retirement.`); await pause();
+    add(b.retired >= r.amount, `Batch #${r.tokenId} has ${fmt(b.retired)} t retired in total, including these, so they can never be sold or claimed again.`); await pause();
+    const score = Number(r.riskScoreAtRetirement);
+    add(score <= 70, `AI risk at retirement was ${score}, ${score <= 70 ? "below" : "above"} the freeze threshold of 70.`); await pause();
+    const m = window.CG_MODEL;
+    const sameModel = m && r.modelHash === m.model_hash;
+    add(sameModel, sameModel
+      ? `Scored by model <span class="mono">${short(r.modelHash, 6, 4)}</span>, the published model card.`
+      : `Scored by model <span class="mono">${short(r.modelHash, 6, 4)}</span>, which is not the published model card.`); await pause();
+    add(!r.complianceClaim || b.correspondingAdjustment, r.complianceClaim
+      ? (b.correspondingAdjustment ? "Compliance claim backed by an Article 6 corresponding adjustment, so these tonnes are not counted twice." : "Compliance claim without a corresponding adjustment.")
+      : "Voluntary claim: no corresponding adjustment needed.");
+    document.getElementById("checkedAt").textContent = `Checked against ${cfg.name} at block ${block}, ${new Date().toLocaleTimeString()}.`;
+  } catch (e) {
+    console.error(e);
+    add(false, `Couldn't read the chain: ${esc(CG.humanError(e).text)}`);
+  } finally { btn.disabled = false; btn.textContent = "Re-verify again"; }
+}
+
+(async () => {
+  const root = document.getElementById("root");
+  const id = Number(new URLSearchParams(location.search).get("id"));
+  try {
+    if (!Number.isInteger(id) || id < 0) throw new Error("Missing ?id=");
+    const r = await CG.read.getRetirement(id);
+    const b = await CG.read.getBatch(r.tokenId);
+    let txHash = null;
+    try {
+      const logs = await CG.logs(CG.read.filters.Retired(id));
+      txHash = logs[0]?.transactionHash || null;
+    } catch {}
+    const score = Number(r.riskScoreAtRetirement);
+    const t = tier(score);
+    const txLink = txHash && CG.explorer("tx", txHash);
+    const addrLink = CG.explorer("address", r.retiree);
+    const no = `CG-${String(id).padStart(6, "0")}`;
+    const im = window.CG_IMPACT;
+    const cars = im ? `Equal to the yearly emissions of about ${fmtCompact(Number(r.amount) / im.carTonnesPerYear)} cars (<a href="${im.carSource}" target="_blank" rel="noopener">EPA</a>).` : "";
+    const reasons = b.riskReasons && b.riskReasons !== "No significant red flags" ? b.riskReasons.split(" | ") : [];
+    document.title = `Retirement Certificate ${no}`;
+    root.innerHTML = `
+    <article class="cert">
+      <div class="seal" aria-hidden="true"><span class="stamp">Burned on chain</span></div>
+      <div class="doc"><span>Certificate of carbon credit retirement</span><span>No. ${no} · ${new Date(Number(r.timestamp) * 1000).toLocaleString()}</span></div>
+      <h1>${esc(r.beneficiary)}</h1>
+      <p class="lead">${esc(r.purpose)}</p>
+      <div class="rule2"></div>
+      <div class="big">
+        <div><span>Retired</span><b>${fmt(r.amount)} <small>tCO₂e</small></b></div>
+        <div><span>Claim type</span><b>${r.complianceClaim ? "Compliance (Art. 6)" : "Voluntary"}</b></div>
+        <div class="t-${t}"><span>AI risk at retirement</span><b style="color:var(--c)">${score} <small>${t}</small></b></div>
+      </div>
+      <dl class="kv">
+        <dt>Project</dt><dd>${REAL_NAMES[b.projectId] ? `${esc(REAL_NAMES[b.projectId])} · ` : ""}${esc(b.projectType)} · ${esc(b.projectId)} · ${esc(b.country)}</dd>
+        <dt>Registry · vintage</dt><dd>${esc(b.registry)} · ${b.vintage}</dd>
+        <dt>Climate equivalent</dt><dd>${cars}</dd>
+        <dt>Batch's current risk reasons</dt><dd>${reasons.length ? reasons.map(esc).join("; ") : "No significant red flags"}</dd>
+        <dt>Corresponding adjustment</dt><dd>${b.correspondingAdjustment ? "Yes: the host country adjusted its NDC accounting, so this tonne is not counted twice." : "No: valid as a voluntary contribution claim only."}</dd>
+        <dt>Registry serial range</dt><dd class="mono">${b.serialFrom} → ${b.serialTo}</dd>
+        <dt>Retired by</dt><dd class="mono">${addrLink ? `<a href="${addrLink}" target="_blank" rel="noopener">${r.retiree}</a>` : r.retiree}</dd>
+        <dt>AI model hash</dt><dd class="mono">${r.modelHash}</dd>
+        <dt>Transaction</dt><dd class="mono">${txHash ? (txLink ? `<a href="${txLink}" target="_blank" rel="noopener">${txHash}</a>` : txHash) : "–"}</dd>
+        <dt>Contract</dt><dd class="mono">${cfg.address} (${esc(cfg.name)})</dd>
+      </dl>
+      <div class="verified">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M7 12.5l3.2 3.2L17 9" stroke="var(--low-soft)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><b>Verified on chain.</b> This page is read live from the CarbonGuard contract, not from a database. These ${fmt(r.amount)} tonnes were burned and can never be sold or claimed again.</div>
+      </div>
+      <section class="reverify noprint" aria-labelledby="rvH">
+        <div class="rv-main">
+          <h2 id="rvH" class="h3">Don't trust this page: re-check it</h2>
+          <p class="muted">Re-reads every claim above from the contract and the burn transaction, in your browser.</p>
+          <button id="rvBtn">Re-verify on chain</button>
+          <ol class="checks" id="checks" aria-live="polite"></ol>
+          <p class="muted" id="checkedAt" style="font-size:13px"></p>
+        </div>
+      </section>
+    </article>
+    <div class="cert-actions"><a href="index.html">← Live ledger</a><span class="muted" style="font-size:13px">Scores are statistical risk indicators, not allegations.</span></div>`;
+    document.getElementById("rvBtn").onclick = (e) => reverify(id, e.currentTarget);
+  } catch (e) {
+    console.error(e);
+    root.innerHTML = `<div class="cert"><h1 style="margin-top:0">Certificate not found</h1><p class="lead">No retirement #${esc(String(id))} exists on ${esc(cfg.name)} at <span class="mono">${esc(cfg.address)}</span>.</p><p style="margin-top:16px"><a href="index.html">← Back to the live ledger</a></p></div>`;
+  }
+})();
+</script>
+</body>
+</html>

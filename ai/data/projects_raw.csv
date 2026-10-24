@@ -1,0 +1,421 @@
+project_id,project_name,registry,project_type,methodology,country,first_vintage,last_vintage,est_annual_reductions,total_issued,total_retired,max_to_median_issuance,buffer_pool_pct,satellite_cover_delta_pct,verifier_changes,has_corresponding_adjustment,_archetype
+GS1000,Delta Green Afforestation/Reforestation Project,GS,Afforestation/Reforestation,VM0047,Kenya,2006,2009,273998,1075092,666515,1.23,14.9,-12.7,0,False,clean
+VCS1001,Clear Sun Solar Project,VCS,Solar,AMS-I.D,Vietnam,2021,2024,154646,522112,345293,1.33,0.0,,1,False,clean
+GS1002,River Delta Cookstoves Project,GS,Cookstoves,VMR0006,India,2022,2024,50937,142350,94833,1.26,0.0,,0,False,clean
+VCS1003,Highland Horizon Cookstoves Project,VCS,Cookstoves,AMS-II.G,Nigeria,2012,2016,87357,2108292,201284,4.01,0.0,,0,False,overstated_usage
+GS1004,Sun Green Cookstoves Project,GS,Cookstoves,VMR0006,Rwanda,2020,2022,97702,223403,179473,1.39,0.0,,0,False,clean
+CAR1005,Blue Coastal Landfill Gas Project,CAR,Landfill Gas,ACM0001,USA,2021,2024,281114,1099325,686533,1.47,0.0,,0,False,clean
+VCS1006,River Valley Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,Brazil,2012,2015,48284,189137,184933,1.33,0.0,,0,True,clean
+GS1007,Clear Highland Afforestation/Reforestation Project,GS,Afforestation/Reforestation,VM0047,Mexico,2013,2022,170810,1749614,1061443,1.47,20.0,5.1,0,False,clean
+VCS1008,Northern Highland Solar Project,VCS,Solar,ACM0002,China,2008,2012,63487,302711,150354,1.48,0.0,,0,False,clean
+CAR1009,Horizon Savanna Improved Forest Management Project,CAR,Improved Forest Management,VM0012,Canada,2013,2024,305524,8264839,4540567,1.35,13.6,-34.5,1,False,inflated_baseline
+VCS1010,Summit Blue Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Mexico,2017,2019,81487,232411,149067,1.76,0.0,,0,False,clean
+VCS1011,Green Valley Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,USA,2017,2024,72338,487663,319862,1.47,0.0,,0,False,clean
+VCS1012,Sun Northern Solar Project,VCS,Solar,ACM0002,Chile,2019,2022,95698,319197,198168,1.74,0.0,,0,False,clean
+CAR1013,Summit Sun Landfill Gas Project,CAR,Landfill Gas,CAR-LFG,Mexico,2016,2020,159209,583217,437321,1.64,0.0,,1,False,clean
+GS1014,Green Forest Wind Project,GS,Wind,ACM0002,Turkey,2011,2017,160599,1067730,595165,1.23,0.0,,2,False,clean
+VCS1015,Evergreen Delta Industrial Gas Project,VCS,Industrial Gas (HFC-23/N2O),AM0021,USA,2007,2017,1592004,21625854,12838397,1.05,0.0,,0,False,non_additional_old_vintage
+GS1016,Lake Coastal Cookstoves Project,GS,Cookstoves,VMR0006,Nigeria,2010,2014,91719,468286,208325,1.77,0.0,,1,False,clean
+ACR1017,Blue Clear Improved Forest Management Project,ACR,Improved Forest Management,VM0012,Canada,2010,2021,170825,1992308,1078806,1.46,17.4,-16.7,0,False,clean
+CAR1018,Coastal Savanna Improved Forest Management Project,CAR,Improved Forest Management,VM0012,USA,2019,2024,147290,754670,617357,1.49,14.0,-2.6,1,False,clean
+ACR1019,Coastal Blue Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,India,2013,2022,120291,1010234,522181,1.46,17.9,3.1,0,False,clean
+GS1020,River Summit Wind Project,GS,Wind,ACM0002,China,2013,2016,517382,1919361,1358135,1.75,0.0,,2,True,clean
+VCS1021,Summit Northern Cookstoves Project,VCS,Cookstoves,GS-TPDDTEC,India,2010,2013,60985,195314,133409,1.54,0.0,,1,True,clean
+VCS1022,Valley Clear Solar Project,VCS,Solar,ACM0002,Chile,2012,2018,76385,404371,38185,1.68,0.0,,0,False,non_additional_old_vintage
+VCS1023,Sun Coastal REDD+ Project,VCS,REDD+,VM0009,Zimbabwe,2011,2018,926165,7659043,5910751,1.41,15.4,1.1,0,False,clean
+VCS1024,Clear Summit Cookstoves Project,VCS,Cookstoves,VMR0006,Malawi,2015,2021,207719,10984444,6144207,4.47,0.0,,1,False,overstated_usage
+GS1025,Clear Forest Cookstoves Project,GS,Cookstoves,AMS-II.G,India,2018,2024,32112,1671253,414986,4.09,0.0,,0,False,overstated_usage
+ACR1026,Valley Summit Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,AR-ACM0003,Brazil,2022,2024,60852,191588,74679,1.22,17.1,-2.6,0,True,clean
+GS1027,Horizon Green Solar Project,GS,Solar,AMS-I.D,Chile,2009,2017,145886,1221974,806583,1.71,0.0,,0,True,clean
+VCS1028,Lake Sun Cookstoves Project,VCS,Cookstoves,GS-TPDDTEC,India,2017,2024,111584,768550,435513,1.05,0.0,,0,False,clean
+CAR1029,Valley Highland Improved Forest Management Project,CAR,Improved Forest Management,CAR-FPP,Chile,2011,2017,318345,1850366,1353991,1.46,21.8,-5.8,1,False,clean
+ACR1030,Northern Sun Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,USA,2007,2019,136024,5391722,2075408,10.36,16.0,-3.3,0,False,anomalous
+VCS1031,Savanna Valley Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Colombia,2009,2014,152211,869063,673859,1.44,15.2,-5.5,0,False,clean
+ACR1032,Blue Lake Landfill Gas Project,ACR,Landfill Gas,ACM0001,Mexico,2016,2024,180601,1347867,992000,1.07,0.0,,1,False,clean
+VCS1033,Summit Valley Solar Project,VCS,Solar,AMS-I.D,Vietnam,2010,2021,207198,2424662,915266,1.29,0.0,,0,False,clean
+VCS1034,Forest Valley Cookstoves Project,VCS,Cookstoves,AMS-II.G,Ghana,2011,2020,56849,579031,291314,1.17,0.0,,1,True,clean
+GS1035,Horizon River Methane Capture Project,GS,Methane Capture (Agriculture),AMS-III.D,Vietnam,2006,2010,21060,79588,34807,1.76,0.0,,0,False,clean
+GS1036,Blue Savanna Wind Project,GS,Wind,ACM0002,China,2011,2014,256759,990399,45821,1.36,0.0,,0,False,non_additional_old_vintage
+VCS1037,Horizon Evergreen Cookstoves Project,VCS,Cookstoves,AMS-II.G,India,2019,2024,75515,2994339,2171246,4.71,0.0,,1,False,overstated_usage
+VCS1038,Valley Delta Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,Brazil,2012,2024,68411,716615,150663,1.74,0.0,,1,True,clean
+VCS1039,Lake Delta Improved Forest Management Project,VCS,Improved Forest Management,CAR-FPP,Canada,2017,2020,178751,539090,389950,1.77,23.5,-7.1,0,True,clean
+VCS1040,Forest Forest Large Hydro Project,VCS,Large Hydro,ACM0002,India,2010,2012,336600,1158340,192803,1.67,0.0,,0,False,non_additional_old_vintage
+ACR1041,Sun Evergreen Improved Forest Management Project,ACR,Improved Forest Management,IFM-ACR,Canada,2018,2020,400027,1194292,714010,1.65,19.6,1.7,0,False,clean
+VCS1042,Evergreen Delta Improved Forest Management Project,VCS,Improved Forest Management,VM0012,USA,2007,2018,258780,2233309,628433,1.28,15.2,-1.5,1,False,clean
+VCS1043,Clear River Large Hydro Project,VCS,Large Hydro,ACM0002,Laos,2010,2012,224365,678160,83667,1.06,0.0,,0,True,non_additional_old_vintage
+GS1044,Sun Blue Afforestation/Reforestation Project,GS,Afforestation/Reforestation,AR-ACM0003,Kenya,2018,2022,101212,527054,174692,1.35,15.2,-10.3,0,False,clean
+VCS1045,Highland Valley Wind Project,VCS,Wind,ACM0002,Brazil,2010,2020,266873,2899162,1750083,1.07,0.0,,1,False,clean
+VCS1046,Lake Green Wind Project,VCS,Wind,ACM0002,Turkey,2008,2015,156654,1262927,505306,1.7,0.0,,0,False,clean
+ACR1047,Green Summit Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,Brazil,2017,2019,110527,255911,133289,1.19,13.6,-10.9,0,True,clean
+VCS1048,River Delta Landfill Gas Project,VCS,Landfill Gas,ACM0001,Brazil,2010,2018,210116,1684098,1275758,1.24,0.0,,0,False,clean
+GS1049,Summit Highland Wind Project,GS,Wind,ACM0002,India,2009,2015,96591,638700,202594,1.78,0.0,,1,True,non_additional_old_vintage
+VCS1050,Forest Summit Solar Project,VCS,Solar,ACM0002,India,2011,2014,155379,506276,361325,1.75,0.0,,0,False,clean
+GS1051,River Savanna Cookstoves Project,GS,Cookstoves,VMR0006,Malawi,2015,2024,55719,416326,121064,1.6,0.0,,0,False,clean
+GS1052,Blue Sun Cookstoves Project,GS,Cookstoves,GS-TPDDTEC,Uganda,2012,2018,60407,1156657,528678,2.25,0.0,,1,True,overstated_usage
+GS1053,Blue Evergreen Wind Project,GS,Wind,ACM0002,China,2008,2014,145694,1054927,433300,1.79,0.0,,0,False,non_additional_old_vintage
+GS1054,Forest Blue Cookstoves Project,GS,Cookstoves,VMR0006,Ghana,2015,2024,76204,619484,210694,1.4,0.0,,0,False,clean
+VCS1055,Clear Horizon Large Hydro Project,VCS,Large Hydro,ACM0002,India,2009,2015,514938,5364978,1635087,1.15,0.0,,0,True,non_additional_old_vintage
+VCS1056,Summit Northern Wind Project,VCS,Wind,ACM0002,Turkey,2011,2018,305024,1868068,542494,1.69,0.0,,0,False,non_additional_old_vintage
+VCS1057,Savanna Savanna Cookstoves Project,VCS,Cookstoves,VMR0006,Nigeria,2013,2018,58957,261472,195309,1.28,0.0,,1,False,clean
+VCS1058,Valley Sun REDD+ Project,VCS,REDD+,VM0007,Indonesia,2008,2012,1224057,4380282,3110987,1.51,17.9,-4.3,1,False,clean
+VCS1059,Sun Summit Landfill Gas Project,VCS,Landfill Gas,CAR-LFG,Chile,2013,2018,207808,1154545,323035,1.18,0.0,,1,False,clean
+GS1060,Northern Forest Wind Project,GS,Wind,ACM0002,Vietnam,2008,2011,252244,816727,481628,1.69,0.0,,1,False,clean
+VCS1061,Northern Summit Improved Forest Management Project,VCS,Improved Forest Management,VM0012,USA,2016,2024,195960,1682796,1271198,1.74,17.1,2.3,0,False,clean
+GS1062,Northern Northern Wind Project,GS,Wind,ACM0002,India,2014,2022,180452,1283099,813026,1.22,0.0,,0,False,clean
+VCS1063,River Horizon REDD+ Project,VCS,REDD+,VM0007,Peru,2020,2024,1084995,27269210,4775044,5.72,9.5,-67.8,1,False,inflated_baseline
+CAR1064,Delta Savanna Soil Carbon Project,CAR,Soil Carbon,CAR-SEP,Brazil,2020,2024,71328,277729,139298,1.5,0.0,,0,False,clean
+VCS1065,Delta Summit Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Thailand,2011,2020,52032,409952,201797,1.54,0.0,,1,False,clean
+VCS1066,Savanna Delta REDD+ Project,VCS,REDD+,VM0015,Cambodia,2015,2024,1546159,14129691,1363902,1.54,12.7,-72.1,1,False,inflated_baseline
+GS1067,Valley Clear Cookstoves Project,GS,Cookstoves,AMS-II.G,Kenya,2013,2018,161482,695364,299960,1.05,0.0,,0,True,clean
+VCS1068,Delta River Landfill Gas Project,VCS,Landfill Gas,ACM0001,USA,2006,2017,121804,1096167,495182,1.07,0.0,,0,False,clean
+ACR1069,Summit Sun Improved Forest Management Project,ACR,Improved Forest Management,VM0012,Canada,2017,2024,143109,1025247,309993,1.75,11.5,1.1,0,True,clean
+VCS1070,River Blue Wind Project,VCS,Wind,ACM0002,China,2007,2015,327598,2813054,1168650,1.31,0.0,,1,False,non_additional_old_vintage
+VCS1071,Delta Summit Cookstoves Project,VCS,Cookstoves,GS-TPDDTEC,Ghana,2016,2020,114340,566168,334470,1.66,0.0,,0,False,clean
+ACR1072,Lake Delta Landfill Gas Project,ACR,Landfill Gas,ACM0001,Chile,2021,2024,94689,368024,316565,1.39,0.0,,2,False,clean
+GS1073,Clear Sun Methane Capture Project,GS,Methane Capture (Agriculture),AMS-III.D,Mexico,2007,2015,44674,374239,94787,1.05,0.0,,0,False,clean
+VCS1074,Green Evergreen Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Kenya,2013,2015,93419,200990,139711,1.04,18.9,0.7,1,False,clean
+GS1075,Coastal Summit Solar Project,GS,Solar,AMS-I.D,China,2008,2016,79797,555137,252441,1.4,0.0,,0,False,non_additional_old_vintage
+ACR1076,Clear River Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,AR-ACM0003,Brazil,2011,2014,269652,857790,612454,1.27,19.2,-11.0,0,True,clean
+GS1077,Highland Forest Methane Capture Project,GS,Methane Capture (Agriculture),AMS-III.D,Mexico,2017,2024,52185,343103,287823,1.06,0.0,,1,False,clean
+VCS1078,Evergreen Horizon REDD+ Project,VCS,REDD+,VM0007,Zimbabwe,2009,2011,529877,1276140,807015,1.54,20.3,-4.7,0,False,clean
+CAR1079,Forest Horizon Improved Forest Management Project,CAR,Improved Forest Management,VM0012,Canada,2009,2015,691832,4520304,2677797,1.58,16.3,-19.1,0,False,clean
+CAR1080,Coastal Savanna Improved Forest Management Project,CAR,Improved Forest Management,VM0012,Chile,2009,2011,146839,454832,218879,1.56,21.3,-8.6,0,True,clean
+VCS1081,River Sun Large Hydro Project,VCS,Large Hydro,ACM0002,India,2010,2015,461188,2536710,511545,1.08,0.0,,0,False,clean
+VCS1082,Summit Lake Wind Project,VCS,Wind,ACM0002,Turkey,2017,2024,103143,819114,560244,1.35,0.0,,0,False,clean
+VCS1083,River Horizon REDD+ Project,VCS,REDD+,VM0009,Peru,2013,2018,473418,2678864,1646619,1.8,20.4,-23.2,0,False,clean
+VCS1084,Summit Green REDD+ Project,VCS,REDD+,VM0009,Peru,2006,2010,1468847,5689916,2984398,1.28,18.7,-13.5,0,False,clean
+VCS1085,River Valley Solar Project,VCS,Solar,ACM0002,China,2020,2024,83669,433823,157523,1.22,0.0,,0,False,clean
+GS1086,Forest Valley Wind Project,GS,Wind,ACM0002,Vietnam,2008,2019,121277,1491355,1016555,1.43,0.0,,0,False,clean
+VCS1087,Coastal Savanna Solar Project,VCS,Solar,ACM0002,China,2016,2024,225244,2023739,1867261,1.14,0.0,,0,False,clean
+VCS1088,Northern Coastal Wind Project,VCS,Wind,ACM0002,Turkey,2006,2016,182911,1738038,785958,1.04,0.0,,0,False,clean
+VCS1089,Blue River Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,Brazil,2012,2018,64639,379983,257319,1.34,0.0,,0,False,clean
+VCS1090,Evergreen Savanna Soil Carbon Project,VCS,Soil Carbon,VM0042,Australia,2017,2021,40144,146811,94071,1.74,0.0,,0,False,clean
+GS1091,Summit Lake Afforestation/Reforestation Project,GS,Afforestation/Reforestation,VM0047,Uganda,2013,2024,339959,3034815,552501,1.28,17.7,-9.4,1,False,clean
+VCS1092,Lake Blue Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Vietnam,2022,2024,25060,56942,39729,1.23,0.0,,0,False,clean
+CAR1093,Savanna Northern Landfill Gas Project,CAR,Landfill Gas,CAR-LFG,USA,2016,2024,170027,1527233,1051962,1.78,0.0,,2,False,clean
+VCS1094,Delta Blue Solar Project,VCS,Solar,ACM0002,China,2020,2024,106579,423115,327658,1.13,0.0,,1,False,clean
+VCS1095,Coastal Forest Solar Project,VCS,Solar,AMS-I.D,India,2017,2020,249410,820111,419066,1.02,0.0,,0,False,clean
+VCS1096,Summit Forest Wind Project,VCS,Wind,ACM0002,China,2006,2009,116862,404457,275210,1.37,0.0,,0,False,clean
+CAR1097,Blue Clear Soil Carbon Project,CAR,Soil Carbon,CAR-SEP,Australia,2008,2010,89136,246576,150923,1.6,0.0,,0,False,clean
+VCS1098,Delta Delta Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,AR-ACM0003,India,2010,2019,154599,1120753,833443,1.77,17.8,-16.7,2,False,clean
+VCS1099,Northern Green Solar Project,VCS,Solar,ACM0002,Chile,2021,2024,44841,153248,44658,1.01,0.0,,0,False,clean
+ACR1100,Summit Highland Industrial Gas Project,ACR,Industrial Gas (HFC-23/N2O),AM0021,India,2011,2015,1605357,11726527,5833139,1.69,0.0,,0,False,non_additional_old_vintage
+VCS1101,Horizon Valley REDD+ Project,VCS,REDD+,VM0007,Zimbabwe,2019,2024,1899914,9772696,6633366,1.06,18.0,-19.0,0,False,clean
+VCS1102,Horizon Lake Solar Project,VCS,Solar,AMS-I.D,Vietnam,2006,2012,195860,1307616,491363,1.39,0.0,,0,False,non_additional_old_vintage
+GS1103,Valley Valley Cookstoves Project,GS,Cookstoves,AMS-II.G,Malawi,2013,2015,45607,491331,94165,4.27,0.0,,0,False,overstated_usage
+CAR1104,Delta Forest Landfill Gas Project,CAR,Landfill Gas,ACM0001,USA,2014,2024,274315,2695919,1357125,1.3,0.0,,0,False,clean
+VCS1105,Savanna Blue REDD+ Project,VCS,REDD+,VM0009,Colombia,2006,2009,1426330,4494260,1604024,1.24,19.3,-15.0,0,False,clean
+VCS1106,Blue Horizon Solar Project,VCS,Solar,ACM0002,India,2008,2017,47736,398433,322952,1.75,0.0,,1,False,clean
+VCS1107,Coastal Lake Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Indonesia,2015,2024,17157,158566,114973,1.28,14.6,-4.1,0,False,clean
+GS1108,Horizon Delta Solar Project,GS,Solar,AMS-I.D,India,2014,2017,123543,477653,314240,1.13,0.0,,0,False,clean
+VCS1109,Delta Sun Improved Forest Management Project,VCS,Improved Forest Management,CAR-FPP,Canada,2019,2024,324032,1821220,1120827,1.01,21.8,-12.2,0,False,clean
+GS1110,Evergreen Horizon Solar Project,GS,Solar,ACM0002,Chile,2007,2014,42715,329428,155646,1.18,0.0,,0,True,non_additional_old_vintage
+ACR1111,Summit Northern Improved Forest Management Project,ACR,Improved Forest Management,IFM-ACR,USA,2016,2018,491582,1174424,653015,1.12,17.2,4.1,1,False,clean
+GS1112,Horizon Coastal Solar Project,GS,Solar,ACM0002,Vietnam,2007,2011,62262,237215,136414,1.01,0.0,,0,False,non_additional_old_vintage
+VCS1113,Highland Savanna REDD+ Project,VCS,REDD+,VM0007,Colombia,2012,2014,1000236,2682268,1853327,1.46,25.2,-6.5,0,False,clean
+VCS1114,Delta Lake Improved Forest Management Project,VCS,Improved Forest Management,CAR-FPP,Chile,2016,2019,568033,5362772,2367678,1.3,17.7,-29.8,0,True,inflated_baseline
+VCS1115,Summit Blue REDD+ Project,VCS,REDD+,VM0015,Colombia,2006,2017,611220,5261461,2358532,1.29,13.3,-16.5,0,False,clean
+VCS1116,River Lake REDD+ Project,VCS,REDD+,VM0007,Indonesia,2017,2023,2744606,87011903,59695303,6.26,11.3,-73.9,1,False,inflated_baseline
+VCS1117,Blue Summit Wind Project,VCS,Wind,ACM0002,Brazil,2007,2014,332790,2785916,1768769,1.72,0.0,,0,True,clean
+ACR1118,Coastal Sun Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,India,2013,2015,122389,277921,136226,1.07,15.6,-27.7,1,False,clean
+GS1119,Summit Blue Wind Project,GS,Wind,ACM0002,India,2015,2017,154069,370114,271346,1.6,0.0,,0,False,clean
+GS1120,Evergreen Evergreen Solar Project,GS,Solar,AMS-I.D,China,2020,2024,95636,437191,316874,1.32,0.0,,0,False,clean
+VCS1121,Northern Sun Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Indonesia,2020,2023,50257,963216,302094,5.54,12.1,-0.9,1,False,anomalous
+GS1122,Lake River Cookstoves Project,GS,Cookstoves,VMR0006,Uganda,2009,2011,26891,205570,51988,2.11,0.0,,0,False,overstated_usage
+VCS1123,Sun Coastal Improved Forest Management Project,VCS,Improved Forest Management,CAR-FPP,USA,2013,2018,726777,4019914,3098276,1.14,14.2,1.0,1,False,clean
+VCS1124,Forest Lake Improved Forest Management Project,VCS,Improved Forest Management,CAR-FPP,Canada,2007,2010,99748,315308,159305,1.33,8.0,-13.6,1,False,clean
+VCS1125,Evergreen Sun REDD+ Project,VCS,REDD+,VM0007,Colombia,2022,2024,712690,1801805,1457815,1.67,18.9,-1.1,0,False,clean
+GS1126,Evergreen Delta Solar Project,GS,Solar,AMS-I.D,Chile,2009,2014,203129,1210631,672393,1.6,0.0,,1,False,non_additional_old_vintage
+VCS1127,Delta Clear Industrial Gas Project,VCS,Industrial Gas (HFC-23/N2O),AM0001,USA,2014,2020,1449508,9029708,2455798,1.45,0.0,,0,True,clean
+GS1128,Highland Blue Wind Project,GS,Wind,ACM0002,Turkey,2006,2012,141630,890967,128044,1.06,0.0,,1,False,non_additional_old_vintage
+GS1129,Summit Savanna Wind Project,GS,Wind,ACM0002,China,2009,2011,570500,1366562,33442,1.05,0.0,,0,True,non_additional_old_vintage
+GS1130,Green Lake Methane Capture Project,GS,Methane Capture (Agriculture),AMS-III.D,Thailand,2010,2013,22656,88092,64549,1.59,0.0,,2,False,clean
+VCS1131,Savanna Summit Large Hydro Project,VCS,Large Hydro,ACM0002,Laos,2006,2017,325257,4325799,655775,1.51,0.0,,0,False,non_additional_old_vintage
+CAR1132,Evergreen Evergreen Landfill Gas Project,CAR,Landfill Gas,CAR-LFG,USA,2017,2024,110000,800069,488764,1.63,0.0,,0,False,clean
+VCS1133,Coastal Forest Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Colombia,2016,2023,95924,578551,338492,1.14,19.5,-14.1,0,False,clean
+VCS1134,Blue Clear Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,VM0047,India,2020,2024,117496,496993,331970,1.59,23.7,-6.4,0,False,clean
+VCS1135,Sun Forest Solar Project,VCS,Solar,ACM0002,Vietnam,2011,2021,119947,1247124,599253,1.57,0.0,,1,False,clean
+VCS1136,Coastal Lake Large Hydro Project,VCS,Large Hydro,ACM0002,Laos,2012,2018,264864,2361296,983884,1.16,0.0,,1,False,non_additional_old_vintage
+VCS1137,Northern Coastal Industrial Gas Project,VCS,Industrial Gas (HFC-23/N2O),AM0001,China,2009,2012,2295828,10185070,3082686,1.02,0.0,,0,False,non_additional_old_vintage
+GS1138,Coastal Sun Cookstoves Project,GS,Cookstoves,AMS-II.G,India,2011,2022,86139,822803,580295,1.56,0.0,,0,False,clean
+VCS1139,Sun Savanna Large Hydro Project,VCS,Large Hydro,ACM0002,India,2006,2010,296143,1559687,446262,1.22,0.0,,0,False,non_additional_old_vintage
+GS1140,Clear Lake Solar Project,GS,Solar,ACM0002,Vietnam,2017,2024,96435,798533,659048,1.35,0.0,,0,False,clean
+VCS1141,Lake Valley Cookstoves Project,VCS,Cookstoves,VMR0006,Rwanda,2008,2010,125904,1999818,187447,2.46,0.0,,0,False,overstated_usage
+VCS1142,Blue Clear REDD+ Project,VCS,REDD+,VM0015,Cambodia,2008,2019,614337,7020520,410610,1.07,18.0,-56.0,0,False,inflated_baseline
+VCS1143,Green Forest Cookstoves Project,VCS,Cookstoves,VMR0006,Kenya,2014,2021,64513,3405087,962853,2.21,0.0,,0,True,overstated_usage
+GS1144,Forest Savanna Methane Capture Project,GS,Methane Capture (Agriculture),AMS-III.D,Thailand,2021,2024,73400,284884,214329,1.21,0.0,,1,False,clean
+VCS1145,Sun Highland Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,AR-ACM0003,India,2016,2024,127187,1019244,520887,1.2,20.8,9.0,0,False,clean
+VCS1146,Savanna Lake REDD+ Project,VCS,REDD+,VM0015,Colombia,2008,2011,609214,2022250,1173239,1.19,21.0,-61.1,1,False,inflated_baseline
+VCS1147,Lake Northern Cookstoves Project,VCS,Cookstoves,VMR0006,Malawi,2022,2024,65184,168877,122916,1.24,0.0,,0,False,clean
+VCS1148,Sun Savanna REDD+ Project,VCS,REDD+,VM0009,Colombia,2008,2013,1913568,11201189,7627470,1.36,20.3,-76.8,0,False,inflated_baseline
+ACR1149,Blue Coastal Improved Forest Management Project,ACR,Improved Forest Management,CAR-FPP,USA,2013,2024,234781,5944324,4270675,1.44,22.4,-35.4,0,False,inflated_baseline
+VCS1150,Valley Sun Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,Brazil,2013,2019,46224,331411,159320,1.44,0.0,,0,False,clean
+VCS1151,Coastal Coastal Improved Forest Management Project,VCS,Improved Forest Management,CAR-FPP,USA,2010,2020,280052,7390756,733050,1.46,19.2,-22.4,0,False,inflated_baseline
+GS1152,Horizon Coastal Wind Project,GS,Wind,ACM0002,Turkey,2010,2012,186128,446648,171819,1.06,0.0,,0,True,non_additional_old_vintage
+ACR1153,Sun River Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,AR-ACM0003,Kenya,2022,2024,92854,245242,152917,1.09,22.4,-10.5,0,False,clean
+GS1154,Northern Summit Solar Project,GS,Solar,AMS-I.D,China,2006,2018,109508,998245,829206,1.11,0.0,,0,False,clean
+VCS1155,Northern Delta REDD+ Project,VCS,REDD+,VM0007,Peru,2019,2024,818110,4626729,2423191,1.66,13.0,-80.8,0,False,inflated_baseline
+ACR1156,Summit Valley Landfill Gas Project,ACR,Landfill Gas,ACM0001,USA,2014,2022,176473,1597878,1312735,1.71,0.0,,1,False,clean
+VCS1157,Evergreen Savanna Cookstoves Project,VCS,Cookstoves,GS-TPDDTEC,Uganda,2010,2019,95126,4092868,1285505,3.33,0.0,,0,False,overstated_usage
+VCS1158,Delta Summit Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,AR-ACM0003,India,2018,2024,105048,752892,615068,1.75,18.9,15.1,0,False,clean
+CAR1159,Summit Green Landfill Gas Project,CAR,Landfill Gas,ACM0001,USA,2016,2024,115156,844250,443935,1.65,0.0,,1,False,clean
+VCS1160,Green Coastal Wind Project,VCS,Wind,ACM0002,Turkey,2013,2018,178812,768508,434619,1.69,0.0,,0,False,non_additional_old_vintage
+VCS1161,Forest Blue Cookstoves Project,VCS,Cookstoves,GS-TPDDTEC,Uganda,2016,2021,172058,985874,254464,1.38,0.0,,1,False,clean
+VCS1162,Lake Valley Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,AR-ACM0003,Mexico,2011,2023,123250,1331515,764284,1.78,14.0,-15.6,1,False,clean
+CAR1163,Valley Delta Landfill Gas Project,CAR,Landfill Gas,CAR-LFG,Mexico,2006,2012,142699,910617,720016,1.26,0.0,,0,False,clean
+GS1164,Forest Delta Cookstoves Project,GS,Cookstoves,GS-TPDDTEC,Kenya,2012,2015,69162,1366221,567532,3.86,0.0,,0,False,overstated_usage
+VCS1165,Horizon Sun REDD+ Project,VCS,REDD+,VM0007,DRC,2018,2024,1377794,36518941,15150225,5.6,6.3,-45.7,2,True,inflated_baseline
+VCS1166,River Sun Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Thailand,2020,2024,51675,189345,101502,1.58,0.0,,0,False,clean
+VCS1167,Sun Blue REDD+ Project,VCS,REDD+,VM0007,Colombia,2010,2018,769131,7101104,4507122,1.57,10.0,-70.7,1,False,inflated_baseline
+VCS1168,Blue Coastal REDD+ Project,VCS,REDD+,VM0007,Zimbabwe,2012,2016,523860,2595143,1328067,1.66,19.9,-75.1,0,False,inflated_baseline
+VCS1169,Blue Valley Cookstoves Project,VCS,Cookstoves,VMR0006,Rwanda,2014,2019,20115,100866,59679,1.08,0.0,,0,False,clean
+ACR1170,Lake Delta Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,Uganda,2022,2024,270479,739915,282329,1.55,18.3,6.2,0,False,clean
+CAR1171,Forest Savanna Improved Forest Management Project,CAR,Improved Forest Management,IFM-ACR,USA,2011,2017,221754,1259539,945090,1.02,19.2,-7.7,0,False,clean
+VCS1172,Sun Savanna Wind Project,VCS,Wind,ACM0002,Turkey,2008,2012,318672,1181520,495984,1.73,0.0,,0,False,non_additional_old_vintage
+VCS1173,Summit River Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Thailand,2012,2019,12087,85900,28339,1.34,0.0,,0,False,clean
+CAR1174,Horizon Northern Soil Carbon Project,CAR,Soil Carbon,VM0042,Brazil,2016,2022,264855,8226734,3428592,10.42,0.0,,2,False,anomalous
+VCS1175,Valley Sun REDD+ Project,VCS,REDD+,VM0015,Colombia,2006,2016,876042,9922802,8360530,1.34,18.2,1.3,1,False,clean
+VCS1176,Forest Green Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Kenya,2009,2021,57687,628539,431001,1.76,13.8,-15.8,0,False,clean
+VCS1177,Green Coastal Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,AR-ACM0003,Brazil,2007,2017,99147,1107170,326517,1.2,17.7,-8.6,0,False,clean
+ACR1178,Savanna Coastal Industrial Gas Project,ACR,Industrial Gas (HFC-23/N2O),AM0021,India,2016,2022,857475,4370142,3030753,1.28,0.0,,0,False,clean
+ACR1179,Horizon Forest Improved Forest Management Project,ACR,Improved Forest Management,IFM-ACR,USA,2011,2022,425723,5316483,3482032,1.53,15.0,-8.2,1,False,clean
+VCS1180,Sun Lake Large Hydro Project,VCS,Large Hydro,ACM0002,China,2022,2024,487510,1438876,1078102,1.28,0.0,,1,False,clean
+VCS1181,Sun Evergreen Large Hydro Project,VCS,Large Hydro,ACM0002,Laos,2012,2020,150702,1134528,831929,1.48,0.0,,0,False,clean
+VCS1182,Forest Blue Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Kenya,2021,2024,58144,214608,170252,1.8,18.4,4.7,0,False,clean
+VCS1183,Sun Blue Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Mexico,2015,2020,53540,297611,130098,1.19,0.0,,0,False,clean
+CAR1184,Lake Clear Improved Forest Management Project,CAR,Improved Forest Management,VM0012,USA,2016,2018,238237,526052,277625,1.23,20.7,-11.3,2,False,clean
+VCS1185,Savanna Highland Solar Project,VCS,Solar,ACM0002,India,2006,2010,119568,433414,356580,1.1,0.0,,1,False,clean
+ACR1186,Northern Forest Landfill Gas Project,ACR,Landfill Gas,ACM0001,Brazil,2022,2024,167898,356770,219693,1.63,0.0,,0,False,clean
+VCS1187,Green River REDD+ Project,VCS,REDD+,VM0015,Zimbabwe,2016,2018,704596,8329159,4080782,2.7,10.8,-43.4,1,True,inflated_baseline
+GS1188,Lake Highland Solar Project,GS,Solar,AMS-I.D,Vietnam,2017,2024,53221,391916,142864,1.14,0.0,,0,False,clean
+VCS1189,River River Improved Forest Management Project,VCS,Improved Forest Management,VM0012,USA,2007,2009,196772,417659,135555,1.42,18.3,-11.9,0,False,clean
+VCS1190,Lake River Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,AR-ACM0003,Brazil,2016,2022,190955,961562,836834,1.43,14.4,6.3,1,False,clean
+VCS1191,Savanna Northern Wind Project,VCS,Wind,ACM0002,India,2007,2017,174490,1652706,835847,1.44,0.0,,2,False,clean
+GS1192,Lake River Cookstoves Project,GS,Cookstoves,VMR0006,Nigeria,2011,2018,59188,492640,380784,1.09,0.0,,0,False,clean
+VCS1193,Horizon Valley Wind Project,VCS,Wind,ACM0002,Turkey,2019,2024,258343,1353708,271182,1.28,0.0,,0,False,clean
+VCS1194,Northern Forest Solar Project,VCS,Solar,AMS-I.D,India,2007,2017,67083,588783,424949,1.29,0.0,,0,False,clean
+GS1195,Delta Sun Wind Project,GS,Wind,ACM0002,Brazil,2014,2022,174913,1238265,1137574,1.66,0.0,,0,False,clean
+VCS1196,River Savanna Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,USA,2021,2024,43799,174063,88652,1.7,0.0,,0,False,clean
+ACR1197,Evergreen Sun Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,India,2008,2018,163277,1276303,1010998,1.02,22.9,9.0,0,False,clean
+CAR1198,Clear Sun Improved Forest Management Project,CAR,Improved Forest Management,IFM-ACR,Canada,2010,2015,346371,1521026,905094,1.42,22.8,-2.9,0,False,clean
+VCS1199,Clear Horizon Cookstoves Project,VCS,Cookstoves,VMR0006,Uganda,2008,2014,81983,471389,328203,1.49,0.0,,0,True,clean
+ACR1200,Forest Valley Landfill Gas Project,ACR,Landfill Gas,ACM0001,Mexico,2008,2015,308321,1953862,1644103,1.78,0.0,,0,False,clean
+VCS1201,Savanna Sun Solar Project,VCS,Solar,ACM0002,India,2006,2009,46996,192669,65644,1.22,0.0,,0,True,clean
+ACR1202,Horizon Northern Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,Uganda,2018,2020,107022,301675,172501,1.21,19.1,-1.2,1,True,clean
+CAR1203,Savanna Northern Landfill Gas Project,CAR,Landfill Gas,ACM0001,USA,2008,2017,119922,908500,467375,1.17,0.0,,0,False,clean
+ACR1204,Highland Savanna Landfill Gas Project,ACR,Landfill Gas,CAR-LFG,Mexico,2006,2010,206322,900410,635552,1.62,0.0,,0,False,clean
+VCS1205,Highland Sun Landfill Gas Project,VCS,Landfill Gas,ACM0001,Chile,2019,2024,97926,598990,389336,1.54,0.0,,0,False,clean
+VCS1206,Forest Delta REDD+ Project,VCS,REDD+,VM0009,Zimbabwe,2010,2021,1346932,52806011,12587930,5.76,7.9,-60.6,2,False,inflated_baseline
+ACR1207,Coastal Coastal Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,India,2009,2014,205275,1031420,497387,1.51,13.8,-3.4,1,False,clean
+VCS1208,Northern Summit Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,Brazil,2018,2024,162974,1186595,797132,1.47,0.0,,1,True,clean
+VCS1209,Savanna Forest Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Indonesia,2020,2024,73740,286146,164240,1.61,16.1,-9.1,0,False,clean
+GS1210,Sun Delta Afforestation/Reforestation Project,GS,Afforestation/Reforestation,VM0047,USA,2020,2024,75899,395151,304351,1.05,24.2,-1.8,1,True,clean
+VCS1211,Horizon Blue Wind Project,VCS,Wind,ACM0002,Turkey,2014,2016,197446,502044,302866,1.21,0.0,,0,False,clean
+CAR1212,Coastal Green Improved Forest Management Project,CAR,Improved Forest Management,VM0012,USA,2019,2024,283435,1331953,954740,1.35,20.6,-17.0,0,False,clean
+GS1213,Northern River Cookstoves Project,GS,Cookstoves,AMS-II.G,India,2017,2020,46987,1116091,591954,4.25,0.0,,0,False,overstated_usage
+VCS1214,Blue River REDD+ Project,VCS,REDD+,VM0009,Cambodia,2010,2017,779767,6287230,4220965,1.38,20.2,-8.4,0,False,clean
+VCS1215,Green Horizon Improved Forest Management Project,VCS,Improved Forest Management,CAR-FPP,Chile,2013,2019,414931,2991972,1939522,1.27,19.6,3.0,1,False,clean
+CAR1216,Green Northern Improved Forest Management Project,CAR,Improved Forest Management,IFM-ACR,Canada,2022,2024,546943,3110536,1102377,1.45,24.7,-21.7,1,False,inflated_baseline
+VCS1217,Forest Horizon Soil Carbon Project,VCS,Soil Carbon,VM0042,Brazil,2014,2018,26664,135631,72169,1.54,0.0,,0,False,clean
+VCS1218,Clear Delta Wind Project,VCS,Wind,ACM0002,India,2019,2024,168085,861782,339139,1.76,0.0,,1,False,clean
+ACR1219,Forest Clear Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,India,2007,2015,65624,441370,239095,1.54,13.2,-19.9,1,False,clean
+GS1220,Valley Evergreen Cookstoves Project,GS,Cookstoves,GS-TPDDTEC,Ghana,2022,2024,67414,172745,154189,1.23,0.0,,0,False,clean
+GS1221,Lake Horizon Wind Project,GS,Wind,ACM0002,Brazil,2011,2021,212291,2082568,1089460,1.69,0.0,,0,False,clean
+GS1222,Blue Green Solar Project,GS,Solar,ACM0002,Vietnam,2011,2022,98346,1024670,276280,1.2,0.0,,0,False,non_additional_old_vintage
+VCS1223,Summit Blue Wind Project,VCS,Wind,ACM0002,Vietnam,2017,2024,120008,957748,528151,1.3,0.0,,2,False,clean
+GS1224,Forest Forest Cookstoves Project,GS,Cookstoves,AMS-II.G,Kenya,2018,2020,76330,1444478,383099,3.49,0.0,,0,False,overstated_usage
+CAR1225,Green Northern Improved Forest Management Project,CAR,Improved Forest Management,VM0012,USA,2019,2021,396330,915796,405962,1.64,18.2,-14.9,0,False,clean
+VCS1226,Savanna Highland Wind Project,VCS,Wind,ACM0002,Turkey,2013,2018,78599,335374,93934,1.4,0.0,,1,False,non_additional_old_vintage
+VCS1227,Northern Horizon Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Mexico,2011,2020,79513,732633,537337,1.59,0.0,,0,True,clean
+GS1228,Forest River Wind Project,GS,Wind,ACM0002,Vietnam,2010,2021,341838,3652418,2466450,1.71,0.0,,0,False,clean
+VCS1229,River Northern Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Senegal,2018,2024,36872,240639,143981,1.44,19.0,-8.9,3,False,clean
+VCS1230,Evergreen Summit REDD+ Project,VCS,REDD+,VM0009,Brazil,2014,2018,860876,23539301,10824360,5.85,10.8,-74.4,1,False,inflated_baseline
+VCS1231,Clear Horizon Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,AR-ACM0003,India,2018,2024,124078,764469,414437,1.48,17.3,5.2,0,True,clean
+VCS1232,Summit Highland Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Kenya,2021,2023,41660,100197,30297,1.59,18.0,2.4,1,False,clean
+GS1233,Highland Sun Wind Project,GS,Wind,ACM0002,China,2006,2012,284887,1680764,83677,1.17,0.0,,2,False,non_additional_old_vintage
+VCS1234,Sun Lake Wind Project,VCS,Wind,ACM0002,Vietnam,2010,2021,209983,2458812,1736537,1.55,0.0,,0,False,clean
+VCS1235,Blue River Cookstoves Project,VCS,Cookstoves,VMR0006,Uganda,2015,2021,30466,1515213,353550,2.49,0.0,,0,False,overstated_usage
+ACR1236,Lake Forest Improved Forest Management Project,ACR,Improved Forest Management,CAR-FPP,Canada,2014,2020,232929,1686115,1333033,1.32,17.8,-14.4,0,False,clean
+VCS1237,Horizon Lake Large Hydro Project,VCS,Large Hydro,ACM0002,Brazil,2007,2017,580876,7754232,2243735,1.32,0.0,,0,True,non_additional_old_vintage
+GS1238,Horizon Evergreen Cookstoves Project,GS,Cookstoves,VMR0006,Uganda,2009,2020,145857,1810414,1243811,1.02,0.0,,2,False,clean
+VCS1239,Savanna Savanna Cookstoves Project,VCS,Cookstoves,GS-TPDDTEC,Kenya,2007,2014,101601,635081,472459,1.54,0.0,,0,False,clean
+ACR1240,Evergreen Summit Landfill Gas Project,ACR,Landfill Gas,ACM0001,Brazil,2006,2014,160841,1117595,662606,1.06,0.0,,0,False,clean
+VCS1241,Clear Clear Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Vietnam,2011,2016,73861,374395,272371,1.58,0.0,,0,False,clean
+VCS1242,Horizon Coastal Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Vietnam,2010,2018,15976,139056,68139,1.46,0.0,,0,False,clean
+VCS1243,Lake Sun Wind Project,VCS,Wind,ACM0002,Brazil,2009,2021,263088,2524498,1123261,1.17,0.0,,0,False,clean
+VCS1244,Horizon Green REDD+ Project,VCS,REDD+,VM0009,Zimbabwe,2010,2019,813665,8455555,1027882,1.36,22.9,-71.6,1,False,inflated_baseline
+VCS1245,Clear Coastal REDD+ Project,VCS,REDD+,VM0007,Brazil,2008,2019,698464,7009114,2383600,1.58,18.1,-12.9,1,False,clean
+VCS1246,Blue Evergreen Wind Project,VCS,Wind,ACM0002,Vietnam,2007,2009,244266,588636,276794,1.28,0.0,,0,False,clean
+VCS1247,Lake Summit REDD+ Project,VCS,REDD+,VM0009,Cambodia,2020,2024,1252357,21265226,6414829,3.3,8.3,-75.3,2,False,inflated_baseline
+VCS1248,Savanna Evergreen REDD+ Project,VCS,REDD+,VM0015,Colombia,2009,2019,1284862,12979472,7939019,1.5,21.3,-6.9,0,False,clean
+ACR1249,Forest River Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,Brazil,2009,2018,136997,1146159,852442,1.65,16.1,-0.2,1,False,clean
+VCS1250,Green Lake Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Mexico,2008,2013,69213,295712,143665,1.56,0.0,,0,False,clean
+GS1251,Green Savanna Afforestation/Reforestation Project,GS,Afforestation/Reforestation,VM0047,Brazil,2017,2019,175400,471389,401552,1.2,18.8,-9.6,1,False,clean
+VCS1252,Green Sun REDD+ Project,VCS,REDD+,VM0007,Indonesia,2012,2017,840507,4993149,2583613,1.62,25.2,-5.0,0,False,clean
+VCS1253,Sun Blue Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,Australia,2020,2024,99080,438547,304088,1.52,0.0,,0,False,clean
+VCS1254,Delta Coastal Solar Project,VCS,Solar,AMS-I.D,China,2022,2024,60163,136488,85945,1.45,0.0,,0,False,clean
+VCS1255,Green River Landfill Gas Project,VCS,Landfill Gas,ACM0001,USA,2012,2020,101658,938372,352084,1.12,0.0,,1,True,clean
+VCS1256,River Valley Cookstoves Project,VCS,Cookstoves,VMR0006,Nigeria,2014,2022,195941,1458605,1167594,1.53,0.0,,0,True,clean
+VCS1257,Horizon Horizon Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,Brazil,2019,2023,58049,205264,118001,1.41,0.0,,0,False,clean
+VCS1258,Clear Savanna Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Vietnam,2016,2018,69066,154407,138748,1.58,0.0,,1,False,clean
+VCS1259,Northern Horizon Wind Project,VCS,Wind,ACM0002,Turkey,2015,2017,655258,1595281,1425984,1.39,0.0,,0,False,clean
+VCS1260,Blue Blue Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Mexico,2008,2019,47345,493486,413476,1.57,0.0,,0,False,clean
+VCS1261,Forest Highland Wind Project,VCS,Wind,ACM0002,Vietnam,2006,2013,270256,2011428,573285,1.46,0.0,,0,False,non_additional_old_vintage
+GS1262,Forest Forest Cookstoves Project,GS,Cookstoves,VMR0006,Uganda,2009,2017,70654,649802,610735,1.74,0.0,,0,False,clean
+VCS1263,Evergreen Valley Landfill Gas Project,VCS,Landfill Gas,ACM0001,Chile,2007,2018,269744,12009687,7937280,6.36,0.0,,0,False,anomalous
+GS1264,Savanna Delta Solar Project,GS,Solar,AMS-I.D,India,2015,2018,55032,223414,71051,1.56,0.0,,1,False,clean
+ACR1265,Evergreen Sun Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,Uganda,2016,2022,63982,335787,292485,1.78,20.5,-2.7,1,False,clean
+GS1266,Savanna Forest Wind Project,GS,Wind,ACM0002,India,2017,2024,147104,1202168,473085,1.76,0.0,,0,False,clean
+VCS1267,Summit Blue REDD+ Project,VCS,REDD+,VM0009,Colombia,2015,2021,1708407,11055916,3656091,1.62,21.3,-53.0,2,False,inflated_baseline
+VCS1268,Clear Savanna Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Indonesia,2006,2013,70561,529639,323582,1.63,12.6,-7.0,0,True,clean
+GS1269,Horizon River Wind Project,GS,Wind,ACM0002,Vietnam,2020,2024,244229,1032821,863471,1.47,0.0,,0,False,clean
+VCS1270,Highland Green REDD+ Project,VCS,REDD+,VM0015,Zimbabwe,2007,2015,645416,5940413,2806016,1.51,17.9,-5.3,2,False,clean
+CAR1271,Forest Blue Soil Carbon Project,CAR,Soil Carbon,VM0042,USA,2019,2024,36917,200777,108864,1.17,0.0,,0,False,clean
+GS1272,Savanna Coastal Methane Capture Project,GS,Methane Capture (Agriculture),AMS-III.D,Vietnam,2020,2024,115923,528072,273224,1.54,0.0,,1,False,clean
+VCS1273,Northern Forest Landfill Gas Project,VCS,Landfill Gas,CAR-LFG,USA,2018,2024,135955,812463,525190,1.15,0.0,,2,False,clean
+VCS1274,Coastal Horizon Cookstoves Project,VCS,Cookstoves,GS-TPDDTEC,Ghana,2007,2009,131299,366819,180763,1.71,0.0,,0,False,clean
+VCS1275,Highland River Solar Project,VCS,Solar,AMS-I.D,China,2017,2024,546836,4152053,2782938,1.77,0.0,,1,True,clean
+VCS1276,Highland Horizon REDD+ Project,VCS,REDD+,VM0007,Brazil,2012,2019,977949,39472493,7330480,2.63,11.4,-82.0,2,False,inflated_baseline
+VCS1277,Blue Northern REDD+ Project,VCS,REDD+,VM0015,Colombia,2017,2022,622078,3227522,524675,1.14,19.1,-8.2,0,False,clean
+ACR1278,Forest Summit Improved Forest Management Project,ACR,Improved Forest Management,VM0012,Canada,2012,2018,451740,2926368,1728363,1.6,15.7,-21.3,1,False,clean
+GS1279,River Northern Cookstoves Project,GS,Cookstoves,GS-TPDDTEC,Uganda,2020,2023,71926,247482,130783,1.02,0.0,,0,True,clean
+ACR1280,Evergreen Valley Landfill Gas Project,ACR,Landfill Gas,CAR-LFG,USA,2020,2024,189903,988035,467087,1.07,0.0,,0,False,clean
+ACR1281,Savanna Clear Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,Mexico,2017,2020,93843,304070,259581,1.56,26.3,0.1,1,True,clean
+VCS1282,Delta Northern REDD+ Project,VCS,REDD+,VM0007,Cambodia,2022,2024,786334,7050599,2252201,5.77,7.0,-80.7,1,False,inflated_baseline
+VCS1283,Valley Clear Large Hydro Project,VCS,Large Hydro,ACM0002,Laos,2021,2024,325169,1149027,693790,1.26,0.0,,1,False,clean
+VCS1284,Forest Highland Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Indonesia,2018,2024,67451,438786,368356,1.23,16.9,-1.9,1,False,clean
+VCS1285,Savanna Forest Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Kenya,2013,2024,106908,959254,789554,1.17,18.0,-0.7,1,False,clean
+ACR1286,Delta River Landfill Gas Project,ACR,Landfill Gas,ACM0001,Mexico,2020,2024,103183,1582908,391817,7.86,0.0,,0,True,anomalous
+VCS1287,Delta Lake Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Vietnam,2019,2024,30319,178012,41954,1.06,0.0,,0,False,clean
+GS1288,Forest Forest Wind Project,GS,Wind,ACM0002,China,2015,2024,251390,2304864,1313277,1.15,0.0,,0,False,clean
+ACR1289,Forest Savanna Landfill Gas Project,ACR,Landfill Gas,ACM0001,Mexico,2016,2024,192819,1487666,706997,1.47,0.0,,1,False,clean
+VCS1290,Savanna Horizon Cookstoves Project,VCS,Cookstoves,AMS-II.G,Ghana,2013,2015,132783,351392,207025,1.11,0.0,,0,True,clean
+GS1291,Savanna Evergreen Cookstoves Project,GS,Cookstoves,VMR0006,Uganda,2022,2024,55268,899610,261332,3.76,0.0,,0,False,overstated_usage
+VCS1292,Clear Coastal Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,Brazil,2009,2018,77831,574045,166384,1.63,0.0,,0,False,clean
+GS1293,Highland Lake Cookstoves Project,GS,Cookstoves,GS-TPDDTEC,Kenya,2006,2011,65314,279906,229916,1.66,0.0,,0,False,clean
+ACR1294,Horizon Blue Landfill Gas Project,ACR,Landfill Gas,CAR-LFG,USA,2022,2024,274490,583409,189307,1.71,0.0,,2,False,clean
+VCS1295,Horizon Evergreen Wind Project,VCS,Wind,ACM0002,Brazil,2021,2024,159612,581591,87397,1.06,0.0,,0,False,clean
+VCS1296,Coastal Coastal REDD+ Project,VCS,REDD+,VM0007,DRC,2018,2024,1275223,7909378,6401152,1.02,16.3,-1.0,1,True,clean
+VCS1297,Valley Clear REDD+ Project,VCS,REDD+,VM0009,Colombia,2014,2023,629058,5856437,3268058,1.71,13.8,-52.4,0,True,inflated_baseline
+GS1298,Evergreen Horizon Wind Project,GS,Wind,ACM0002,Brazil,2009,2015,162463,1070813,667711,1.44,0.0,,0,False,clean
+VCS1299,Blue Valley Large Hydro Project,VCS,Large Hydro,ACM0002,Laos,2008,2013,266796,1892228,850327,1.22,0.0,,0,False,non_additional_old_vintage
+CAR1300,Highland Sun Landfill Gas Project,CAR,Landfill Gas,ACM0001,USA,2020,2024,111930,435361,248598,1.64,0.0,,0,False,clean
+ACR1301,Green Blue Improved Forest Management Project,ACR,Improved Forest Management,VM0012,Canada,2018,2024,246105,1696515,604098,1.45,24.5,-21.1,1,False,clean
+VCS1302,Blue Sun REDD+ Project,VCS,REDD+,VM0015,Indonesia,2006,2011,287610,1779905,762228,1.68,22.5,3.6,0,False,clean
+GS1303,Evergreen Evergreen Wind Project,GS,Wind,ACM0002,Brazil,2019,2024,273380,1598146,1176678,1.67,0.0,,0,False,clean
+ACR1304,Savanna Sun Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,Kenya,2016,2022,125950,849375,700340,1.13,12.4,-17.9,1,False,clean
+ACR1305,Valley River Improved Forest Management Project,ACR,Improved Forest Management,IFM-ACR,USA,2012,2018,400968,2490410,1414088,1.09,17.4,-8.7,0,True,clean
+VCS1306,Lake Valley Wind Project,VCS,Wind,ACM0002,Brazil,2009,2015,161797,803049,402331,1.14,0.0,,0,False,clean
+GS1307,Valley Horizon Cookstoves Project,GS,Cookstoves,VMR0006,Uganda,2015,2024,36855,264218,128308,1.41,0.0,,1,False,clean
+VCS1308,Valley Valley Cookstoves Project,VCS,Cookstoves,AMS-II.G,Ghana,2012,2019,98679,706626,625374,1.63,0.0,,0,False,clean
+VCS1309,Clear River REDD+ Project,VCS,REDD+,VM0015,Colombia,2014,2023,984134,9503737,2149740,1.33,17.7,-41.5,0,True,inflated_baseline
+VCS1310,Evergreen Valley Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,AR-ACM0003,USA,2020,2024,139918,616580,371551,1.56,20.2,-3.4,0,False,clean
+ACR1311,Forest Evergreen Industrial Gas Project,ACR,Industrial Gas (HFC-23/N2O),AM0021,USA,2012,2017,3054332,19288830,11360118,1.48,0.0,,0,False,non_additional_old_vintage
+GS1312,Savanna Horizon Wind Project,GS,Wind,ACM0002,Turkey,2013,2018,270458,1231386,1123834,1.18,0.0,,1,False,clean
+VCS1313,Summit Delta Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Kenya,2009,2016,63605,512124,340525,1.32,23.4,-4.4,0,True,clean
+VCS1314,Blue Valley Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Indonesia,2014,2023,67708,591406,330520,1.41,20.3,-10.9,1,False,clean
+GS1315,Blue Northern Afforestation/Reforestation Project,GS,Afforestation/Reforestation,VM0047,Brazil,2019,2024,102762,632796,237345,1.5,21.4,-9.4,0,False,clean
+GS1316,Valley Clear Cookstoves Project,GS,Cookstoves,AMS-II.G,Rwanda,2013,2023,88858,859037,328798,1.44,0.0,,0,False,clean
+GS1317,Valley Valley Wind Project,GS,Wind,ACM0002,Turkey,2008,2014,184637,1163220,683955,1.52,0.0,,0,False,clean
+VCS1318,Forest Horizon REDD+ Project,VCS,REDD+,VM0015,Indonesia,2020,2024,1047819,3722438,3037032,1.36,14.0,-19.6,0,True,clean
+VCS1319,Evergreen Summit REDD+ Project,VCS,REDD+,VM0007,Cambodia,2012,2017,968569,5279572,3365906,1.74,16.5,-57.1,0,False,inflated_baseline
+ACR1320,Clear Clear Industrial Gas Project,ACR,Industrial Gas (HFC-23/N2O),AM0001,USA,2007,2017,1363153,15461341,9160331,1.34,0.0,,0,False,clean
+VCS1321,Savanna Lake Industrial Gas Project,VCS,Industrial Gas (HFC-23/N2O),AM0001,China,2015,2018,1128270,4256708,1373174,1.39,0.0,,1,False,clean
+VCS1322,River Green Cookstoves Project,VCS,Cookstoves,VMR0006,India,2008,2015,113779,7630475,4868477,2.26,0.0,,1,False,overstated_usage
+VCS1323,Coastal Forest Large Hydro Project,VCS,Large Hydro,ACM0002,Brazil,2009,2019,406149,5152609,1876674,1.25,0.0,,0,False,non_additional_old_vintage
+VCS1324,Horizon Highland Wind Project,VCS,Wind,ACM0002,India,2022,2024,288144,890916,548679,1.53,0.0,,0,False,clean
+CAR1325,Clear Forest Landfill Gas Project,CAR,Landfill Gas,ACM0001,Brazil,2010,2021,173944,2110313,934007,1.07,0.0,,0,False,clean
+VCS1326,Highland Valley Improved Forest Management Project,VCS,Improved Forest Management,IFM-ACR,Chile,2008,2020,344383,11837282,3147735,1.44,16.7,-34.9,1,False,inflated_baseline
+GS1327,Coastal Delta Wind Project,GS,Wind,ACM0002,Vietnam,2010,2012,170341,471757,174024,1.16,0.0,,1,False,non_additional_old_vintage
+VCS1328,Blue Evergreen Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,Brazil,2008,2015,50334,418306,78907,1.14,0.0,,0,False,clean
+VCS1329,Clear Evergreen Industrial Gas Project,VCS,Industrial Gas (HFC-23/N2O),AM0001,China,2011,2022,1869197,25996326,17680000,1.74,0.0,,0,False,non_additional_old_vintage
+ACR1330,Evergreen Delta Improved Forest Management Project,ACR,Improved Forest Management,VM0012,Chile,2018,2023,173567,882094,247801,1.2,19.2,-7.1,0,False,clean
+VCS1331,Coastal Green Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Kenya,2022,2024,60454,180881,147300,1.64,15.4,1.2,0,True,clean
+GS1332,Summit Forest Cookstoves Project,GS,Cookstoves,AMS-II.G,Rwanda,2021,2024,159665,639496,178312,1.13,0.0,,0,False,clean
+VCS1333,Valley River Large Hydro Project,VCS,Large Hydro,ACM0002,Laos,2011,2013,347577,985704,634153,1.17,0.0,,0,True,clean
+VCS1334,Clear Blue Large Hydro Project,VCS,Large Hydro,ACM0002,China,2012,2014,405843,1794793,322348,1.22,0.0,,0,False,non_additional_old_vintage
+VCS1335,Evergreen Valley Cookstoves Project,VCS,Cookstoves,AMS-II.G,Kenya,2022,2024,45696,102493,77568,1.74,0.0,,0,False,clean
+VCS1336,Highland Green Industrial Gas Project,VCS,Industrial Gas (HFC-23/N2O),AM0021,USA,2012,2014,1181482,5521406,1759059,1.5,0.0,,0,True,non_additional_old_vintage
+VCS1337,Northern Horizon Cookstoves Project,VCS,Cookstoves,VMR0006,Kenya,2011,2017,137687,7281917,804559,4.99,0.0,,0,True,overstated_usage
+GS1338,Clear Green Methane Capture Project,GS,Methane Capture (Agriculture),AMS-III.D,Vietnam,2010,2018,39752,349850,101203,1.5,0.0,,0,True,clean
+VCS1339,Valley Evergreen Soil Carbon Project,VCS,Soil Carbon,VM0042,Brazil,2014,2024,36702,394393,324654,1.79,0.0,,0,True,clean
+CAR1340,Evergreen Delta Soil Carbon Project,CAR,Soil Carbon,VM0042,Brazil,2011,2023,93668,1150027,539789,1.48,0.0,,0,False,clean
+VCS1341,Evergreen Savanna Soil Carbon Project,VCS,Soil Carbon,VM0042,USA,2011,2021,100646,1006753,386479,1.08,0.0,,1,False,clean
+VCS1342,Clear Coastal REDD+ Project,VCS,REDD+,VM0015,Indonesia,2010,2014,1152248,5928514,1659976,1.38,16.5,-5.2,2,False,clean
+GS1343,Coastal Highland Solar Project,GS,Solar,ACM0002,Vietnam,2016,2024,154125,1432066,483991,1.65,0.0,,1,False,clean
+ACR1344,Forest Summit Landfill Gas Project,ACR,Landfill Gas,ACM0001,Mexico,2016,2024,193658,1473533,580746,1.19,0.0,,1,False,clean
+GS1345,Valley Evergreen Wind Project,GS,Wind,ACM0002,Turkey,2021,2024,111660,440285,218751,1.55,0.0,,0,False,clean
+VCS1346,River Coastal Wind Project,VCS,Wind,ACM0002,China,2016,2018,145620,368069,102102,1.42,0.0,,1,False,clean
+GS1347,Northern Coastal Afforestation/Reforestation Project,GS,Afforestation/Reforestation,VM0047,Mexico,2006,2011,117753,637124,518349,1.34,10.2,-4.5,0,False,clean
+ACR1348,Blue Horizon Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,AR-ACM0003,India,2014,2022,149544,974917,724469,1.22,17.7,6.6,0,False,clean
+CAR1349,Clear Highland Landfill Gas Project,CAR,Landfill Gas,ACM0001,Chile,2015,2022,320557,2642365,2092770,1.43,0.0,,0,False,clean
+VCS1350,Horizon Northern REDD+ Project,VCS,REDD+,VM0009,Colombia,2013,2017,1498622,6881705,3263368,1.72,16.4,6.8,0,False,clean
+VCS1351,Forest Forest Large Hydro Project,VCS,Large Hydro,ACM0002,China,2017,2023,104138,619086,384781,1.63,0.0,,1,False,clean
+VCS1352,Northern Clear REDD+ Project,VCS,REDD+,VM0015,Zimbabwe,2020,2022,996802,2804495,806255,1.46,11.0,-45.9,0,False,inflated_baseline
+GS1353,Highland Northern Cookstoves Project,GS,Cookstoves,GS-TPDDTEC,Ghana,2006,2009,210568,662576,492321,1.56,0.0,,1,False,clean
+VCS1354,Delta River REDD+ Project,VCS,REDD+,VM0015,Colombia,2018,2021,515661,1547815,971256,1.42,16.9,7.7,2,False,clean
+VCS1355,Green Forest Solar Project,VCS,Solar,ACM0002,China,2015,2022,132888,987980,736681,1.12,0.0,,0,False,clean
+CAR1356,Blue Coastal Improved Forest Management Project,CAR,Improved Forest Management,VM0012,USA,2009,2017,182854,1478104,1050623,1.41,20.9,-5.6,0,True,clean
+GS1357,River Valley Cookstoves Project,GS,Cookstoves,VMR0006,Malawi,2009,2015,60752,442870,179175,1.73,0.0,,1,False,clean
+ACR1358,Highland Horizon Improved Forest Management Project,ACR,Improved Forest Management,IFM-ACR,Canada,2017,2024,800231,6704014,3977441,1.68,21.2,-4.1,0,False,clean
+GS1359,Sun Coastal Wind Project,GS,Wind,ACM0002,Vietnam,2016,2024,272912,2162394,685584,1.7,0.0,,0,True,clean
+GS1360,Savanna Highland Solar Project,GS,Solar,ACM0002,India,2007,2011,130565,617666,276143,1.73,0.0,,0,False,clean
+VCS1361,Savanna Delta Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,VM0047,India,2010,2021,180212,1561690,759679,1.49,9.3,-4.0,3,False,clean
+VCS1362,Sun Summit Landfill Gas Project,VCS,Landfill Gas,CAR-LFG,Brazil,2017,2019,289042,714232,521562,1.15,0.0,,0,False,clean
+CAR1363,Blue Summit Landfill Gas Project,CAR,Landfill Gas,ACM0001,Chile,2018,2024,138169,2462772,777788,9.24,0.0,,0,False,anomalous
+VCS1364,Clear Delta Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Mexico,2019,2021,87152,237780,170929,1.27,0.0,,2,False,clean
+GS1365,Coastal Clear Cookstoves Project,GS,Cookstoves,VMR0006,Nigeria,2018,2024,56120,307351,254441,1.68,0.0,,2,False,clean
+VCS1366,Valley Horizon Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Kenya,2011,2014,68948,259741,173396,1.21,15.2,3.0,0,False,clean
+VCS1367,Summit Summit REDD+ Project,VCS,REDD+,VM0015,DRC,2012,2014,358609,1107402,169371,1.62,15.2,-80.5,0,False,inflated_baseline
+VCS1368,Northern Lake Methane Capture Project,VCS,Methane Capture (Agriculture),AMS-III.D,Thailand,2020,2024,67711,318576,195413,1.47,0.0,,0,False,clean
+VCS1369,Highland Delta Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,AR-ACM0003,Uganda,2022,2024,101578,238659,141616,1.29,18.9,-23.6,0,False,clean
+GS1370,Northern Green Cookstoves Project,GS,Cookstoves,GS-TPDDTEC,Rwanda,2008,2018,170122,11767356,3081600,4.1,0.0,,3,False,overstated_usage
+VCS1371,Coastal Green REDD+ Project,VCS,REDD+,VM0009,Cambodia,2022,2024,1238576,3674091,3102258,1.65,19.7,-42.3,0,False,inflated_baseline
+VCS1372,Horizon Evergreen Industrial Gas Project,VCS,Industrial Gas (HFC-23/N2O),AM0021,USA,2010,2014,2017967,12504069,5495956,1.41,0.0,,1,False,non_additional_old_vintage
+GS1373,Green River Wind Project,GS,Wind,ACM0002,Brazil,2006,2010,364503,1802818,646081,1.1,0.0,,0,False,clean
+GS1374,Green Lake Methane Capture Project,GS,Methane Capture (Agriculture),AMS-III.D,Thailand,2021,2024,19702,73471,29481,1.68,0.0,,0,False,clean
+VCS1375,Evergreen Clear REDD+ Project,VCS,REDD+,VM0009,Brazil,2011,2016,1205438,16510706,4728800,5.73,11.3,-64.5,1,False,inflated_baseline
+CAR1376,Delta Delta Soil Carbon Project,CAR,Soil Carbon,VM0042,Australia,2013,2021,54980,449498,344661,1.35,0.0,,0,False,clean
+GS1377,Horizon Lake Cookstoves Project,GS,Cookstoves,VMR0006,Kenya,2008,2020,119001,10548828,971045,2.75,0.0,,1,False,overstated_usage
+VCS1378,Forest Lake Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,VM0047,India,2013,2023,33447,1496239,286832,7.77,12.9,-10.4,1,False,anomalous
+VCS1379,Northern Clear Solar Project,VCS,Solar,ACM0002,Chile,2008,2010,58775,145373,45947,1.18,0.0,,0,False,non_additional_old_vintage
+VCS1380,Forest Sun REDD+ Project,VCS,REDD+,VM0015,Colombia,2013,2022,419032,4216180,2372312,1.63,16.4,-10.2,1,False,clean
+VCS1381,Green Valley Wind Project,VCS,Wind,ACM0002,Brazil,2011,2019,260925,1840659,542115,1.71,0.0,,1,True,non_additional_old_vintage
+GS1382,Savanna Savanna Wind Project,GS,Wind,ACM0002,Vietnam,2006,2010,218474,854924,227624,1.04,0.0,,0,False,non_additional_old_vintage
+VCS1383,Green Summit REDD+ Project,VCS,REDD+,VM0015,Cambodia,2018,2024,1758668,11312392,8107141,1.69,11.0,-8.9,0,False,clean
+VCS1384,Lake Blue Cookstoves Project,VCS,Cookstoves,GS-TPDDTEC,Rwanda,2009,2018,37133,265880,95344,1.24,0.0,,0,False,clean
+ACR1385,Blue Delta Improved Forest Management Project,ACR,Improved Forest Management,CAR-FPP,Chile,2008,2012,310196,1573697,768535,1.78,16.3,-12.5,1,False,clean
+VCS1386,Delta Highland Afforestation/Reforestation Project,VCS,Afforestation/Reforestation,VM0047,Brazil,2015,2024,111598,937691,749449,1.41,19.4,-8.3,2,False,clean
+VCS1387,Valley Delta Soil Carbon Project,VCS,Soil Carbon,CAR-SEP,Brazil,2018,2024,95760,648834,394182,1.12,0.0,,1,True,clean
+VCS1388,Coastal Lake Solar Project,VCS,Solar,AMS-I.D,Chile,2010,2013,153426,577568,213028,1.4,0.0,,0,False,clean
+VCS1389,River Coastal REDD+ Project,VCS,REDD+,VM0009,Colombia,2009,2021,887037,10327640,2575595,1.28,22.0,-57.8,0,False,inflated_baseline
+ACR1390,Savanna Green Landfill Gas Project,ACR,Landfill Gas,ACM0001,Brazil,2007,2010,263930,846595,204847,1.37,0.0,,0,False,clean
+VCS1391,Valley Green Cookstoves Project,VCS,Cookstoves,AMS-II.G,Uganda,2013,2024,66386,605520,414168,1.72,0.0,,0,False,clean
+VCS1392,Evergreen Clear Solar Project,VCS,Solar,ACM0002,Vietnam,2006,2014,201891,1348817,1116087,1.11,0.0,,0,False,clean
+VCS1393,Savanna River Cookstoves Project,VCS,Cookstoves,GS-TPDDTEC,Ghana,2007,2009,79030,191452,88247,1.68,0.0,,0,False,clean
+GS1394,Valley Lake Solar Project,GS,Solar,AMS-I.D,Chile,2014,2021,158568,1285710,579232,1.51,0.0,,0,False,clean
+VCS1395,Clear Evergreen Large Hydro Project,VCS,Large Hydro,ACM0002,Brazil,2009,2012,1253691,5850177,1591980,1.01,0.0,,0,False,non_additional_old_vintage
+CAR1396,Coastal Highland Improved Forest Management Project,CAR,Improved Forest Management,VM0012,Chile,2009,2021,500029,4888191,3001332,1.4,12.4,-16.6,1,False,clean
+VCS1397,Savanna Forest Industrial Gas Project,VCS,Industrial Gas (HFC-23/N2O),AM0001,USA,2007,2011,1499159,11765204,4976851,1.56,0.0,,1,False,non_additional_old_vintage
+GS1398,Green Summit Solar Project,GS,Solar,ACM0002,Vietnam,2011,2017,250686,1358652,1125182,1.37,0.0,,0,True,clean
+GS1399,Blue Delta Solar Project,GS,Solar,AMS-I.D,India,2010,2021,80971,697441,129322,1.13,0.0,,1,False,non_additional_old_vintage
+ACR1400,Clear Northern Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,AR-ACM0003,India,2012,2014,177409,478735,365874,1.02,19.5,-0.8,1,False,clean
+GS1401,Clear Evergreen Afforestation/Reforestation Project,GS,Afforestation/Reforestation,VM0047,Brazil,2015,2020,98161,506086,314289,1.59,22.3,-4.9,2,False,clean
+GS1402,River Green Cookstoves Project,GS,Cookstoves,GS-TPDDTEC,Malawi,2020,2024,139212,3697412,1496728,3.03,0.0,,0,False,overstated_usage
+VCS1403,Forest Coastal REDD+ Project,VCS,REDD+,VM0015,Cambodia,2008,2016,1186505,10042082,3099753,1.66,14.6,-2.6,0,False,clean
+VCS1404,Blue Summit REDD+ Project,VCS,REDD+,VM0015,Cambodia,2007,2011,1262769,5617377,3978612,1.26,21.8,-8.6,0,False,clean
+VCS1405,Horizon Northern Solar Project,VCS,Solar,ACM0002,India,2019,2023,67669,300803,140082,1.69,0.0,,0,False,clean
+VCS1406,Clear Blue Improved Forest Management Project,VCS,Improved Forest Management,IFM-ACR,USA,2022,2024,483107,1326279,658138,1.65,15.3,-4.6,1,True,clean
+VCS1407,Horizon Blue Large Hydro Project,VCS,Large Hydro,ACM0002,Laos,2013,2022,723910,6770549,2789461,1.19,0.0,,1,False,clean
+VCS1408,Valley Highland REDD+ Project,VCS,REDD+,VM0009,Colombia,2014,2018,507648,2508883,666907,1.31,13.0,-63.7,0,False,inflated_baseline
+VCS1409,Horizon Savanna Landfill Gas Project,VCS,Landfill Gas,ACM0001,Brazil,2008,2012,207677,839725,553638,1.36,0.0,,1,False,clean
+ACR1410,Highland Green Afforestation/Reforestation Project,ACR,Afforestation/Reforestation,VM0047,Brazil,2018,2024,164042,999066,234637,1.39,19.2,-13.1,2,False,clean
+VCS1411,River Sun Blue Carbon Project,VCS,Blue Carbon (Mangroves),VM0033,Indonesia,2021,2024,34887,120413,87062,1.24,21.6,-11.1,0,True,clean
+CAR1412,Delta Lake Soil Carbon Project,CAR,Soil Carbon,CAR-SEP,USA,2011,2019,48308,346446,78260,1.73,0.0,,0,False,clean
+VCS1413,Highland Summit Large Hydro Project,VCS,Large Hydro,ACM0002,India,2010,2020,750502,9457262,3521825,1.52,0.0,,0,True,non_additional_old_vintage
+VCS1414,River Green Cookstoves Project,VCS,Cookstoves,GS-TPDDTEC,Ghana,2006,2017,106101,1283689,370712,1.76,0.0,,0,False,clean
+VCS1415,Valley Delta REDD+ Project,VCS,REDD+,VM0015,Zimbabwe,2022,2024,1060827,3048512,2205436,1.35,9.2,5.0,0,True,clean
+ACR1416,Forest Blue Landfill Gas Project,ACR,Landfill Gas,CAR-LFG,Chile,2011,2016,235027,1168670,738412,1.45,0.0,,0,False,clean
+VCS1417,Valley River Wind Project,VCS,Wind,ACM0002,China,2011,2013,296761,899658,247836,1.74,0.0,,0,False,non_additional_old_vintage
+VCS1418,Highland Clear REDD+ Project,VCS,REDD+,VM0007,Brazil,2014,2022,490291,4029246,1983171,1.32,16.3,-16.2,3,True,clean
+VCS1419,Sun Savanna Wind Project,VCS,Wind,ACM0002,Brazil,2017,2021,145188,667532,235198,1.43,0.0,,0,False,clean

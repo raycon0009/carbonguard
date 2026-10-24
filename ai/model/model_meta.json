@@ -1,0 +1,95 @@
+{
+  "model_version": "cg-risk-v1",
+  "model_hash": "0x38a707942c7cb274fede7a059a4e68bc76d174a48d055db05f1a4e5a9fec1f43",
+  "data_hash": "0x0290524af0c6d7d08198b4f09e153046f7b049dbc9e1e349b090a22cfe9085bd",
+  "data_files": [
+    "projects_raw.csv",
+    "real_projects.csv"
+  ],
+  "source_weighting": "equal total weight for synthetic and real projects",
+  "training_rows": {
+    "synthetic": 420,
+    "real": 6038,
+    "real_held_out": 69
+  },
+  "features": [
+    "over_issuance_ratio",
+    "satellite_gap_pct",
+    "issuance_spike",
+    "vintage_age",
+    "retirement_rate",
+    "buffer_shortfall",
+    "verifier_changes",
+    "type_overcrediting_history",
+    "type_low_additionality"
+  ],
+  "score_formula": "round(100 * (0.8 * GBM(weak-supervised P(suspicious)) + 0.2 * isolation_anomaly))",
+  "tiers": {
+    "Low": "<35",
+    "Medium": "35-70",
+    "High": ">70 (blocked from trading on chain)"
+  },
+  "metrics": {
+    "weak_label_positive_rate": 0.331,
+    "oof_auc_vs_weak_labels": 1.0,
+    "auc_vs_hidden_truth_blended": 0.977,
+    "auc_vs_hidden_truth_rules_only": 0.929,
+    "high_tier_precision": 0.982,
+    "recall_high_or_medium": 0.981
+  },
+  "tier_counts": {
+    "Low": 263,
+    "Medium": 102,
+    "High": 55
+  },
+  "global_importance": {
+    "over_issuance_ratio": 0.3593,
+    "vintage_age": 0.1986,
+    "type_low_additionality": 0.1839,
+    "satellite_gap_pct": 0.1035,
+    "retirement_rate": 0.075,
+    "issuance_spike": 0.0428,
+    "buffer_shortfall": 0.0225,
+    "verifier_changes": 0.0143,
+    "type_overcrediting_history": 0.0001
+  },
+  "fairness": {
+    "method": "residual = observed High rate - High rate expected from the region's project-type mix",
+    "country_is_model_input": false,
+    "overall_high_rate": 0.131,
+    "max_abs_residual": 0.014,
+    "min_projects_per_region": 10,
+    "regions": {
+      "Asia": {
+        "projects": 157,
+        "observed_high_rate": 0.089,
+        "expected_from_type_mix": 0.076,
+        "residual": 0.013
+      },
+      "Latin America": {
+        "projects": 120,
+        "observed_high_rate": 0.117,
+        "expected_from_type_mix": 0.12,
+        "residual": -0.003
+      },
+      "Africa": {
+        "projects": 81,
+        "observed_high_rate": 0.259,
+        "expected_from_type_mix": 0.268,
+        "residual": -0.009
+      },
+      "North America": {
+        "projects": 58,
+        "observed_high_rate": 0.103,
+        "expected_from_type_mix": 0.117,
+        "residual": -0.014
+      },
+      "Oceania": {
+        "projects": 4,
+        "observed_high_rate": 0.0,
+        "expected_from_type_mix": 0.043,
+        "residual": -0.043
+      }
+    }
+  }
+}

@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CarbonGuard · Pre-check</title>
+<meta name="description" content="Score any carbon project with the CarbonGuard model, entirely in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z' fill='%23121a16'/%3E%3Cpath d='M11 16.5l3.5 3.5 7-7.5' stroke='%23f4f5f1' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="story.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="var(--ink)"/><path d="M11 16.5l3.5 3.5 7-7.5" stroke="var(--paper)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      CarbonGuard
+    </a>
+    <nav class="nav" aria-label="Pages">
+      <a href="story.html">The problem</a>
+      <a href="index.html">Live ledger</a>
+      <a href="sandbox.html" aria-current="page">Pre-check</a>
+      <a href="satellite.html">Satellite evidence</a>
+    </nav>
+    <span class="spacer"></span>
+    <span class="chain hide-sm"><span class="dot" style="background:var(--ink-3)"></span>Off-chain · runs in your browser</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="title-row">
+    <div>
+      <h1>Pre-check a carbon project</h1>
+      <p class="sub">The model that scores credits on chain scores this project live, with the reasons it would write.</p>
+    </div>
+    <span class="spacer"></span>
+    <span class="privacy"><b>Private.</b> Nothing you enter leaves this page or goes on chain.</span>
+  </div>
+
+  <div class="presets" id="presets" role="group" aria-label="Start from a project"></div>
+
+  <div class="sb-stage">
+    <div class="instrument" id="result">
+      <div class="sb-proj"><div><b id="pName"></b><div class="muted" style="font-size:14px" id="pData"></div></div><span class="muted" style="font-size:13px" id="pSource"></span></div>
+      <div class="sb-score">
+        <b id="score">–</b><span class="of">/ 100</span>
+        <span class="tier-word" id="tierWord"></span>
+        <span class="stamp" id="tierPill"></span>
+      </div>
+      <div class="sb-meter" id="meterBox">
+        <i id="meter"></i>
+        <span class="tick" style="left:35%"></span><span class="tick" style="left:70%"></span>
+        <span class="ghost" id="ghost"><span id="ghostLabel"></span></span>
+      </div>
+      <div class="sb-scale"><span>Low</span><span>Medium: tradable with a warning</span><span>High: frozen</span></div>
+      <p class="sb-delta" id="delta" aria-live="polite"></p>
+      <p class="sb-verdict" id="verdict"></p>
+
+      <div class="sat-control">
+        <div class="lab"><label for="satGap">Satellite gap</label><output id="satVal" for="satGap">0%</output></div>
+        <p>Share of the forest loss a project claims to have prevented that satellites don't see prevented.</p>
+        <div class="slider" id="slider">
+          <input type="range" id="satGap" min="0" max="100" step="1" value="0" aria-describedby="satHelp">
+          <span class="mark" id="satMark" hidden></span>
+        </div>
+        <div class="sat-foot">
+          <span class="muted" id="satHelp">0 = no satellite measurement</span>
+          <button type="button" class="primary sm" id="applySat" hidden></button>
+          <a href="satellite.html" id="satLink">See the satellite evidence →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-side">
+      <h2 class="h3">Reasons it would write on chain</h2>
+      <ul class="reasons" id="reasons"></ul>
+      <h2 class="h3">What moves the score</h2>
+      <div class="imp" id="effects" style="margin-top:12px"></div>
+      <p class="sb-note">Approximate points each input adds right now. They don't sum to the change shown under the score.</p>
+      <p class="sb-match" id="match"></p>
+      <div class="hashes">
+        <div class="hashrow"><span>Model</span><span class="mono" id="modelVer"></span></div>
+        <div class="hashrow"><span>Model hash</span><span class="mono" id="modelHash" title=""></span></div>
+      </div>
+      <p class="sb-note">The same model and model hash as the scores on chain. It reproduces the Python pipeline's score and reasons for all 6,107 real registry projects (<span class="mono">test/sandbox.parity.test.js</span>).</p>
+    </div>
+  </div>
+
+  <section class="inputs" aria-labelledby="inH">
+    <div class="ledger-head tight">
+      <div class="row"><h2 id="inH">Registry inputs</h2></div>
+      <p id="presetNote"></p>
+    </div>
+    <div class="sb-grid" id="form" style="margin-top:18px">
+      <div class="field wide"><label for="project_type">Project type</label><select id="project_type"></select></div>
+      <div class="field"><label for="first_vintage">First vintage</label><input type="number" id="first_vintage" min="1990" max="2026" step="1" inputmode="numeric"></div>
+      <div class="field"><label for="last_vintage">Last vintage</label><input type="number" id="last_vintage" min="1990" max="2026" step="1" inputmode="numeric"></div>
+      <div class="field"><label for="total_issued">Credits issued (t)</label><input type="number" id="total_issued" min="0" step="1" inputmode="numeric"></div>
+      <div class="field"><label for="total_retired">Credits retired (t)</label><input type="number" id="total_retired" min="0" step="1" inputmode="numeric"></div>
+      <div class="field wide">
+        <label for="est_annual_reductions">Ex-ante estimate (t per year)</label>
+        <input type="number" id="est_annual_reductions" min="0" step="1" inputmode="numeric">
+        <label class="check" style="margin-top:8px"><input type="checkbox" id="estUnknown"> <span>Not published (assume issuance matches it)</span></label>
+      </div>
+      <div class="field"><label for="max_to_median_issuance">Peak year ÷ median year</label><input type="number" id="max_to_median_issuance" min="0" step="0.1" inputmode="decimal"><p class="hint">Issuance in the biggest year over a typical year.</p></div>
+      <div class="field"><label for="buffer_pool_pct">Permanence buffer (%)</label><input type="number" id="buffer_pool_pct" min="0" max="100" step="0.5" inputmode="decimal"><p class="hint">Credits held back against reversal. 15% is the norm for forests.</p></div>
+      <div class="field"><label for="verifier_changes">Auditor changes</label><input type="number" id="verifier_changes" min="0" max="20" step="1" inputmode="numeric"><p class="hint">How often the project switched verifier.</p></div>
+    </div>
+    <div class="msg err" id="formErr" role="alert"></div>
+  </section>
+
+  <section class="portfolio" aria-labelledby="pfH">
+    <div class="ledger-head">
+      <div class="row"><h2 id="pfH">Check a whole portfolio</h2></div>
+      <p>One row per holding, with the same registry fields as above. Every row is scored in this page by the same model; the file is read here and never uploaded.</p>
+    </div>
+    <div class="pf-drop" id="pfDrop">
+      <button type="button" class="primary" id="pfPick">Choose a CSV file</button>
+      <button type="button" id="pfExample">Try an example portfolio</button>
+      <a class="btn text" id="pfTemplate" download="carbonguard-portfolio-template.csv">Download the template</a>
+      <span class="muted">or drop a CSV here</span>
+      <input type="file" id="pfFile" accept=".csv,text/csv" hidden>
+    </div>
+    <div id="pfOut" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer class="foot"><div class="wrap"><span>Scores are statistical risk indicators from public data, not allegations of wrongdoing.</span></div></footer>
+
+<script src="sandbox_model.js"></script>
+<script src="scorer.js"></script>
+<script>
+const M = window.CG_SANDBOX;
+const S = window.CGScorer;
+const $ = (id) => document.getElementById(id);
+const FIELDS = ["first_vintage", "last_vintage", "total_issued", "total_retired", "est_annual_reductions",
+  "max_to_median_issuance", "buffer_pool_pct", "verifier_changes"];
+const LABEL = {
+  over_issuance_ratio: "Issued vs. own estimate",
+  satellite_gap_pct: "Satellite gap",
+  issuance_spike: "Issuance spike",
+  vintage_age: "Vintage age",
+  retirement_rate: "Retirement rate",
+  buffer_shortfall: "Thin buffer",
+  verifier_changes: "Auditor changes",
+  type_overcrediting_history: "Type: over-crediting history",
+  type_low_additionality: "Type: low additionality",
+};
+// The picker shows registry-only projects; a "-sat" preset is the same project with its measured gap applied.
+const PICK = M.presets.filter((p) => !p.key.endsWith("-sat"));
+const SHORTNAME = { VCS902: "Kariba", VCS944: "Alto Mayo", VCS1748: "Southern Cardamom", "typical-Wind": "Typical wind", "typical-Cookstoves": "Typical cookstoves", "typical-Landfill Gas": "Typical landfill gas", "fictional-overissuer": "Fictional over-issuer", blank: "Blank" };
+let preset = null, shown = null, shownTier = null;
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+// Motion, inline because this page may load no other script (see DESIGN.md, Motion).
+const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+function countTo(el, from, to) {
+  cancelAnimationFrame(el._raf);
+  if (reduced() || from === null || from === to) { el.textContent = to; return; }
+  const t0 = performance.now(), dur = 900;
+  const step = (now) => {
+    const t = Math.min(1, (now - t0) / dur);
+    el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - t, 4)));
+    if (t < 1) el._raf = requestAnimationFrame(step);
+  };
+  el._raf = requestAnimationFrame(step);
+}
+function land(el) {
+  if (reduced()) return;
+  el.animate([{ transform: "scale(1.18)", opacity: 0 }, { transform: "scale(1)", opacity: 1 }], { duration: 240, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
+}
+
+function init() {
+  $("project_type").innerHTML = M.types.map((t) => `<option>${esc(t)}</option>`).join("");
+  $("presets").innerHTML = PICK.map((p, i) => `<button type="button" data-i="${i}" aria-pressed="false">${esc(SHORTNAME[p.key] || p.label)}</button>`).join("");
+  $("modelVer").textContent = M.model_version;
+  $("modelHash").textContent = M.model_hash.slice(0, 10) + "…" + M.model_hash.slice(-6);
+  $("modelHash").title = M.model_hash;
+  $("presets").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) load(PICK[Number(b.dataset.i)]); });
+  $("form").addEventListener("input", update);
+  $("satGap").addEventListener("input", update);
+  $("applySat").addEventListener("click", () => { $("satGap").value = Math.round(preset.measured_gap_pct); update(); });
+  const want = new URLSearchParams(location.search).get("preset") || "";
+  const base = PICK.find((p) => p.key === want.replace(/-sat$/, "")) || PICK[0];
+  load(base, want.endsWith("-sat"));
+}
+
+function load(p, withSat = false) {
+  preset = p;
+  const r = p.raw;
+  [...$("presets").children].forEach((b) => b.setAttribute("aria-pressed", String(PICK[Number(b.dataset.i)] === p)));
+  $("project_type").value = M.types.includes(r.project_type) ? r.project_type : "Other";
+  for (const k of FIELDS) $(k).value = r[k] === null ? "" : +r[k].toFixed(k === "max_to_median_issuance" ? 2 : 1);
+  $("estUnknown").checked = false;
+  const g = p.measured_gap_pct;
+  $("satGap").value = withSat && g !== undefined ? Math.round(g) : r.satellite_cover_delta_pct === null ? 0 : Math.round(-r.satellite_cover_delta_pct);
+  $("pName").textContent = p.label.replace(/: registry data only$/, "");
+  $("pSource").textContent = `Source: ${p.source}`;
+  $("presetNote").textContent = `The registry fields for ${p.label.replace(/: registry data only$/, "")}, from ${p.source}. Edit any value; the score updates as you type. The satellite gap is set with the slider above.`;
+  $("satMark").hidden = $("applySat").hidden = g === undefined;
+  $("satLink").href = g === undefined ? "satellite.html" : `satellite.html?project=${p.key}`;
+  if (g !== undefined) {
+    $("satMark").style.left = `calc(13px + (100% - 26px) * ${g / 100})`;
+    $("satMark").title = `Measured: ${g}%`;
+    $("applySat").textContent = `Apply measured gap (${Math.round(g)}%)`;
+  }
+  update();
+}
+
+// The preset's exact raw values while untouched, so "matches the Python score" is a true statement.
+function readForm() {
+  const raw = { project_type: $("project_type").value };
+  for (const k of FIELDS) raw[k] = $(k).value === "" ? NaN : Number($(k).value);
+  const gap = Number($("satGap").value);
+  raw.satellite_cover_delta_pct = gap > 0 ? -gap : null;
+  const p = preset.raw;
+  for (const k of FIELDS) if (p[k] !== null && raw[k] === +p[k].toFixed(k === "max_to_median_issuance" ? 2 : 1)) raw[k] = p[k];
+  if (p.satellite_cover_delta_pct !== null && gap === Math.round(-p.satellite_cover_delta_pct)) raw.satellite_cover_delta_pct = p.satellite_cover_delta_pct;
+  // The slider shows the measured gap rounded; score the measurement itself.
+  if (preset.measured_gap_pct !== undefined && gap === Math.round(preset.measured_gap_pct)) raw.satellite_cover_delta_pct = -preset.measured_gap_pct;
+  const years = Math.max(raw.last_vintage - raw.first_vintage + 1, 1);
+  $("est_annual_reductions").disabled = $("estUnknown").checked;
+  if ($("estUnknown").checked) raw.est_annual_reductions = raw.total_issued / years;
+  return raw;
+}
+
+function problems(r) {
+  const out = [];
+  for (const k of FIELDS) if (!Number.isFinite(r[k]) || r[k] < 0) out.push(`${$(k).previousElementSibling?.textContent || k} must be a number ≥ 0.`);
+  if (r.first_vintage < 1990 || r.first_vintage > M.current_year || r.last_vintage > M.current_year) out.push(`Vintages must be between 1990 and ${M.current_year}.`);
+  if (r.last_vintage < r.first_vintage) out.push("Last vintage can't be before the first.");
+  if (r.total_retired > r.total_issued) out.push("More credits retired than issued.");
+  return out;
+}
+
+const STATUS = { Low: ["Tradable", "st-low"], Medium: ["Tradable", "st-med"], High: ["Would be frozen", "st-high"] };
+
+function update() {
+  const raw = readForm();
+  const gap = Number($("satGap").value);
+  $("satVal").textContent = `${gap}%`;
+  $("slider").style.setProperty("--p", gap);
+  const g = preset.measured_gap_pct, applied = g !== undefined && gap === Math.round(g);
+  $("applySat").disabled = applied;
+  if (g !== undefined) $("applySat").textContent = applied ? "Measured gap applied" : `Apply measured gap (${Math.round(g)}%)`;
+  $("pData").textContent = applied ? "Registry data + our satellite measurement" : gap > 0 ? "Registry data + your satellite gap" : "Registry data only";
+  const errs = problems(raw);
+  $("formErr").innerHTML = errs.length ? "The score is paused until these are fixed:<br>" + errs.map(esc).join("<br>") : "";
+  $("formErr").classList.toggle("show", errs.length > 0);
+  $("result").classList.toggle("stale", errs.length > 0);
+  if (errs.length) { $("delta").textContent = "Paused: fix the registry inputs below."; return; }
+
+  const s = S.scoreRaw(M, raw);
+  const res = $("result");
+  res.className = `instrument t-${s.tier}`;
+  countTo($("score"), shown, s.risk);
+  $("meterBox").style.setProperty("--v", s.risk / 100);
+  $("tierWord").textContent = `${s.tier} risk`;
+  const [word, cls] = STATUS[s.tier];
+  $("tierPill").textContent = word;
+  $("tierPill").className = `stamp ${cls}`;
+  if (shownTier !== null && shownTier !== s.tier) land($("tierPill"));
+  shown = s.risk; shownTier = s.tier;
+
+  // What the same project scores without satellite evidence: the ghost on the meter.
+  const base = gap > 0 ? S.scoreRaw(M, { ...raw, satellite_cover_delta_pct: null }).risk : null;
+  $("ghost").classList.toggle("show", base !== null && base !== s.risk);
+  if (base !== null) {
+    $("ghost").style.left = `${base}%`;
+    $("ghost").classList.toggle("flip", base > 60);
+    $("ghostLabel").textContent = `${base} without satellite data`;
+    const d = s.risk - base;
+    $("delta").innerHTML = d ? `<b>${d > 0 ? "+" : ""}${d}</b> in total from satellite evidence` : "Satellite evidence doesn't move this score.";
+  } else {
+    $("delta").textContent = preset.measured_gap_pct !== undefined ? "Registry data only. Now apply the satellite measurement." : "";
+  }
+
+  const onlySat = s.reasons.length === 1 && /^Satellite/.test(s.reasons[0]);
+  $("verdict").innerHTML = s.risk > M.high_risk_threshold
+    ? "<b>Would be frozen on chain</b> until independent verifiers review it."
+    : s.tier === "Medium"
+      ? onlySat ? "Tradable with a public risk warning. Satellite evidence is its only red flag, so it stays below the freeze line at 70." : "Tradable on chain, with a public risk warning."
+      : "Tradable on chain.";
+  $("reasons").className = `reasons t-${s.tier}`;
+  $("reasons").innerHTML = s.reasons.length
+    ? s.reasons.map((r) => `<li>${esc(r)}</li>`).join("")
+    : `<li class="none">No significant red flags</li>`;
+
+  const moves = s.effects.filter((e) => e.effect > 0.005).sort((a, b) => b.effect - a.effect);
+  const max = Math.max(0.01, ...moves.map((e) => e.effect));
+  $("effects").innerHTML = moves.length
+    ? moves.map((e) => `<span>${esc(LABEL[e.feature])}</span><div><div class="b${e.feature === "satellite_gap_pct" ? " sat" : ""}" style="width:${(100 * e.effect / max).toFixed(1)}%"></div></div><span class="v">+${Math.round(80 * e.effect)}</span>`).join("")
+    : `<span class="muted" style="grid-column:1/-1">Nothing is pushing this score up.</span>`;
+
+  // Compare with the Python model when the inputs are exactly a preset (registry-only, or with its measured gap).
+  const same = (a, b) => Object.keys(b).every((k) => a[k] === b[k]);
+  const twin = preset.measured_gap_pct !== undefined && M.presets.find((p) => p.key === preset.key + "-sat");
+  if (preset.python_score === undefined) { $("match").className = "sb-match"; $("match").textContent = same(raw, preset.raw) ? "A row from your portfolio, scored live in this page." : "Edited: this is your own scenario, scored live."; return; }
+  const ref = $("estUnknown").checked ? null
+    : same(raw, preset.raw) ? preset
+    : twin && same(raw, { ...preset.raw, satellite_cover_delta_pct: -preset.measured_gap_pct }) ? twin : null;
+  $("match").className = `sb-match${ref && s.risk === ref.python_score ? " ok" : ""}`;
+  $("match").textContent = ref
+    ? (s.risk === ref.python_score ? `✓ Matches the Python model's score for this project (${ref.python_score}).` : `✗ Differs from the Python model (${ref.python_score}).`)
+    : "Edited: this is your own scenario, scored live.";
+}
+
+// ---------- portfolio check: a CSV read with the File API and scored row by row, all in this page
+const PF_COLS = ["holding", "tonnes_held", "project_type", "first_vintage", "last_vintage", "est_annual_reductions",
+  "total_issued", "total_retired", "max_to_median_issuance", "buffer_pool_pct", "satellite_gap_pct", "verifier_changes"];
+const PF_REQUIRED = ["holding", "tonnes_held", "project_type", "first_vintage", "last_vintage", "total_issued", "total_retired",
+  "max_to_median_issuance", "buffer_pool_pct"];
+// Fictional holdings, with registry fields from CarbonGuard's synthetic training data.
+const PF_EXAMPLE = `holding,tonnes_held,project_type,first_vintage,last_vintage,est_annual_reductions,total_issued,total_retired,max_to_median_issuance,buffer_pool_pct,satellite_gap_pct,verifier_changes
+"Wind farm, India",20000,Wind,2015,2017,154069,370114,271346,1.6,0,,0
+"Landfill gas, Brazil",12000,Landfill Gas,2022,2024,167898,356770,219693,1.63,0,,0
+"Rooftop solar, India",15000,Solar,2017,2020,249410,820111,419066,1.02,0,,0
+"Reforestation, India",8000,Afforestation/Reforestation,2016,2024,127187,1019244,520887,1.2,20.8,0,0
+"Forest protection, Southern Africa",30000,REDD+,2007,2015,645416,5940413,2806016,1.51,17.9,5.3,2
+"Hydro dam, Laos",10000,Large Hydro,2011,2013,347577,985704,634153,1.17,0,,0
+"Forest protection, Colombia",25000,REDD+,2008,2013,1913568,11201189,7627470,1.36,20.3,76.8,0
+"Cookstoves, Uganda",5000,Cookstoves,2009,2011,26891,205570,51988,2.11,0,,0
+`;
+let pfRows = [];
+
+// RFC 4180: quoted fields, doubled quotes, commas and newlines inside quotes.
+function parseCsv(text) {
+  const rows = [];
+  let row = [], field = "", quoted = false;
+  text = text.replace(/^﻿/, "");
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quoted) {
+      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+      else if (c === '"') quoted = false;
+      else field += c;
+    } else if (c === '"') quoted = true;
+    else if (c === ",") { row.push(field); field = ""; }
+    else if (c === "\n" || c === "\r") {
+      if (c === "\r" && text[i + 1] === "\n") i++;
+      row.push(field); rows.push(row); row = []; field = "";
+    } else field += c;
+  }
+  if (field || row.length) { row.push(field); rows.push(row); }
+  return rows.filter((r) => r.some((f) => f.trim() !== ""));
+}
+
+function scorePortfolio(text) {
+  const rows = parseCsv(text);
+  if (!rows.length) return { error: "The file is empty." };
+  const head = rows[0].map((h) => h.trim().toLowerCase().replace(/\s+/g, "_"));
+  const missing = PF_REQUIRED.filter((c) => !head.includes(c));
+  if (missing.length) return { error: `Missing column${missing.length > 1 ? "s" : ""}: ${missing.join(", ")}. Download the template for the expected header.` };
+  if (rows.length > 2001) return { error: "Up to 2,000 holdings at a time." };
+  const out = [], bad = [];
+  rows.slice(1).forEach((cells, i) => {
+    const line = i + 2, v = Object.fromEntries(head.map((h, j) => [h, (cells[j] ?? "").trim()]));
+    const num = (k) => (v[k] === "" || v[k] === undefined ? null : Number(v[k].replace(/[\s_]/g, "")));
+    const raw = { project_type: M.types.includes(v.project_type) ? v.project_type : "Other" };
+    for (const k of FIELDS) raw[k] = num(k);
+    const held = num("tonnes_held"), gap = num("satellite_gap_pct");
+    const notes = [];
+    if (raw.project_type === "Other" && v.project_type) notes.push(`type “${v.project_type}” scored as Other`);
+    if (raw.est_annual_reductions === null) { raw.est_annual_reductions = raw.total_issued / Math.max(raw.last_vintage - raw.first_vintage + 1, 1); notes.push("no ex-ante estimate: assumed issuance matches it"); }
+    if (raw.verifier_changes === null) raw.verifier_changes = 0;
+    raw.satellite_cover_delta_pct = gap > 0 ? -gap : null;
+    const errs = problems(raw);
+    if (!v.holding) errs.push("holding is empty.");
+    if (!Number.isFinite(held) || held < 0) errs.push("tonnes_held must be a number ≥ 0.");
+    if (gap !== null && !(gap >= 0 && gap <= 100)) errs.push("satellite_gap_pct must be between 0 and 100.");
+    if (errs.length) { bad.push({ line, holding: v.holding, errs }); return; }
+    out.push({ holding: v.holding, held, raw, notes, s: S.scoreRaw(M, raw) });
+  });
+  return { rows: out.sort((a, b) => b.s.risk - a.s.risk), bad };
+}
+
+function renderPortfolio(res, name) {
+  const fmt = (n) => Math.round(n).toLocaleString("en-US");
+  if (res.error) { $("pfOut").innerHTML = `<div class="msg err show">${esc(name)}: ${esc(res.error)}</div>`; return; }
+  pfRows = res.rows;
+  const total = pfRows.reduce((a, r) => a + r.held, 0);
+  const by = (t) => pfRows.filter((r) => r.s.tier === t).reduce((a, r) => a + r.held, 0);
+  const pct = (x) => (total ? `${((100 * x) / total).toFixed(0)}%` : "0%");
+  const [lo, me, hi] = ["Low", "Medium", "High"].map(by);
+  const badHtml = res.bad.length
+    ? `<div class="msg err show" style="margin-top:16px">${res.bad.length} row${res.bad.length > 1 ? "s" : ""} skipped:<br>${res.bad.slice(0, 8).map((b) => `Line ${b.line}${b.holding ? ` (${esc(b.holding)})` : ""}: ${b.errs.map(esc).join(" ")}`).join("<br>")}${res.bad.length > 8 ? "<br>…" : ""}</div>` : "";
+  $("pfOut").innerHTML = `
+    <p class="pf-file">${esc(name)} · ${pfRows.length} holding${pfRows.length === 1 ? "" : "s"} scored in this page</p>
+    <div class="bigfigs pf-figs">
+      <div><b>${fmt(total)} t</b><span>held</span></div>
+      <div class="t-High"><b>${fmt(hi)} t</b><span>${pct(hi)} High: would be frozen on chain</span></div>
+      <div class="t-Medium"><b>${fmt(me)} t</b><span>${pct(me)} Medium: tradable with a warning</span></div>
+      <div class="t-Low"><b>${fmt(lo)} t</b><span>${pct(lo)} Low</span></div>
+    </div>
+    <div class="pf-bar" role="img" aria-label="Share of tonnes by risk tier: ${pct(hi)} High, ${pct(me)} Medium, ${pct(lo)} Low">
+      <i class="t-High" style="flex-grow:${hi}"></i><i class="t-Medium" style="flex-grow:${me}"></i><i class="t-Low" style="flex-grow:${lo}"></i>
+    </div>
+    ${badHtml}
+    <div class="table-wrap" style="margin-top:20px"><table class="cards">
+      <thead><tr><th>AI risk</th><th>Holding</th><th class="num">Held</th><th class="hide-md">Top reason</th><th><span class="sr-only">Inspect</span></th></tr></thead>
+      <tbody>${pfRows.map((r, i) => `<tr>
+        <td class="c-score"><span class="score t-${r.s.tier}"><b>${r.s.risk}</b><span class="rail hide-sm" style="--v:${r.s.risk / 100}"><i></i></span></span></td>
+        <td class="c-proj proj"><b>${esc(r.holding)}</b><span>${esc(r.raw.project_type)} · ${r.raw.first_vintage}–${r.raw.last_vintage}${r.notes.length ? ` · ${esc(r.notes.join("; "))}` : ""}</span></td>
+        <td class="c-num num">${fmt(r.held)} t</td>
+        <td class="c-hide why hide-md">${r.s.reasons.length ? esc(r.s.reasons[0]) : `<span class="muted">No significant red flags</span>`}</td>
+        <td class="c-act num"><button type="button" class="sm" data-pf="${i}">Inspect</button></td>
+      </tr>`).join("")}</tbody>
+    </table></div>
+    <p class="sb-note">Scores are statistical risk indicators from registry data, not allegations. Holdings without a satellite gap are scored on registry data alone.</p>`;
+}
+
+function readPortfolio(file) {
+  if (!file) return;
+  if (file.size > 5e6) { renderPortfolio({ error: "Files up to 5 MB." }, file.name); return; }
+  file.text().then((t) => renderPortfolio(scorePortfolio(t), file.name));
+}
+
+function initPortfolio() {
+  const tpl = PF_COLS.join(",") + "\n" + PF_EXAMPLE.split("\n").slice(1, 3).join("\n") + "\n";
+  $("pfTemplate").href = URL.createObjectURL(new Blob([tpl], { type: "text/csv" }));
+  $("pfPick").onclick = () => $("pfFile").click();
+  $("pfFile").onchange = (e) => { readPortfolio(e.target.files[0]); e.target.value = ""; };
+  $("pfExample").onclick = () => renderPortfolio(scorePortfolio(PF_EXAMPLE), "Example portfolio (fictional holdings)");
+  const drop = $("pfDrop");
+  drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
+  drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+  drop.addEventListener("drop", (e) => { e.preventDefault(); drop.classList.remove("over"); readPortfolio(e.dataTransfer.files[0]); });
+  $("pfOut").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-pf]");
+    if (!b) return;
+    const r = pfRows[Number(b.dataset.pf)];
+    load({ key: "portfolio", label: r.holding, source: "your portfolio (stays in this page)", raw: r.raw });
+    $("result").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "start" });
+  });
+}
+
+init();
+initPortfolio();
+</script>
+</body>
+</html>
