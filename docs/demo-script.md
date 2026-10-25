@@ -10,11 +10,19 @@ Six beats, each mapped to the judging rubric. The voice-over is 594 words, which
 
 ## Before each take
 
-1. Terminal 1: `npm run chain` (set `HARDHAT_DISABLE_TELEMETRY_PROMPT=true` first, or answer the first-run prompt).
-2. Terminal 2: `npm run demo:local`. **Re-run this before every take of beat 4**, so Alto Mayo starts at 66 and Live.
-3. Terminal 3: `npm run web`.
-4. Browser: one window, 1920×1080, light theme, zoom 100–110%, bookmarks bar hidden, no other tabs, notifications off.
-5. Open these tabs in order: `story.html`, `sandbox.html?preset=VCS902`, `satellite.html`, `index.html`, `certificate.html?id=1`.
+Three terminals, each started in the `carbonguard` folder. Terminals 1 and 3 keep running for the whole session; terminal 2 is for one-off commands.
+
+1. Terminal 1 (the blockchain): `npm run chain`. The first time, answer `n` to Hardhat's usage-data prompt.
+2. Terminal 2 (control): `npm run demo:local` loads the demo and finishes in about 30 s. It's a reset, not a server: run it again only after `demo:monitor` has frozen Alto Mayo (or after a MetaMask buy, retire or vote) and you want another clean take. The attack buttons and everything else are read-only and need no reset.
+3. Terminal 3 (the website): `npm run web`.
+4. Browser: Chrome or Edge, one window, 1920×1080, light theme, zoom 100–110%, bookmarks bar hidden, no other tabs, notifications off.
+5. Open the five pages in order, one tab each, or all at once from PowerShell:
+
+   ```powershell
+   start http://127.0.0.1:8080/story.html; start "http://127.0.0.1:8080/sandbox.html?preset=VCS902"; start http://127.0.0.1:8080/satellite.html; start http://127.0.0.1:8080/index.html; start "http://127.0.0.1:8080/certificate.html?id=1"
+   ```
+
+   After any `demo:local`, press F5 in every tab so it reads the fresh contracts.
 6. Have terminal 2 ready with `npm run demo:monitor` typed but not run.
 
 ---
