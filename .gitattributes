@@ -1,0 +1,3 @@
+# Keep the training data byte-for-byte: model_meta.json's data_hash covers these exact (CRLF) bytes.
+ai/data/*.csv -text
+*.joblib binary

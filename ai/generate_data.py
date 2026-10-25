@@ -145,7 +145,8 @@ def main(n=420):
     types = RNG.choice(names, size=n, p=shares / shares.sum())
     df = pd.DataFrame([make_project(i, t) for i, t in enumerate(types)])
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(OUT, index=False)
+    # CRLF on every OS: the published data_hash covers these exact bytes (pandas would use os.linesep).
+    df.to_csv(OUT, index=False, lineterminator="\r\n")
     print(f"wrote {len(df)} projects -> {OUT}")
     print(df["_archetype"].value_counts().to_string())
 

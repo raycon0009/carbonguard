@@ -102,6 +102,8 @@ contract CarbonGuard is ERC1155, AccessControl {
     mapping(uint256 => Batch) private _batches;
     Retirement[] private _retirements;
     // keccak256(registry, projectId, vintage) => serial ranges already bridged
+    // Written through a storage pointer in registerBatch (existing.push), which Slither doesn't track.
+    // slither-disable-next-line uninitialized-state
     mapping(bytes32 => SerialRange[]) private _ranges;
     mapping(uint256 => Votes) private _votes;
     mapping(uint256 => mapping(address => bool)) private _hasVoted;

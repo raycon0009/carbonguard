@@ -240,7 +240,7 @@ def main():
     out["reasons"] = [" | ".join(r) if r else "No significant red flags" for r in reasons]
     for k in ("over_issuance_ratio", "satellite_gap_pct", "retirement_rate"):
         out[k] = X_syn[k].round(3)
-    out.to_csv(SCORED, index=False)
+    out.to_csv(SCORED, index=False, lineterminator="\r\n")  # same bytes on every OS
     out.to_json(SCORED.with_suffix(".json"), orient="records", indent=1)
 
     MODEL.parent.mkdir(parents=True, exist_ok=True)

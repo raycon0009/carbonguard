@@ -61,7 +61,8 @@ def build(xlsx=vr.DEFAULT_XLSX):
     raw["satellite_measured"] = measured
     raw["holdout"] = raw["project_id"].isin(holdout_ids())
     raw = raw.sort_values("project_id").reset_index(drop=True)
-    raw.to_csv(REAL, index=False, float_format="%.6g")
+    # CRLF on every OS: the published data_hash covers these exact bytes (pandas would use os.linesep).
+    raw.to_csv(REAL, index=False, float_format="%.6g", lineterminator="\r\n")
     notes.update({
         "satellite_measured": int(measured.sum()),
         "held_out_from_training": int(raw["holdout"].sum()),

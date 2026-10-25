@@ -5,5 +5,6 @@ pandas==3.0.1
 scikit-learn==1.8.0
 joblib==1.5.3
 matplotlib==3.10.8
+pyarrow==25.0.1  # pandas 3 stores the model's text columns with pyarrow; loading the model needs it
 openpyxl==3.1.5  # only for ai/validate_real_world.py
 pytest>=8
